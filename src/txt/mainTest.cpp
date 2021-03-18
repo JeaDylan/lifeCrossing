@@ -5,7 +5,9 @@ using namespace std;
 
 int main() {
 
-   cout<<"hello test"<<endl;
+    Point2D p;
+    cout<<p.getX()<<endl;
+    cout<<p.getX()<<endl;
 
    return 0;
 }
