@@ -16,6 +16,9 @@ all: $(EXEC_NAME) ./doc/projet.doxy
 ./obj/Point2D.o: ./src/core/Point2D.cpp ./src/core/Point2D.h
 	$(CC) $(CFLAGS) -c ./src/core/Point2D.cpp -o ./obj/Point2D.o
 
+./obj/FruitLegume.o: ./src/core/FruitLegume.cpp ./src/core/FruitLegume.h
+	$(CC) $(CFLAGS) -c ./src/core/FruitLegume.cpp -o ./obj/FruitLegume.o
+
 ./doc/projet.doxy: $(SRC_FILES)
 	doxygen doc/projet.doxy
 
