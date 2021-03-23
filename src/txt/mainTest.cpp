@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../core/Meuble.h"
 #include "../core/EnsembleFruitLeg.h"
+#include "../core/EnsembleMeuble.h"
 #include "../core/Jardin.h"
 
 using namespace std;
@@ -11,9 +11,11 @@ int main() {
     Meuble m;
     FruitLegume fruit;
     EnsembleFruitLeg ensemble;
+    EnsembleMeuble ensembleMeuble;
     Jardin jardin;
     p.testRegression();
     m.testRegression();
+    ensembleMeuble.testRegression();
     fruit.testRegression();
     ensemble.testRegression();
     jardin.testRegression();

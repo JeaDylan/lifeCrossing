@@ -15,7 +15,7 @@ Point2D::~Point2D() {
 }
 
 Point2D::Point2D(unsigned int nx, unsigned int ny) {
-    assert(nx>0&&ny>0);
+    assert(nx>=0&&ny>=0);
     x=nx;
     y=ny;
 }
@@ -29,12 +29,12 @@ unsigned int Point2D::getY() const {
 }
 
 void Point2D::setX(unsigned int nx) {
-    assert(nx>0);
+    assert(nx>=0);
     x=nx;
 }
 
 void Point2D::setY(unsigned int ny) {
-    assert(ny>0);
+    assert(ny>=0);
     y=ny;
 }
 

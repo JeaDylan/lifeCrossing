@@ -16,7 +16,7 @@ using namespace std;
 class Meuble {
 private:
     string nom;
-    vector<Point2D> * dimension;
+    Point2D dimension;
 
 
 public:
@@ -30,7 +30,7 @@ public:
     @param nomM nom du meuble (identifiant)
     @param dim Position 2D dans le terrain correspondant
     */
-    Meuble(string nomM,const vector<Point2D> & dim);
+    Meuble(string nomM,const Point2D & dim);
     
     /*! @brief Destructeur: suppression d'un meuble
     */
@@ -40,7 +40,10 @@ public:
     string getNomMeuble() const;
     
     /*! @brief Accesseur : récupère la position d'un meuble */
-    vector<Point2D>* getDimension() const;
+    Point2D getDimension() const;
+
+    /*! @brief Affiche le nom du meuble et sa position */
+    void afficheMeuble() const;
      
     /*! @brief Test des fonctions du module*/
     void testRegression();
