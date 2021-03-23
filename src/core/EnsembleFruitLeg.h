@@ -1,3 +1,9 @@
+/**
+    @brief Module gérant un ensemble de FruitLegume
+    @file EnsembleFruitLeg.h
+
+*/
+
 #ifndef _ENSEMBLE_FRUIT_LEG
 #define _ENSEMBLE_FRUIT_LEG
 #include "FruitLegume.h"
@@ -7,14 +13,16 @@
 
 using namespace std;
 
+/*! @class un EnsembleFruitLeg = un tableau dynamique de FruitLegume
+*/
 class EnsembleFruitLeg {
 
-private:
-    /*! @param tabFruitLeg pointeur sur un tableau dynamique de FruitLegume */
+public: 
+  
     vector<FruitLegume> * tabFruitLeg;
    
-public: 
-    /*! @brief Constructeur : alloue sur le tas un tableau dynamique de FruitLegume 
+
+    /*! @brief Constructeur par défaut : alloue sur le tas un tableau dynamique de FruitLegume 
     */
     EnsembleFruitLeg();
 
@@ -25,7 +33,7 @@ public:
     /*! @brief Ajout d'un FruitLegume dans le tableau dynamique
         @param fruitLeg nom du FruitLegume à ajouter au tableau 
     */ 
-    void addFruitLeg(const FruitLegume & fruitLeg);
+    void ajouterFruitLeg(const FruitLegume & fruitLeg);
 
     /*! @brief Suppression d'un FruitLegume du tableau dynamique
         @param nomFruitLeg nom du FruitLegume à supprimer du tableau 
@@ -35,7 +43,7 @@ public:
     /*! @brief Donne des informations sur un FruitLegume
         @param nomFruitLeg nom du FruitLegume à rechercher 
     */
-    void chercherFruitLeg(string nomFruitLeg);
+    FruitLegume chercherFruitLeg(string nomFruitLeg)const;
 
     /*! @brief Affiche les noms des FruitLegume présents dans le tableau 
     */
@@ -47,7 +55,7 @@ public:
 
     /*! @brief Test des fonctions du module
     */
-    void testRegression()const;
+    void testRegression();
 
 
 };

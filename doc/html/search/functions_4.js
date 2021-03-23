@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fruitlegume_46',['FruitLegume',['../classFruitLegume.html#af549ab8640d684485722458c5ffe7661',1,'FruitLegume']]]
+  ['fruitlegume_71',['FruitLegume',['../classFruitLegume.html#aaa6697b104344829a18138b520b107e4',1,'FruitLegume::FruitLegume()'],['../classFruitLegume.html#a973c464cc8b48ec94f09b54a0532cd64',1,'FruitLegume::FruitLegume(string nomG, string typeG, float prixG, float prixV, int gainE, unsigned int tempsR)']]]
 ];

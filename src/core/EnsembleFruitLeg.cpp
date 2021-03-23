@@ -7,13 +7,16 @@ EnsembleFruitLeg::EnsembleFruitLeg(){
 }
 
 EnsembleFruitLeg::~EnsembleFruitLeg(){
- 
-    delete [] tabFruitLeg;
+    tabFruitLeg->clear();
+    tabFruitLeg->shrink_to_fit ();
+    delete tabFruitLeg;
     tabFruitLeg = NULL;
     
 }
 
-void EnsembleFruitLeg::addFruitLeg(const FruitLegume & fruitLeg){ //ajout dans le tabFruitLeg de l'inventaire du perso
+
+
+void EnsembleFruitLeg::ajouterFruitLeg(const FruitLegume & fruitLeg){ //ajout dans le tabFruitLeg de l'inventaire du perso
           
           tabFruitLeg->push_back(fruitLeg);
           
@@ -24,24 +27,21 @@ void EnsembleFruitLeg::suppFruitLeg(string nom){ //suppression d'un fruit ou leg
     int taille = tabFruitLeg->size();
     for(int i = 0; i < taille ; i++){
         if(nom == (*tabFruitLeg)[i].getNomGraine()){
-                tabFruitLeg->erase(tabFruitLeg->begin() + i); 
+                tabFruitLeg->erase(tabFruitLeg->begin() + i);
+    
         }
     }
 }
 
-void EnsembleFruitLeg::chercherFruitLeg(string nomFruitLeg)const{
+FruitLegume EnsembleFruitLeg::chercherFruitLeg(string nomFruitLeg)const{
     int taille = tabFruitLeg->size();
     for(int i = 0; i < taille ; i++){
         if(nomFruitLeg == (*tabFruitLeg)[i].getNomGraine()){
-                cout << "Nom de la graine : " << (*tabFruitLeg)[i].getNomGraine() << endl;
-                cout << "Type de la graine : " << (*tabFruitLeg)[i].getTypeGraine() << endl;
-                cout << "Prix d'achat : " <<  (*tabFruitLeg)[i].getPrixGraine() << endl;
-                cout << "Prix revente : " << (*tabFruitLeg)[i].getPrixVente() << endl;
-                cout << "Gain energetique : " << (*tabFruitLeg)[i].getGainEnergie() << endl; 
-                exit(1);
+               
+                return (*tabFruitLeg)[i];
         }
     }
-    cout << "Ce fruit ou legume n'est pas possede "<< endl;
+    cout << "Ce fruit ou legume n'est pas possede ou n'existe pas "<< endl;
     exit(0);
 
 }
@@ -77,6 +77,35 @@ void EnsembleFruitLeg::banqueDeFruitLeg(){ //il faut ajuster/definir les prix et
     tabFruitLeg->push_back(FruitLegume ("lentille","legume",0,0,0,0));
     tabFruitLeg->push_back(FruitLegume ("mais","legume",0,0,0,0));
     tabFruitLeg->push_back(FruitLegume ("patate","legume",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume ("salede","legume",0,0,0,0));
+    tabFruitLeg->push_back(FruitLegume ("salade","legume",0,0,0,0));
     
+}
+
+
+void EnsembleFruitLeg::testRegression(){
+   //j'instancie un EnsembleFruitLeg dans le main   
+   cout<<"Debut test regression EnsembleFruitLeg..."<<endl;
+   EnsembleFruitLeg test;
+   assert(test.tabFruitLeg != NULL);//verification du constructeur
+   assert(test.tabFruitLeg->size() == 0);
+   FruitLegume fraise = FruitLegume("fraise","fruit",4,6,25,5);
+   FruitLegume courgette = FruitLegume("courgette","legume",6,8,50,120);
+   test.ajouterFruitLeg(fraise);
+   assert(test.tabFruitLeg->size() == 1);
+   assert(test.tabFruitLeg->at(0).getNomGraine() == "fraise");
+   assert(test.tabFruitLeg->at(0).getPrixGraine() == 4);
+   test.ajouterFruitLeg(courgette);
+   assert(test.tabFruitLeg->size() == 2);
+   test.suppFruitLeg("fraise");
+   assert(test.tabFruitLeg->size() == 1);
+   assert(test.tabFruitLeg->at(0).getNomGraine() == "courgette");
+   test.afficheListeFruitLeg(); //affichage d'une liste sur le terminal
+   EnsembleFruitLeg testBanque; //test de la banque de FruitLegume
+   testBanque.banqueDeFruitLeg();
+   assert(testBanque.tabFruitLeg->at(0).getNomGraine() == "banane");
+   assert(testBanque.tabFruitLeg->at(1).getNomGraine() == "coco");
+   assert(testBanque.tabFruitLeg->at(10).getNomGraine() == "aubergine");
+   testBanque.afficheListeFruitLeg();
+   cout<<"Test Regression EnsembleFruitLeg...OK"<<endl;
+
 }

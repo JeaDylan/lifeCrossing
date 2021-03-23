@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['addfruitleg_41',['addFruitLeg',['../classEnsembleFruitLeg.html#a5497bda4289aebf624dd02fc63774846',1,'EnsembleFruitLeg']]],
-  ['affichelistefruitleg_42',['afficheListeFruitLeg',['../classEnsembleFruitLeg.html#a1a0c28088f94d5e05403ccfa31179d07',1,'EnsembleFruitLeg']]]
+  ['addjardin_64',['addJardin',['../classEnsembleJardin.html#a935f68f88303dc98fed460902448dede',1,'EnsembleJardin']]],
+  ['affichelistefruitleg_65',['afficheListeFruitLeg',['../classEnsembleFruitLeg.html#a1a0c28088f94d5e05403ccfa31179d07',1,'EnsembleFruitLeg']]],
+  ['ajouterfruitleg_66',['ajouterFruitLeg',['../classEnsembleFruitLeg.html#a2b52d5d46aaefaba6f1f7f4400ff05fe',1,'EnsembleFruitLeg']]]
 ];

@@ -1,7 +1,17 @@
 var searchData=
 [
-  ['_7eensemblefruitleg_68',['~EnsembleFruitLeg',['../classEnsembleFruitLeg.html#aa4e496a558263464c18bc5772ea6c6f2',1,'EnsembleFruitLeg']]],
-  ['_7efruitlegume_69',['~FruitLegume',['../classFruitLegume.html#a4eb5b1e664d60f4595d20b298e242aa5',1,'FruitLegume']]],
-  ['_7emeuble_70',['~Meuble',['../classMeuble.html#a8f7455e012809a130268b2db4e73dfbc',1,'Meuble']]],
-  ['_7epoint2d_71',['~Point2D',['../classPoint2D.html#a1960ff3b89d1854c7f0242240c5e7fc8',1,'Point2D']]]
+  ['setdimx_91',['setDimX',['../classEnsembleJardin.html#a572d20924ab1caa39bd201e8025733b6',1,'EnsembleJardin']]],
+  ['setdimy_92',['setDimY',['../classEnsembleJardin.html#a22be124f6a4834a1d3cf045dd6868eb8',1,'EnsembleJardin']]],
+  ['setgainenergie_93',['setGainEnergie',['../classFruitLegume.html#ac47a7e79f5a2aa873e7417c2deb1297e',1,'FruitLegume']]],
+  ['setnomgraine_94',['setNomGraine',['../classFruitLegume.html#a5006d48d4379eec29074ef7490600776',1,'FruitLegume']]],
+  ['setoccupe_95',['setOccupe',['../classJardin.html#a3afa434cbb56d995cf8d97c95ea5db75',1,'Jardin::setOccupe(bool occ)'],['../classJardin.html#a3afa434cbb56d995cf8d97c95ea5db75',1,'Jardin::setOccupe(bool occ)']]],
+  ['setpret_96',['setPret',['../classJardin.html#a474d468f09ae8cc86b9a71db20161aea',1,'Jardin::setPret(bool prt)'],['../classJardin.html#a474d468f09ae8cc86b9a71db20161aea',1,'Jardin::setPret(bool prt)']]],
+  ['setprixgraine_97',['setPrixGraine',['../classFruitLegume.html#ae51bb225548d859b04b8074bd580b612',1,'FruitLegume']]],
+  ['setprixvente_98',['setPrixVente',['../classFruitLegume.html#a4444465bea847ed810c7b9da130aceb8',1,'FruitLegume']]],
+  ['settempsrecolte_99',['setTempsRecolte',['../classFruitLegume.html#a4569b381c913e5876763dde0f576e089',1,'FruitLegume']]],
+  ['settypegraine_100',['setTypeGraine',['../classFruitLegume.html#a91c481d3b748bae6a82c66c814fa5214',1,'FruitLegume']]],
+  ['setx_101',['setX',['../classPoint2D.html#a57f4038f2fdd3c71664f815115de237e',1,'Point2D']]],
+  ['sety_102',['setY',['../classPoint2D.html#a34515b225b5d23be9b7277514854f69a',1,'Point2D']]],
+  ['suppfruitleg_103',['suppFruitLeg',['../classEnsembleFruitLeg.html#a8d81d432ae30730afe3f27a3914da8d5',1,'EnsembleFruitLeg']]],
+  ['suppjardin_104',['suppJardin',['../classEnsembleJardin.html#a564f135a99c6d3e15f8762b6ca76edeb',1,'EnsembleJardin']]]
 ];

@@ -27,7 +27,7 @@ void EnsembleJardin::setDimX(unsigned int dx){ return dimX = dx; }
 void EnsembleJardin::setDimY(unsigned int dy){ return dimY = dy; }
 
 void EnsembleJardin::addJardin(const Jardin & jardin){
-    int taille = tabJardin->size();
+   
     tabJardin->push_back(jardin);
 
 }
@@ -57,7 +57,7 @@ int EnsembleJardin::recupIndice(unsigned int nx, unsigned int ny){
 
 bool EnsembleJardin::planter(string nom, unsigned int nx, unsigned int ny){
     int i = recupIndice(nx,ny);
-    assignerFruitLeg((*tabJardin)[i], nom);
+    assignerFruitLeg(nom);
     (*tabJardin)[i].setOccupe(true);    
     clock_t time_req;
     time_req = clock();
@@ -71,8 +71,27 @@ bool EnsembleJardin::planter(string nom, unsigned int nx, unsigned int ny){
 }
 
 
-void EnsembleJardin::assignerFruitLeg(Jardin & jardin, string nom){
+void EnsembleJardin::assignerFruitLeg(string nom){
      banqueFruitLeg.banqueDeFruitLeg(); //instancie une banque de fruit leg 
-     jardin.plant = banqueFruitLeg.chercherFruitLeg(nom); //le FruitLeg du jardin est initialisé avec une graine
+     plant = banqueFruitLeg.chercherFruitLeg(nom); //le FruitLeg du jardin est initialisé avec une graine
+
+}
+
+
+void EnsembleJardin::testRegression(){
+    assert(tabJardin->empty());
+    assert(tabJardin->size() == 0);
+    Jardin jardin; 
+    addJardin(jardin);
+    assert(tabJardin->size() == 1);
+    assert(tabJardin->at(0).getNomGraine() == "NULL");
+    assert(tabJardin->at(0).getOccupe() == false);
+    assignerFruitLeg(fraise);
+    assert(tabJardin->at(0).getNomGraine() == "fraise");
+    assert(tabJardin->at(0).getTypeGraine() == "fruit");
+
+    
+    
+
 
 }

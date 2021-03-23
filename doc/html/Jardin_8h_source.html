@@ -69,36 +69,50 @@ $(function() {
 <div class="title">Jardin.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _JARDIN</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define _JARDIN</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;Point2D.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;FruiLegume.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classJardin.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="classJardin.html">Jardin</a>{</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <a class="code" href="classFruitLegume.html">FruitLegume</a> plant;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <a class="code" href="classPoint2D.html">Point2D</a> position;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordtype">bool</span> occupe;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">bool</span> pret;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classJardin.html">Jardin</a>(); <span class="comment">// ??</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    ~<a class="code" href="classJardin.html">Jardin</a>();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">bool</span> getOccupe()<span class="keyword">const</span>;    </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">bool</span> getPret()<span class="keyword">const</span>; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> setOccupe(<span class="keywordtype">bool</span> occ);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> setPret(<span class="keywordtype">bool</span> prt);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<a href="Jardin_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef _JARDIN</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define _JARDIN</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Point2D.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="FruitLegume_8h.html">FruitLegume.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">class </span><a class="code" href="classJardin.html">Jardin</a>{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classFruitLegume.html">FruitLegume</a> plant; <span class="comment">//FruitLegume par défaut</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classPoint2D.html">Point2D</a> position;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">bool</span> occupe;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">bool</span> pret;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classJardin.html#a5ae7629edb7e6523985c296debf3ae1c">Jardin</a>(); </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif //_JARDIN</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classJardin.html#ae81ead1bf1236e467e246dda5e6d9024">getOccupe</a>()<span class="keyword">const</span>;   </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classJardin.html#aaf9cc25bdaa05a55e2d3d36de161131e">getPret</a>()<span class="keyword">const</span>; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classJardin.html#a3afa434cbb56d995cf8d97c95ea5db75">setOccupe</a>(<span class="keywordtype">bool</span> occ);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classJardin.html#a474d468f09ae8cc86b9a71db20161aea">setPret</a>(<span class="keywordtype">bool</span> prt);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classJardin.html#a67799818874596fff947c02e66f9a263">testRegression</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif //_JARDIN</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassFruitLegume_html"><div class="ttname"><a href="classFruitLegume.html">FruitLegume</a></div><div class="ttdef"><b>Definition:</b> FruitLegume.h:9</div></div>
-<div class="ttc" id="aclassJardin_html"><div class="ttname"><a href="classJardin.html">Jardin</a></div><div class="ttdef"><b>Definition:</b> Jardin.h:6</div></div>
+<div class="ttc" id="aclassJardin_html_ae81ead1bf1236e467e246dda5e6d9024"><div class="ttname"><a href="classJardin.html#ae81ead1bf1236e467e246dda5e6d9024">Jardin::getOccupe</a></div><div class="ttdeci">bool getOccupe() const</div><div class="ttdoc">Accesseur : renvoie la valeur du booléen occupe.</div></div>
+<div class="ttc" id="aclassFruitLegume_html"><div class="ttname"><a href="classFruitLegume.html">FruitLegume</a></div><div class="ttdef"><b>Definition:</b> FruitLegume.h:16</div></div>
+<div class="ttc" id="aclassJardin_html_a474d468f09ae8cc86b9a71db20161aea"><div class="ttname"><a href="classJardin.html#a474d468f09ae8cc86b9a71db20161aea">Jardin::setPret</a></div><div class="ttdeci">void setPret(bool prt)</div><div class="ttdoc">Mutateur : modifie la valeur du booléen pret.</div></div>
+<div class="ttc" id="aclassJardin_html_aaf9cc25bdaa05a55e2d3d36de161131e"><div class="ttname"><a href="classJardin.html#aaf9cc25bdaa05a55e2d3d36de161131e">Jardin::getPret</a></div><div class="ttdeci">bool getPret() const</div><div class="ttdoc">Accesseur : renvoit la valeur du booléen pret.</div></div>
+<div class="ttc" id="aclassJardin_html"><div class="ttname"><a href="classJardin.html">Jardin</a></div><div class="ttdef"><b>Definition:</b> Jardin.cpp:13</div></div>
+<div class="ttc" id="aFruitLegume_8h_html"><div class="ttname"><a href="FruitLegume_8h.html">FruitLegume.h</a></div><div class="ttdoc">Module gérant un FruitLegume.</div></div>
+<div class="ttc" id="aclassJardin_html_a67799818874596fff947c02e66f9a263"><div class="ttname"><a href="classJardin.html#a67799818874596fff947c02e66f9a263">Jardin::testRegression</a></div><div class="ttdeci">void testRegression()</div><div class="ttdoc">Teste toutes les fonctions du module.</div></div>
+<div class="ttc" id="aclassJardin_html_a3afa434cbb56d995cf8d97c95ea5db75"><div class="ttname"><a href="classJardin.html#a3afa434cbb56d995cf8d97c95ea5db75">Jardin::setOccupe</a></div><div class="ttdeci">void setOccupe(bool occ)</div><div class="ttdoc">Mutateur : modifie la valeur du booléen occupe.</div></div>
 <div class="ttc" id="aclassPoint2D_html"><div class="ttname"><a href="classPoint2D.html">Point2D</a></div><div class="ttdoc">Point2D est une classe qui crée des points à deux dimensions.</div><div class="ttdef"><b>Definition:</b> Point2D.h:10</div></div>
+<div class="ttc" id="aclassJardin_html_a5ae7629edb7e6523985c296debf3ae1c"><div class="ttname"><a href="classJardin.html#a5ae7629edb7e6523985c296debf3ae1c">Jardin::Jardin</a></div><div class="ttdeci">Jardin()</div><div class="ttdoc">Constructeur : initialise une parcelle de jardin.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
