@@ -1,0 +1,6 @@
+#ignore le dossier doc
+doc 
+#ignore le dossier bin
+bin 
+#ignore le dossier obj
+obj
