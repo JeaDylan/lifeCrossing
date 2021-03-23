@@ -46,5 +46,13 @@ public:
     */
     void setY (unsigned int ny);
 
+    /*! @brief affectation pour un Point2D
+        @param p Point2D
+    */
+    Point2D operator= (const Point2D & p);
+    
+    /*! @brief Test des fonctions du module*/
+    void testRegression();
+
 };
 #endif // _Point2D

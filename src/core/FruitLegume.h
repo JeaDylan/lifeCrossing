@@ -23,7 +23,7 @@ public:
     @param prixV prix de vente au marché d'une graine
     @param gainE points de faim en plus
     */
-    FruitLegume(sting nomG, string typeG, int gainE, int prixG, int prixV);
+    FruitLegume(string nomG, string typeG, int gainE, int prixG, int prixV);
     
     /*! @brief Destructeur: suppression d'un fruit ou légume
     */
