@@ -14,7 +14,7 @@ private:
  
 public:
    
-    /*! @brief Constructeur par defaut: initialise le point à (0,0).
+    /*! @brief Constructeur par defaut: initialise le point à (0,0).  TEST
     */
     Point2D();
     
