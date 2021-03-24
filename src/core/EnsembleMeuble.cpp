@@ -3,26 +3,23 @@
 
 
 EnsembleMeuble::EnsembleMeuble(){
-    tabMeuble = new vector<Meuble>;
+    tabMeuble.empty();
 }
 
 EnsembleMeuble::~EnsembleMeuble() {
-    tabMeuble->clear();
-    tabMeuble->shrink_to_fit ();
-    delete tabMeuble;
-    tabMeuble = NULL;
-    
+    tabMeuble.clear();
+    tabMeuble.shrink_to_fit ();
 }
 
 void EnsembleMeuble::ajouterMeuble(const Meuble & meuble) {
-    tabMeuble->push_back(meuble);
+    tabMeuble.push_back(meuble);
 }
 
 void EnsembleMeuble::suppMeuble(string nomMeuble) {
-    int taille = tabMeuble->size();
+    int taille = tabMeuble.size();
     for(int i = 0; i < taille ; i++){
-        if(nomMeuble == (*tabMeuble)[i].getNomMeuble()) {
-                tabMeuble->erase(tabMeuble->begin() + i);
+        if(nomMeuble == tabMeuble[i].getNomMeuble()) {
+                tabMeuble.erase(tabMeuble.begin() + i);
     
         }
     }
@@ -30,18 +27,38 @@ void EnsembleMeuble::suppMeuble(string nomMeuble) {
 
 void EnsembleMeuble::afficheListeMeuble()const {
     cout << "Meubles et leurs dimensions : " <<endl;
-    int taille = tabMeuble->size();
+    int taille = tabMeuble.size();
     for(int i = 0; i < taille; i++){
-        (*tabMeuble)[i].afficheMeuble();
+        tabMeuble[i].afficheMeuble();
     }
+}
 
+EnsembleMeuble EnsembleMeuble::operator= (const EnsembleMeuble & copieMeubles) {
+    tabMeuble = copieMeubles.tabMeuble;
+    return *this;
+}
+
+void EnsembleMeuble::banqueDeMeubleMaison() {
+    //Création d'une table dans la Maison
+    Point2D table1MaisonP(3,3);
+    Point2D table2MaisonP(3,4);
+    Point2D table3MaisonP(4,3);
+    Point2D table4MaisonP(4,4);
+    Meuble table1Maison("table1Maison",table1MaisonP);
+    Meuble table2Maison("table2Maison",table2MaisonP);
+    Meuble table3Maison("table3Maison",table3MaisonP);
+    Meuble table4Maison("table4Maison",table4MaisonP);
+    tabMeuble.push_back(table1Maison);
+    tabMeuble.push_back(table2Maison);
+    tabMeuble.push_back(table3Maison);
+    tabMeuble.push_back(table4Maison);
 }
 
 void EnsembleMeuble::testRegression() {
    cout<<"Tests pour le module EnsembleMeuble :"<<endl;
    EnsembleMeuble test;
-   assert(test.tabMeuble != NULL);
-   assert(test.tabMeuble->size() == 0);
+   EnsembleMeuble testBanque;
+   assert(test.tabMeuble.size() == 0);
    cout<<"Constructeur par Défaut OK ..."<<endl;
 
    //création d'un meuble
@@ -57,14 +74,16 @@ void EnsembleMeuble::testRegression() {
    cout<<"Constructeur par copie OK ..."<<endl;
    test.ajouterMeuble(table1);
    test.ajouterMeuble(table2);
-   assert(test.tabMeuble->size() == 2);
-   assert(test.tabMeuble->at(0).getNomMeuble() == "table1");
-   assert(test.tabMeuble->at(1).getNomMeuble() == "table2");
+   assert(test.tabMeuble.size() == 2);
+   assert(test.tabMeuble[0].getNomMeuble() == "table1");
+   assert(test.tabMeuble[1].getNomMeuble() == "table2");
    test.suppMeuble("table1");
-   assert(test.tabMeuble->size()==1);
-   test.tabMeuble->at(0).afficheMeuble();
+   assert(test.tabMeuble.size()==1);
+   test.tabMeuble[0].afficheMeuble();
    cout<<"Suppression OK ..."<<endl;
+   testBanque.banqueDeMeubleMaison();
+   assert(testBanque.tabMeuble.size()==4);
    test.afficheListeMeuble();
-   cout<<"Test Regression EnsembleMeuble...OK"<<endl;
+   cout<<"Test Regression EnsembleMeuble OK ..."<<endl;
 
 }

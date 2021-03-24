@@ -5,7 +5,6 @@
 
 #ifndef _MEUBLE
 #define _MEUBLE
-#include <strings.h>
 #include <iostream>
 #include <vector>
 #include <strings.h>

@@ -18,7 +18,7 @@ class EnsembleMeuble {
 
 public: 
   
-    vector<Meuble> * tabMeuble;
+    vector<Meuble> tabMeuble;
    
 
     /*! @brief Constructeur par défaut : alloue sur le tas un tableau dynamique de Meuble 
@@ -42,6 +42,13 @@ public:
     /*! @brief Affiche les noms des Meubles présents dans le tableau 
     */
     void afficheListeMeuble()const;
+
+    /*! @brief Affectation d'un EnsembleMeuble à un autre
+    */
+    EnsembleMeuble operator= (const EnsembleMeuble & copieMeubles);
+
+    /*! @brief Remplie l'ensembleMeuble de tout les meubles du Jeu */
+    void banqueDeMeubleMaison();
 
     /*! @brief Test des fonctions du module
     */
