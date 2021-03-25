@@ -53,9 +53,15 @@ int EnsembleJardin::recupIndice(unsigned int nx, unsigned int ny){
     }
 
 }
-
+bool EnsembleJardin::estRecoltable(unsigned int x,unsigned int y){
+    int i = recupIndice(x,y);
+    if((*tabJardin)[i].getFini() == true) 
+        return true;
+    else return false;    
+}
 
 bool EnsembleJardin::planter(string nom, unsigned int nx, unsigned int ny){
+    //enlever la graine de l'inventaire du perso
     int i = recupIndice(nx,ny);
     assignerFruitLeg(nom);
     (*tabJardin)[i].setOccupe(true);    

@@ -62,6 +62,8 @@ public:
     */
     int recupIndice(unsigned int nx, unsigned int ny);
 
+    bool estRecoltable(unsigned int x,unsigned int y);
+
     //deplacer cette fonction dans le module Personnage
     //Rajouter une foncton verifie FruitLeg dans Inventaire et utiliser cette fonction afin de verifier
     //que le perso possède la graine de FruitLeg avant de planter

@@ -52,6 +52,10 @@ unsigned int Terrain::getdimY () const {
     return dimX;
 }
 
+void Terrain::setChar(unsigned int x,unsigned int y,char symbole){
+            tab[x][y] = symbole;
+}
+
 EnsembleMeuble Terrain::getMeubles () const {
     return meublesTerrain;
 }
@@ -64,6 +68,18 @@ void Terrain::afficheTerrain() {
         cout<<endl;
     }
     cout<<endl;
+}
+
+char Terrain::getXY (const int x, const int y) const {
+	assert(x>=0);
+	assert(y>=0);
+	assert(x<dimx);
+	assert(y<dimy);
+	return ter[x][y];
+}
+
+bool estPositionPersoValide (const int x, const int y) const{
+    
 }
 
 void Terrain::testRegression() {

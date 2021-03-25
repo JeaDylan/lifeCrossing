@@ -88,6 +88,10 @@ public:
 
     /*! @brief Affiche le Terrain*/
     void afficheTerrain();
+
+    char getXY (const int x, const int y) const ;
+
+    void setChar(unsigned int x,unsigned int y,char symbole);
     
     /*! @brief Test des fonctions du module*/
     void testRegression();
