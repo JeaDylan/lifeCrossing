@@ -1,6 +1,6 @@
 EXEC_NAME = ./bin/test
-OBJS_TEST = ./obj/maintest.o ./obj/Point2D.o ./obj/FruitLegume.o ./obj/EnsembleFruitLeg.o ./obj/Jardin.o ./obj/Meuble.o ./obj/EnsembleMeuble.o ./obj/Terrain.o ./obj/EnsembleTerrain.o
-SRC_FILES = ./src/core/FruitLegume.h ./src/core/Mission.h ./src/core/Point2D.h ./src/core/EnsembleFruitLeg.h ./src/core/Jardin.h ./src/core/Meuble.h ./src/core/EnsembleMeuble.h ./src/core/Terrain.h ./src/core/EnsembleTerrain.h
+OBJS_TEST = ./obj/maintest.o ./obj/Point2D.o ./obj/FruitLegume.o ./obj/EnsembleFruitLeg.o ./obj/Jardin.o ./obj/Meuble.o ./obj/EnsembleMeuble.o ./obj/Terrain.o ./obj/EnsembleTerrain.o ./obj/Personnage.o 
+SRC_FILES = ./src/core/FruitLegume.h ./src/core/Mission.h ./src/core/Point2D.h ./src/core/EnsembleFruitLeg.h ./src/core/Jardin.h ./src/core/Meuble.h ./src/core/EnsembleMeuble.h ./src/core/Terrain.h ./src/core/EnsembleTerrain.h ./src/core/Personnage.h
 
 CC = g++
 CFLAGS = -ggdb -Wall
@@ -36,6 +36,9 @@ all: $(EXEC_NAME) ./doc/projet.doxy
 
 ./obj/EnsembleTerrain.o: ./src/core/EnsembleTerrain.cpp ./src/core/EnsembleTerrain.h ./src/core/Terrain.h ./src/core/EnsembleMeuble.h ./src/core/Meuble.h
 	$(CC) $(CFLAGS) -c ./src/core/EnsembleTerrain.cpp -o ./obj/EnsembleTerrain.o
+
+./obj/Personnage.o: ./src/core/Personnage.cpp ./src/core/Personnage.h ./src/core/Terrain.h ./src/core/Point2D.h
+	$(CC) $(CFLAGS) -c ./src/core/Personnage.cpp -o ./obj/Personnage.o
 
 ./doc/projet.doxy: $(SRC_FILES)
 	doxygen doc/projet.doxy
