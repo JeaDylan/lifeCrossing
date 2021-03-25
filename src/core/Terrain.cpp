@@ -53,11 +53,15 @@ unsigned int Terrain::getdimY () const {
 }
 
 void Terrain::setChar(unsigned int x,unsigned int y,char symbole){
-            tab[x][y] = symbole;
+            terr[x][y] = symbole;
 }
 
 EnsembleMeuble Terrain::getMeubles () const {
     return meublesTerrain;
+}
+
+string Terrain::getNom () const {
+    return nom;
 }
 
 void Terrain::afficheTerrain() {
@@ -70,17 +74,17 @@ void Terrain::afficheTerrain() {
     cout<<endl;
 }
 
-char Terrain::getXY (const int x, const int y) const {
+char Terrain::getXY (const unsigned int x, const unsigned int y) const {
 	assert(x>=0);
 	assert(y>=0);
-	assert(x<dimx);
-	assert(y<dimy);
-	return ter[x][y];
+	assert(x<dimX);
+	assert(y<dimY);
+	return terr[x][y];
 }
 
-bool estPositionPersoValide (const int x, const int y) const{
+/*bool estPositionPersoValide (const int x, const int y) const{
     
-}
+}*/
 
 void Terrain::testRegression() {
     cout<<"Tests pour le module Terrain :"<<endl;

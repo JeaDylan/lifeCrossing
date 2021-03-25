@@ -2,7 +2,9 @@
 #include "../core/EnsembleFruitLeg.h"
 #include "../core/EnsembleMeuble.h"
 #include "../core/Jardin.h"
-#include "../core/Terrain.h"
+#include "../core/EnsembleTerrain.h"
+#include "../core/Personnage.h"
+
 
 using namespace std;
 
@@ -13,8 +15,10 @@ int main() {
     FruitLegume fruit;
     EnsembleFruitLeg ensemble;
     EnsembleMeuble ensembleMeuble;
+    EnsembleTerrain ensembleTerrain;
     Jardin jardin;
     Terrain t;
+    Personnage perso;
     p.testRegression();
     m.testRegression();
     ensembleMeuble.testRegression();
@@ -22,6 +26,7 @@ int main() {
     ensemble.testRegression();
     jardin.testRegression();
     t.testRegression();
-
+    ensembleTerrain.testRegression();
+    perso.testRegression();
    return 0;
 }

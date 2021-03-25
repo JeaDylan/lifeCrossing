@@ -47,8 +47,11 @@ public:
     */
     EnsembleMeuble operator= (const EnsembleMeuble & copieMeubles);
 
-    /*! @brief Remplie l'ensembleMeuble de tout les meubles du Jeu */
+    /*! @brief Remplie l'ensembleMeubleMaison de tout les meubles de la maison */
     void banqueDeMeubleMaison();
+
+    /*! @brief Remplie l'ensembleMeubleQuartier de tout les meubles du Quartier */
+    void banqueDeMeubleQuartier();
 
     /*! @brief Test des fonctions du module
     */
