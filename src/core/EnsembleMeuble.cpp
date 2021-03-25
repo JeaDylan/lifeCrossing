@@ -39,7 +39,7 @@ EnsembleMeuble EnsembleMeuble::operator= (const EnsembleMeuble & copieMeubles) {
 }
 
 void EnsembleMeuble::banqueDeMeubleMaison() {
-    //Création d'une table dans la Maison
+    // Création d'une table dans la Maison
     Point2D table1MaisonP(3,3);
     Point2D table2MaisonP(3,4);
     Point2D table3MaisonP(4,3);
@@ -53,6 +53,56 @@ void EnsembleMeuble::banqueDeMeubleMaison() {
     tabMeuble.push_back(table3Maison);
     tabMeuble.push_back(table4Maison);
 }
+
+void EnsembleMeuble::banqueDeMeubleQuartier() {
+    // Création des Maisons du Quartier du Personnage
+    Point2D maison1P1(1,1);
+    Point2D maison1P2(1,2);
+    Point2D maison1P3(2,1);
+    Point2D maison1P4(2,2);
+
+    Point2D maison2P1(5,1);
+    Point2D maison2P2(5,2);
+    Point2D maison2P3(6,1);
+    Point2D maison2P4(6,2);
+
+    Point2D maison3P1(9,1);
+    Point2D maison3P2(9,2);
+    Point2D maison3P3(10,1);
+    Point2D maison3P4(10,2);
+
+    Meuble maison1_1("maison1_1",maison1P1);
+    Meuble maison1_2("maison1_2",maison1P2);
+    Meuble maison1_3("maison1_3",maison1P3);
+    Meuble maison1_4("maison1_4",maison1P4);
+
+    Meuble maison2_1("maison2_1",maison2P1);
+    Meuble maison2_2("maison2_2",maison2P2);
+    Meuble maison2_3("maison2_3",maison2P3);
+    Meuble maison2_4("maison2_4",maison2P4);
+
+    Meuble maison3_1("maison3_1",maison3P1);
+    Meuble maison3_2("maison3_2",maison3P2);
+    Meuble maison3_3("maison3_3",maison3P3);
+    Meuble maison3_4("maison3_4",maison3P4);
+
+    tabMeuble.push_back(maison1_1);
+    tabMeuble.push_back(maison1_2);
+    tabMeuble.push_back(maison1_3);
+    tabMeuble.push_back(maison1_4);
+
+    tabMeuble.push_back(maison2_1);
+    tabMeuble.push_back(maison2_2);
+    tabMeuble.push_back(maison2_3);
+    tabMeuble.push_back(maison2_4);
+
+    tabMeuble.push_back(maison3_1);
+    tabMeuble.push_back(maison3_2);
+    tabMeuble.push_back(maison3_3);
+    tabMeuble.push_back(maison3_4);
+
+}
+
 
 void EnsembleMeuble::testRegression() {
    cout<<"Tests pour le module EnsembleMeuble :"<<endl;
