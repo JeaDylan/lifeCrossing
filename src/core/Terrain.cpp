@@ -45,6 +45,10 @@ EnsembleMeuble meubles) {
     meublesTerrain=meubles;
 }
 
+bool Terrain::estPositionPersoValide (const int x, const int y){
+	return (x>=0 && x<dimX && y>=0 && y<dimY && terr[x][y]!='x');
+}
+
 unsigned int Terrain::getdimX () const {
     return dimX;
 }
@@ -100,5 +104,7 @@ void Terrain::testRegression() {
     assert(maison.getdimX()==10&&maison.getdimY()==10);
     assert(maison.getMeubles().tabMeuble.size()==4);
     afficheTerrain();
+    assert(maison.estPositionPersoValide(0,0));
+    assert(maison.estPositionPersoValide(4,4)==false);
     cout<<"test Regression Terrain OK ..."<<endl;
 }

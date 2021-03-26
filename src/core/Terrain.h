@@ -49,7 +49,7 @@ public:
     @param x : abs de la case à tester
     @param y : ordonnée de la case à tester
     */
-    bool estPositionPersoValide (const int x, const int y) const;
+    bool estPositionPersoValide (const int x, const int y);
 
     /*! @brief Accesseur : récupère la composante dimX du Terrain
     */
