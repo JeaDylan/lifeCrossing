@@ -20,7 +20,7 @@ class Personnage {
 private:
     string nom;
     char avatar;
-    unsigned int argent;
+    float argent;
     //Vie vie;
     Point2D position;
     //Jauge niveau;
@@ -37,7 +37,7 @@ public:
     @param sexe sexe du personnage
     @param avatar avatar du personnage
     */
-    Personnage(string nomP, unsigned int argentPerso,Point2D positionPerso);
+    Personnage(string nomP, float argentPerso,Point2D positionPerso);
     
     /*! @brief Destructeur: suppression d'un personnage
     */
@@ -50,8 +50,14 @@ public:
     char getAvatar() const;
 
     /*! @brief Accesseur : récupère l'argent du personnage */
-    unsigned int getArgent() const;
+    float getArgent() const;
+    
+    /*! @brief Accesseur : récupère la position en X du personnage */
+    unsigned int getPosX() const;
 
+    /*! @brief Accesseur : récupère la position en Y du personnage */
+    unsigned int getPosY() const;
+    
     /*! @brief Mutateur : modifie le nom du personnage
     @param nomP nom est remplacé par nomP */
     void setNom(string nomP);
@@ -62,12 +68,20 @@ public:
     
     /*! @brief Mutateur : modifie l'argent du personnage (gain)
     @param gain argent += gain */
-    void gainArgent(unsigned int gain);
+    void gainArgent(float gain);
     
     /*! @brief Mutateur : modifie l'argent du personnage (perte)
     @param perte argent -= perte */
-    void perteArgent(unsigned int perte);
+    void perteArgent(float perte);
 
+    /*! @brief Mutateur : modifie la position en X du personnage 
+    @param posX position.X devient posX */
+    void setPosX(unsigned int posX);
+    
+    /*! @brief Mutateur : modifie la position en Y du personnage 
+    @param posY position.Y devient posY */
+    void setPosY(unsigned int posY);
+    
     /*! @brief Déplacement sur la gauche du personnage
     @param terrain la position2D du personnage est modifiée d'une case vers la gauche */
     void gauche (const Terrain& terrain);

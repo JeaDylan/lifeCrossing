@@ -6,7 +6,7 @@ const char persoChar[3]  = "P";
 Personnage::Personnage() {
     nom="sansNom";
     avatar=persoChar[0];
-    argent=0;
+    argent=0.0;
     //vie.Vie();
     position.setX(0);
     position.setY(0);
@@ -17,7 +17,7 @@ Personnage::Personnage() {
     //inventaire.Inventaire();
 }
 
-Personnage::Personnage(string nomP, unsigned int argentPerso,Point2D positionPerso) {
+Personnage::Personnage(string nomP, float argentPerso,Point2D positionPerso) {
     nom=nomP;
     avatar=persoChar[0];
     argent=argentPerso;
@@ -36,8 +36,16 @@ char Personnage::getAvatar() const {
     return avatar;
 }
 
-unsigned int Personnage::getArgent() const {
+float Personnage::getArgent() const {
     return argent;
+}
+
+unsigned int Personnage::getPosX() const {
+    return position.getX();
+}
+
+unsigned int Personnage::getPosY() const {
+    return position.getY();
 }
 
 void Personnage::setNom(string nomP) {
@@ -48,13 +56,22 @@ void Personnage::setAvatar(char avatarP) {
     avatar=avatarP;
 }
 
-void Personnage::gainArgent(unsigned int gain) {
+void Personnage::gainArgent(float gain) {
     argent+=gain;
 }
 
-void Personnage::perteArgent(unsigned int perte) {
+void Personnage::perteArgent(float perte) {
     argent-=perte;
 }
+
+void Personnage::setPosX(unsigned int posX) {
+    position.setX(posX);
+}
+
+void Personnage::setPosY(unsigned int posY) {
+    position.setY(posY);
+}
+
 /*
 void Personnage::gauche (const Terrain & t) {
     if (t.estPositionPersoValide(position.getX()-1,position.getY())) position.setX(position.getX()-1);
