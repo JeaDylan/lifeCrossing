@@ -46,6 +46,6 @@ void EnsembleTerrain::testRegression() {
     ensembleTerrain.banqueDeTerrain();
     assert(ensembleTerrain.tabTerrain[0].getNom()=="maison");
     assert(ensembleTerrain.tabTerrain[1].getNom()=="quartier");
-    //ensembleTerrain.afficheTerrains();
+    ensembleTerrain.afficheTerrains();
     cout<<"Test Régression EnsembleTerrain OK ..."<<endl;
 }

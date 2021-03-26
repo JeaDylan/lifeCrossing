@@ -33,7 +33,8 @@ EnsembleMeuble meubles) {
         for(unsigned int j=0;j<dimY;j++) {
             for(unsigned int k=0;k<meubles.tabMeuble.size();k++){
                 if(i==meubles.tabMeuble[k].getDimension().getX()&&j==meubles.tabMeuble[k].getDimension().getY()) {
-                    terr[i-1][j-1]=meubleChar[0];
+                    terr[i][j]=meubleChar[0];
+                    break;
                 }
                 else {
                     terr[i][j]=videChar[0];
@@ -65,6 +66,7 @@ string Terrain::getNom () const {
 }
 
 void Terrain::afficheTerrain() {
+    cout<<"Voici le terrain "<<nom<<" : "<<endl;
     for(unsigned int i=0;i<dimX;i++) {
         for(unsigned int j=0;j<dimY;j++) {
             cout<<terr[i][j];
