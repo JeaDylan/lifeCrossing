@@ -1,7 +1,7 @@
 EXEC_NAME = ./bin/test ./bin/jeu_txt
-OBJS_TEST = ./obj/maintest.o ./obj/Point2D.o ./obj/FruitLegume.o ./obj/EnsembleFruitLeg.o ./obj/Jardin.o ./obj/EnsembleJardin.o ./obj/Meuble.o ./obj/EnsembleMeuble.o ./obj/Terrain.o ./obj/EnsembleTerrain.o ./obj/Personnage.o ./obj/Jauge.o ./obj/Pnj.o ./obj/Jeu.o
+OBJS_TEST = ./obj/maintest.o ./obj/Point2D.o ./obj/FruitLegume.o ./obj/EnsembleFruitLeg.o ./obj/Jardin.o ./obj/EnsembleJardin.o ./obj/Meuble.o ./obj/EnsembleMeuble.o ./obj/Terrain.o ./obj/EnsembleTerrain.o ./obj/Personnage.o ./obj/Jauge.o ./obj/Pnj.o ./obj/Jeu.o ./obj/Activite.o
 OBJS_JEU_TXT = ./obj/main_txt.o ./obj/Point2D.o ./obj/FruitLegume.o ./obj/EnsembleFruitLeg.o ./obj/Jardin.o ./obj/EnsembleJardin.o ./obj/Terrain.o  ./obj/EnsembleTerrain.o ./obj/Personnage.o ./obj/Meuble.o ./obj/EnsembleMeuble.o ./obj/Jeu.o ./obj/winTxt.o ./obj/txtJeu.o
-SRC_FILES = ./src/core/FruitLegume.h ./src/core/Mission.h ./src/core/Point2D.h ./src/core/EnsembleFruitLeg.h ./src/core/Jardin.h ./src/core/EnsembleJardin.h ./src/core/Meuble.h ./src/core/EnsembleMeuble.h ./src/core/Terrain.h ./src/core/EnsembleTerrain.h ./src/core/Personnage.h ./src/core/Jauge.h ./src/core/Pnj.h ./src/core/Mission.h  ./src/core/EnsembleMission.h  ./src/core/Jeu.h
+SRC_FILES = ./src/core/FruitLegume.h ./src/core/Mission.h ./src/core/Point2D.h ./src/core/EnsembleFruitLeg.h ./src/core/Jardin.h ./src/core/EnsembleJardin.h ./src/core/Meuble.h ./src/core/EnsembleMeuble.h ./src/core/Terrain.h ./src/core/EnsembleTerrain.h ./src/core/Personnage.h ./src/core/Jauge.h ./src/core/Pnj.h ./src/core/Mission.h  ./src/core/EnsembleMission.h  ./src/core/Jeu.h ./src/core/Activite
 
 CC = g++
 CFLAGS = -ggdb -Wall
@@ -55,7 +55,10 @@ all: $(EXEC_NAME) ./doc/projet.doxy
 	
 ./obj/Pnj.o: ./src/core/Pnj.cpp ./src/core/Pnj.h ./src/core/Point2D.h
 	$(CC) $(CFLAGS) -c ./src/core/Pnj.cpp -o ./obj/Pnj.o
-
+	
+./obj/Activite.o: ./src/core/Activite.cpp ./src/core/Activite.h ./src/core/Point2D.h
+	$(CC) $(CFLAGS) -c ./src/core/Activite.cpp -o ./obj/Activite.o
+	
 ./obj/Jeu.o: ./src/core/Jeu.cpp ./src/core/Jeu.h ./src/core/Personnage.h ./src/core/EnsembleTerrain.h ./src/core/EnsembleJardin.h 
 	$(CC) $(CFLAGS) -c ./src/core/Jeu.cpp -o ./obj/Jeu.o
 

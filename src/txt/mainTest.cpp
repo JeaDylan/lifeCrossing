@@ -6,6 +6,7 @@
 #include "../core/Personnage.h"
 #include "../core/Pnj.h"
 #include "../core/Jauge.h"
+#include "../core/Activite.h"
 
 
 using namespace std;
@@ -22,6 +23,7 @@ int main() {
     Terrain t;
     Personnage perso;
     Pnj PNJ;
+    Activite a;
     Jauge jauge;
     p.testRegression();
     m.testRegression();
@@ -34,5 +36,6 @@ int main() {
     perso.testRegression();
     PNJ.testRegression();
     jauge.testRegression();
+    a.testRegression();
    return 0;
 }
