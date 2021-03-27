@@ -88,10 +88,6 @@ char Terrain::getXY (const unsigned int x, const unsigned int y) const {
 	return terr[x][y];
 }
 
-/*bool estPositionPersoValide (const int x, const int y) const{
-    
-}*/
-
 void Terrain::testRegression() {
     cout<<"Tests pour le module Terrain :"<<endl;
     EnsembleMeuble ensembleMeuble;
