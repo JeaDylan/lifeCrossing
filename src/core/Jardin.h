@@ -8,7 +8,7 @@
 #include "FruitLegume.h"
 
 
-/*! @class un Jardin = une parcelle de Jardin
+/*! @brief un Jardin = une parcelle de Jardin
 */
 class Jardin{
 private:
@@ -22,6 +22,35 @@ public:
     /*! @brief Constructeur : initialise une parcelle de jardin
     */
     Jardin(); 
+
+    /*! @brief Constructeur par copie: initialise une parcelle de jardin
+    */
+    Jardin(unsigned int nx, unsigned int ny);
+
+    /*! @brief Accesseur: renvoit la position x du jardin
+    */
+    unsigned int getPosX()const;
+
+    /*! @brief Accesseur: renvoit la position y du jardin
+    */
+    unsigned int getPosY()const;
+
+    /*! @brief Acesseur : renvoit le fruitLegume (la graine) présente sur le jardin
+    */
+    FruitLegume getPlant()const;
+
+    /*! @brief Mutateur : modifie la position en x du jardin
+    */
+    void setPosX(unsigned int nx);
+
+    /*! @brief Mutateur : modifie la position en y du jardin
+    */
+    void setPosY(unsigned int ny);
+    
+    /*! @brief Mutateur : modifie la graine présente sur le jardin
+    */
+    void setPlant(const FruitLegume & fruitLeg);
+
 
     /*! @brief Accesseur : renvoie la valeur du booléen occupe
     */

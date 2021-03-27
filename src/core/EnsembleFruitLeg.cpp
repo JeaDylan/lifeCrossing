@@ -57,27 +57,27 @@ void EnsembleFruitLeg::afficheListeFruitLeg()const{
 
 void EnsembleFruitLeg::banqueDeFruitLeg(){ //il faut ajuster/definir les prix et gain energie
 
-    tabFruitLeg->push_back(FruitLegume("banane","fruit",0,0,5,0));
-    tabFruitLeg->push_back(FruitLegume("coco","fruit",0,0,12,0));
-    tabFruitLeg->push_back(FruitLegume("fraise","fruit",1.4,3.9,0,9));
-    tabFruitLeg->push_back(FruitLegume("framboise","fruit",1.6,4.1,0,1));
-    tabFruitLeg->push_back(FruitLegume("orange","fruit",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume("pamplemousse","fruit",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume("poire","fruit",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume("pomme","fruit",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume("mure","fruit",0,0,0,0));    
-    tabFruitLeg->push_back(FruitLegume("tomate", "fruit",0,0,0,0));
+    tabFruitLeg->push_back(FruitLegume("banane","fruit",4,8,5,50));
+    tabFruitLeg->push_back(FruitLegume("coco","fruit",10,20,30,60));
+    tabFruitLeg->push_back(FruitLegume("fraise","fruit",1.4,3.9,15,9));
+    tabFruitLeg->push_back(FruitLegume("framboise","fruit",1.6,4.1,13,1));
+    tabFruitLeg->push_back(FruitLegume("orange","fruit",2.4,6.5,27,7));
+    tabFruitLeg->push_back(FruitLegume("pamplemousse","fruit",3,7.5,23,8));
+    tabFruitLeg->push_back(FruitLegume("poire","fruit",2,4,10,4));
+    tabFruitLeg->push_back(FruitLegume("pomme","fruit",2,4,14,5));
+    tabFruitLeg->push_back(FruitLegume("mure","fruit",9,18.5,4,3));    
+    tabFruitLeg->push_back(FruitLegume("tomate", "fruit",5,25,60,30));
 
-    tabFruitLeg->push_back(FruitLegume ("aubergine","legume",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume ("brocolli","legume",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume ("carotte","legume",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume ("champignon","legume",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume ("chou","legume",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume ("fenouil","legume",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume ("lentille","legume",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume ("mais","legume",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume ("patate","legume",0,0,0,0));
-    tabFruitLeg->push_back(FruitLegume ("salade","legume",0,0,0,0));
+    tabFruitLeg->push_back(FruitLegume ("aubergine","legume",6,10,7,22));
+    tabFruitLeg->push_back(FruitLegume ("brocolli","legume",12,22,32,62));
+    tabFruitLeg->push_back(FruitLegume ("carotte","legume",2.4,5.9,17,18));
+    tabFruitLeg->push_back(FruitLegume ("champignon","legume",5,9.5,25,10));
+    tabFruitLeg->push_back(FruitLegume ("chou","legume",4,8,12,9));
+    tabFruitLeg->push_back(FruitLegume ("fenouil","legume",10,18.5,19,20));
+    tabFruitLeg->push_back(FruitLegume ("lentille","legume",18,34,70,90));
+    tabFruitLeg->push_back(FruitLegume ("mais","legume",30,60,70,100));
+    tabFruitLeg->push_back(FruitLegume ("patate","legume",10,50,100,95));
+    tabFruitLeg->push_back(FruitLegume ("salade","legume",9,20,34,24));
     
 }
 

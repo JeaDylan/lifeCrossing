@@ -4,24 +4,21 @@
 #ifndef _ENSEMBLE_JARDIN
 #define _ENSEMBLE_JARDIN
 #include "Jardin.h"
-
-#include <vector>
-#include <ctime>
-#include <iostream>
-using namespace std;
+#include "EnsembleFruitLeg.h"
 
 
-/*! @class un EnsembleJardin = un tableau dynamique de Jardin 
+
+/*! @brief un EnsembleJardin = un tableau dynamique de Jardin 
 */
 class EnsembleJardin{
-private:
+public:
     vector<Jardin> * tabJardin;
     unsigned int dimX;
     unsigned int dimY;
     Point2D position;
     EnsembleFruitLeg banqueFruitLeg;
     
-public:
+
     /*! @brief Constructeur : alloue un tableau dynamique de Jardin sur le tas 
     */
     EnsembleJardin();
@@ -50,7 +47,7 @@ public:
     /*! @brief Ajoute une parcelle de Jardin 
         @param jardin est ajouté au tableau dynamique
     */
-    void addJardin(const Jardin & jardin);
+    void ajouterJardin(const Jardin & jardin);
 
     /*! @brief Supprime une parcelle de Jardin aux coordonnées (nx,ny) du Jardin
         @param nx coordonnée en x de la parcelle à supprimer
@@ -62,23 +59,23 @@ public:
     */
     int recupIndice(unsigned int nx, unsigned int ny);
 
+    /*! @brief Renvoit true si la parcelle de jardin aux coordonnées (x,y) est recoltable
+    */
     bool estRecoltable(unsigned int x,unsigned int y);
 
-    //deplacer cette fonction dans le module Personnage
-    //Rajouter une foncton verifie FruitLeg dans Inventaire et utiliser cette fonction afin de verifier
-    //que le perso possède la graine de FruitLeg avant de planter
-    bool planter(string nomGraine);
+  
 
-    //lorsque le perso plante une graine la parcelle de jardin qui est initiallement vide est rempli
-    //avec les données du jardin en parametre, est utilisé dans planter()
-    void assignerFruitLeg(Jardin & jardin, string nom);
+    /** @brief lorsque le perso plante une graine la parcelle de jardin qui est initiallement vide est rempli
+    *   avec les données du jardin en parametre, est utilisé dans Jeu::planter()
+    */
+    void assignerFruitLeg(string nom, unsigned int indice);
 
     /*! @brief Teste toutes les fonctions du module
     */
     void testRegression();
 
 
-}
+};
 
 
 #endif //_ENSEMBLE_JARDIN

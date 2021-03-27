@@ -84,19 +84,19 @@ public:
     
     /*! @brief Déplacement sur la gauche du personnage
     @param terrain la position2D du personnage est modifiée d'une case vers la gauche */
-    void gauche (const Terrain& terrain);
+    void gauche (Terrain& terrain);
 
     /*! @brief Déplacement sur la droite du personnage
     @param terrain la position2D du personnage est modifiée d'une case vers la droite */
-    void droite (const Terrain& terrain);
+    void droite (Terrain& terrain);
 
     /*! @brief Déplacement vers le haut du personnage
     @param terrain la position2D du personnage est modifiée d'une case vers le haut */
-    void haut (const Terrain& terrain);
+    void haut (Terrain& terrain);
 
     /*! @brief Déplacement vers le bas du personnage
     @param terrain la position2D du personnage est modifiée d'une case vers le bas */
-    void bas (const Terrain& terrain);
+    void bas (Terrain& terrain);
 
     /*! @brief Choix de faire une activité
     @param terrain Le personnage peut choisir de faire une activité s'il s'approche d'une zone d'activité sur le terrain */

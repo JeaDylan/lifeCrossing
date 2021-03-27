@@ -67,7 +67,7 @@ void FruitLegume::setGainEnergie(int gain){
 void FruitLegume::setTempsRecolte(unsigned int temps){  tempsRecolte = temps; }
 
 void FruitLegume::testRegression()const{
-    FruitLegume fraise = FruitLegume("fraise","fruit",4,6,25,5); //creation d'une fraise
+    FruitLegume fraise("fraise","fruit",4,6,25,5); //creation d'une fraise
     assert(fraise.getNomGraine() == "fraise");
     assert(fraise.getTypeGraine() == "fruit");
     assert(fraise.getPrixGraine() == 4);

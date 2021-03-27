@@ -72,23 +72,23 @@ void Personnage::setPosY(unsigned int posY) {
     position.setY(posY);
 }
 
+
+void Personnage::gauche (Terrain & t) {
+    if (t.estPositionPersoValide(getPosX()-1,getPosY())) setPosX(getPosX()-1);
+}
+
+void Personnage::droite (Terrain & t) {
+    if (t.estPositionPersoValide(getPosX()+1,getPosY())) setPosX(getPosX()+1);
+}
+
+void Personnage::bas (Terrain & t) {
+    if (t.estPositionPersoValide(getPosX(),getPosY()-1)) setPosY(getPosY()-1);
+}
+
+void Personnage::haut (Terrain & t) {
+    if (t.estPositionPersoValide(getPosX(),getPosY()+1)) setPosY(getPosY()+1);
+}
 /*
-void Personnage::gauche (const Terrain & t) {
-    if (t.estPositionPersoValide(position.getX()-1,position.getY())) position.setX(position.getX()-1);
-}
-
-void Personnage::droite (const Terrain & t) {
-    if (t.estPositionPersoValide(position.getX()+1,position.getY())) position.setX(position.getX()+1);
-}
-
-void Personnage::bas (const Terrain & t) {
-    if (t.estPositionPersoValide(position.getX(),position.getY()-1)) position.setY(position.getY()-1);
-}
-
-void Personnage::haut (const Terrain & t) {
-    if (t.estPositionPersoValide(position.getX(),position.getY()+1)) position.setY(position.getY()+1);
-}
-
 bool Personnage::choixActivite (Terrain terrain) const {
     return false;
 }
@@ -125,4 +125,5 @@ void Personnage::testRegression() {
     assert(p.getArgent()==100);
     cout<<"Constructeur par copie OK ..."<<endl;
     p.affichePersonnage();
+
 }

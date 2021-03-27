@@ -13,7 +13,7 @@
 
 using namespace std;
 
-/*! @class un EnsembleFruitLeg = un tableau dynamique de FruitLegume
+/*! @brief un EnsembleFruitLeg = un tableau dynamique de FruitLegume
 */
 class EnsembleFruitLeg {
 
