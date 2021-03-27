@@ -16,12 +16,15 @@ void txtAff(WinTXT & win, Jeu & jeu) {
 	win.clear();
 
     // Affichage quartier
-    jeu.getTerrain().tabTerrain[1].afficheTerrain();
+	for(unsigned int i=0;i<jeu.getTerrain().tabTerrain[1].getdimX();++i) {
+        for(unsigned int j=0;j<jeu.getTerrain().tabTerrain[1].getdimY();++j) {
+            win.print(i,j,jeu.getTerrain().tabTerrain[1].getXY(i,j));
+        }
+    }
     
     //Affichage du Personnage
     win.print(perso.getPosX(),perso.getPosY(),'P');
 
-    
 
 	win.draw();
 }

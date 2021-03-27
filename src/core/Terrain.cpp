@@ -28,7 +28,6 @@ EnsembleMeuble meubles) {
     dimX=x;
     dimY=y;
     nom=nomTerrain;
-    meubles.afficheListeMeuble();
     for(unsigned int i=0;i<dimX;i++) {
         for(unsigned int j=0;j<dimY;j++) {
             for(unsigned int k=0;k<meubles.tabMeuble.size();k++){
@@ -45,7 +44,7 @@ EnsembleMeuble meubles) {
     meublesTerrain=meubles;
 }
 
-bool Terrain::estPositionPersoValide (const int x, const int y){
+bool Terrain::estPositionPersoValide (unsigned int x,unsigned int y){
 	return (x>=0 && x<dimX && y>=0 && y<dimY && terr[x][y]!='x');
 }
 
@@ -80,12 +79,12 @@ void Terrain::afficheTerrain() {
     cout<<endl;
 }
 
-char Terrain::getXY (const unsigned int x, const unsigned int y) const {
+char Terrain::getXY (unsigned int x,unsigned int y) const {
 	assert(x>=0);
 	assert(y>=0);
-	assert(x<dimX);
-	assert(y<dimY);
-	return terr[x][y];
+	//assert(x<dimX);
+	//assert(y<dimY);
+	return terr[y][x];
 }
 
 void Terrain::testRegression() {

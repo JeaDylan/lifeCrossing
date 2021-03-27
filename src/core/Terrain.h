@@ -49,7 +49,7 @@ public:
     @param x : abs de la case à tester
     @param y : ordonnée de la case à tester
     */
-    bool estPositionPersoValide (const int x, const int y);
+    bool estPositionPersoValide (unsigned int x,unsigned int y);
 
     /*! @brief Accesseur : récupère la composante dimX du Terrain
     */
@@ -84,7 +84,7 @@ public:
     @param x : numero de ligne de la case de l'objet
     @param y : numero de colonne de la case de l'objet
     */
-    char getXY (const unsigned int x, const unsigned int y) const;
+    char getXY (unsigned int x, unsigned int y) const;
 
     /*! @brief Affiche le Terrain*/
     void afficheTerrain();

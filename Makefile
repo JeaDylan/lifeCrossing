@@ -1,7 +1,7 @@
 EXEC_NAME = ./bin/test ./bin/jeu_txt
 OBJS_TEST = ./obj/maintest.o ./obj/Point2D.o ./obj/FruitLegume.o ./obj/EnsembleFruitLeg.o ./obj/Jardin.o ./obj/EnsembleJardin.o ./obj/Meuble.o ./obj/EnsembleMeuble.o ./obj/Terrain.o ./obj/EnsembleTerrain.o ./obj/Personnage.o ./obj/Jauge.o ./obj/Pnj.o ./obj/Jeu.o ./obj/Activite.o
 OBJS_JEU_TXT = ./obj/main_txt.o ./obj/Point2D.o ./obj/FruitLegume.o ./obj/EnsembleFruitLeg.o ./obj/Jardin.o ./obj/EnsembleJardin.o ./obj/Terrain.o  ./obj/EnsembleTerrain.o ./obj/Personnage.o ./obj/Meuble.o ./obj/EnsembleMeuble.o ./obj/Jeu.o ./obj/winTxt.o ./obj/txtJeu.o
-SRC_FILES = ./src/core/FruitLegume.h ./src/core/Mission.h ./src/core/Point2D.h ./src/core/EnsembleFruitLeg.h ./src/core/Jardin.h ./src/core/EnsembleJardin.h ./src/core/Meuble.h ./src/core/EnsembleMeuble.h ./src/core/Terrain.h ./src/core/EnsembleTerrain.h ./src/core/Personnage.h ./src/core/Jauge.h ./src/core/Pnj.h ./src/core/Mission.h  ./src/core/EnsembleMission.h  ./src/core/Jeu.h ./src/core/Activite
+SRC_FILES = ./src/core/FruitLegume.h ./src/core/Mission.h ./src/core/Point2D.h ./src/core/EnsembleFruitLeg.h ./src/core/Jardin.h ./src/core/EnsembleJardin.h ./src/core/Meuble.h ./src/core/EnsembleMeuble.h ./src/core/Terrain.h ./src/core/EnsembleTerrain.h ./src/core/Personnage.h ./src/core/Jauge.h ./src/core/Pnj.h ./src/core/Mission.h  ./src/core/EnsembleMission.h  ./src/core/Jeu.h ./src/core/Activite.h
 
 CC = g++
 CFLAGS = -ggdb -Wall
@@ -14,10 +14,10 @@ all: $(EXEC_NAME) ./doc/projet.doxy
 ./bin/jeu_txt: $(OBJS_JEU_TXT) 
 	$(CC) $(OBJS_JEU_TXT) -o ./bin/jeu_txt
 
-./obj/maintest.o: ./src/txt/mainTest.cpp ./src/core/FruitLegume.h ./src/core/EnsembleFruitLeg.h ./src/core/Jardin.h ./src/core/EnsembleMeuble.h ./src/core/EnsembleMeuble.h  ./src/core/EnsembleMission.h ./src/core/Jeu.h ./src/core/Personnage.h
+./obj/maintest.o: ./src/txt/mainTest.cpp ./src/core/FruitLegume.h ./src/core/EnsembleFruitLeg.h ./src/core/Jardin.h ./src/core/EnsembleMeuble.h ./src/core/EnsembleMeuble.h  ./src/core/EnsembleMission.h ./src/core/Jeu.h ./src/core/Personnage.h ./src/core/Activite.h
 	$(CC) $(CFLAGS) -c ./src/txt/mainTest.cpp -o ./obj/maintest.o
 
-./obj/main_txt.o: ./src/txt/main_txt.cpp  ./src/txt/winTxt.h ./src/txt/txtJeu.h ./src/core/EnsembleFruitLeg.h ./src/core/EnsembleJardin.h ./src/core/EnsembleTerrain.h ./src/core/EnsembleMeuble.h  ./src/core/EnsembleMission.h ./src/core/Jeu.h ./src/core/Personnage.h
+./obj/main_txt.o: ./src/txt/main_txt.cpp  ./src/txt/winTxt.h ./src/txt/txtJeu.h ./src/core/EnsembleFruitLeg.h ./src/core/EnsembleJardin.h ./src/core/EnsembleTerrain.h ./src/core/EnsembleMeuble.h  ./src/core/EnsembleMission.h ./src/core/Jeu.h ./src/core/Personnage.h ./src/core/Activite.h
 	$(CC) $(CFLAGS) -c ./src/txt/main_txt.cpp  -o ./obj/main_txt.o
 
 ./obj/Point2D.o: ./src/core/Point2D.cpp ./src/core/Point2D.h

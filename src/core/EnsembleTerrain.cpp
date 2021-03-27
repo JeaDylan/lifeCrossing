@@ -28,13 +28,13 @@ void EnsembleTerrain::banqueDeTerrain() {
     // Création Maison du personnage
     EnsembleMeuble ensembleMeubleMaison;
     ensembleMeubleMaison.banqueDeMeubleMaison();
-    Terrain maison(20,15,"maison",ensembleMeubleMaison);
+    Terrain maison(20,20,"maison",ensembleMeubleMaison);
     tabTerrain.push_back(maison);
 
     // Création Quartier du personnage
     EnsembleMeuble ensembleMeubleQuartier;
     ensembleMeubleQuartier.banqueDeMeubleQuartier();
-    Terrain quartier(20,15,"quartier",ensembleMeubleQuartier);
+    Terrain quartier(20,20,"quartier",ensembleMeubleQuartier);
     tabTerrain.push_back(quartier);
 
 }
