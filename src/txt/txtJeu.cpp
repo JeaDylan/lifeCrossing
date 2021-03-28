@@ -9,16 +9,16 @@
 #include "../core/Jeu.h"
 
 void txtAff(WinTXT & win, Jeu & jeu) {
-//	const EnsembleTerrain& ter = jeu.getConstTerrain();
+	const EnsembleTerrain& ter = jeu.getConstTerrain();
 	const Personnage& perso = jeu.getConstPersonnage();
-  //  const EnsembleJardin& jardin = jeu.getConstJardin();
+  	const EnsembleJardin& jardin = jeu.getConstJardin();
 
 	win.clear();
 
     // Affichage quartier
-	for(unsigned int i=0;i<jeu.getTerrain().tabTerrain[1].getdimX();++i) {
-        for(unsigned int j=0;j<jeu.getTerrain().tabTerrain[1].getdimY();++j) {
-            win.print(i,j,jeu.getTerrain().tabTerrain[1].getXY(i,j));
+	for(unsigned int i=0;i<ter.tabTerrain[1].getdimX();++i) {
+        for(unsigned int j=0;j<ter.tabTerrain[1].getdimY();++j) {
+            win.print(i,j,ter.tabTerrain[1].getXY(i,j));
         }
     }
     
