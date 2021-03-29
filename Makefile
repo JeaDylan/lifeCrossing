@@ -12,7 +12,7 @@ all: $(EXEC_NAME) ./doc/projet.doxy
 	$(CC) $(OBJS_TEST) -o ./bin/test
 
 ./bin/jeu_txt: $(OBJS_JEU_TXT) 
-	$(CC) $(OBJS_JEU_TXT) -o ./bin/jeu_txt
+	$(CC) $(OBJS_JEU_TXT) -o ./bin/jeu_txt -lncurses
 
 ./obj/maintest.o: ./src/txt/mainTest.cpp ./src/core/FruitLegume.h ./src/core/EnsembleFruitLeg.h ./src/core/Jardin.h ./src/core/EnsembleMeuble.h ./src/core/EnsembleMeuble.h  ./src/core/EnsembleMission.h ./src/core/Jeu.h ./src/core/Personnage.h ./src/core/Activite.h
 	$(CC) $(CFLAGS) -c ./src/txt/mainTest.cpp -o ./obj/maintest.o

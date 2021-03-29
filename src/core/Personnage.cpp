@@ -10,7 +10,7 @@ Personnage::Personnage() {
     //vie.Vie();
     position.setX(0);
     position.setY(0);
-    //niveau.setNiveau(0);    
+    //niveau.setNiveau(0);
     //niveau.setNiveauMax(100);
     //xp.setNiveau(0);
     //xp.setNiveauMax(100);
@@ -74,19 +74,19 @@ void Personnage::setPosY(unsigned int posY) {
 
 
 void Personnage::gauche (Terrain & t) {
-    if (t.estPositionPersoValide(getPosX()-1,getPosY())) setPosX(getPosX()-1);
-}
-
-void Personnage::droite (Terrain & t) {
-    if (t.estPositionPersoValide(getPosX()+1,getPosY())) setPosX(getPosX()+1);
-}
-
-void Personnage::bas (Terrain & t) {
     if (t.estPositionPersoValide(getPosX(),getPosY()-1)) setPosY(getPosY()-1);
 }
 
-void Personnage::haut (Terrain & t) {
+void Personnage::droite (Terrain & t) {
     if (t.estPositionPersoValide(getPosX(),getPosY()+1)) setPosY(getPosY()+1);
+}
+
+void Personnage::bas (Terrain & t) {
+    if (t.estPositionPersoValide(getPosX()-1,getPosY())) setPosX(getPosX()-1);
+}
+
+void Personnage::haut (Terrain & t) {
+    if (t.estPositionPersoValide(getPosX()+1,getPosY())) setPosX(getPosX()+1);
 }
 /*
 bool Personnage::choixActivite (Terrain terrain) const {
@@ -112,7 +112,7 @@ void Personnage::testRegression() {
     assert(argent == 0);
     assert(position.getX()==0);
     assert(position.getY()==0);
-    //assert(niveau.niveauActuel==0);    
+    //assert(niveau.niveauActuel==0);
     //assert(niveau.niveauMax==100);
     //assert(xp.niveauActuel==0);
     //assert(xp.niveauMax==100);

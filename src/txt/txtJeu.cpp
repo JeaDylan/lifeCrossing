@@ -5,15 +5,17 @@
 #include <unistd.h>
 #endif // WIN32
 #include "winTxt.h"
+#include <ncurses.h>
 
 #include "../core/Jeu.h"
 
-void txtAff(WinTXT & win, Jeu & jeu) {
+void txtAff(WINDOW * win, Jeu & jeu) {
 	const EnsembleTerrain& ter = jeu.getConstTerrain();
 	const Personnage& perso = jeu.getConstPersonnage();
   	const EnsembleJardin& jardin = jeu.getConstJardin();
 
-	win.clear();
+	// Avec winTxt.h
+	/*win.clear();
 
     // Affichage quartier
 	for(unsigned int i=0;i<ter.tabTerrain[1].getdimX();++i) {
@@ -26,13 +28,32 @@ void txtAff(WinTXT & win, Jeu & jeu) {
     win.print(perso.getPosX(),perso.getPosY(),'P');
 
 
-	win.draw();
+	win.draw();*/
+
+	// Avec ncurces.h
+	curs_set(0);
+	noecho();
+	int y,x,yDeb,xDeb,yMax,xMax;
+
+	getyx(stdscr,y,x);
+	getbegyx(stdscr,yDeb,xDeb);
+	getmaxyx(stdscr,yMax,xMax);
+
+	for(unsigned int i=0;i<ter.tabTerrain[1].getdimX();++i) {
+        for(unsigned int j=0;j<ter.tabTerrain[1].getdimY();++j) {
+			wmove(win,j,i);
+			waddch(win,ter.tabTerrain[1].getXY(i,j));
+        }
+    }
+	wmove(win,perso.getPosX(),perso.getPosY());
+	waddch(win,'P');
+	wgetch(win);
 }
 
 void txtBoucle (Jeu & jeu) {
 	// Creation d'une nouvelle fenetre en mode texte
 	// => fenetre de dimension et position (WIDTH,HEIGHT,STARTX,STARTY)
-    WinTXT win (jeu.getConstTerrain().tabTerrain[1].getdimX(),jeu.getConstTerrain().tabTerrain[1].getdimY());
+	WINDOW * win = newwin(jeu.getConstTerrain().tabTerrain[1].getdimX(),jeu.getConstTerrain().tabTerrain[1].getdimY(),0,0);
 
 	bool ok = true;
 	int c;
@@ -46,9 +67,9 @@ void txtBoucle (Jeu & jeu) {
 		usleep(100000);
         #endif // WIN32
 
-		//jeu.actionsAutomatiques();
-
-		c = win.getCh();
+		//jeu.actionsAutomatiques();	
+		nodelay(win,true);
+		c = wgetch(win);
 		switch (c) {
 			case 'k':
 				jeu.actionClavier('g');
