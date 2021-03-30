@@ -50,21 +50,17 @@ string rep;
 			perso.bas(ter.tabTerrain[1]);
 			break;
         case 'p' : //planter
-          
-            cout<<"Voulez-vous planter une graine? (oui/non) "<<endl;
-            cin>>rep;
-            assert(rep == "oui" || rep == "non");
+          /*
             if(rep == "oui"){
-                string graine;
-                cout<<"Que voulez-vous planter?"<<endl;
-                cin>>graine;
-                cout<<"La graine est plantée, attendre qu'elle soit recoltable..."<<endl;
+                char graine[10];
+                wprintw(winDialogue,"Que voulez-vous planter ? ",0,0);
+                wgetch(winDialogue);
                 //assert position valide -> fonction
                 //assert getOccupe == false -> fonction
-                if (planter(graine,perso.getPosX(),perso.getPosY()) == true ){
-                    ter.tabTerrain[1].setChar(perso.getPosX(),perso.getPosY(),'-');                
+                //if (planter(graine,perso.getPosX(),perso.getPosY()) == true ){
+                   // ter.tabTerrain[1].setChar(perso.getPosX(),perso.getPosY(),'-');                
                 }                
-            }
+            }*/
             break;
         case 'r' : //recolter
             string rep2;
