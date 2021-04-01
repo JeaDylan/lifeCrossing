@@ -5,8 +5,9 @@
 #include "../core/EnsembleTerrain.h"
 #include "../core/Personnage.h"
 #include "../core/Pnj.h"
-#include "../core/Jauge.h"
 #include "../core/Activite.h"
+#include "../core/Jauge.h"
+#include "../core/Inventaire.h"
 
 
 using namespace std;
@@ -25,6 +26,7 @@ int main() {
     Pnj PNJ;
     Activite a;
     Jauge jauge;
+    Inventaire i;
     p.testRegression();
     m.testRegression();
     ensembleMeuble.testRegression();
@@ -37,5 +39,6 @@ int main() {
     PNJ.testRegression();
     jauge.testRegression();
     a.testRegression();
+    i.testRegression();
    return 0;
 }
