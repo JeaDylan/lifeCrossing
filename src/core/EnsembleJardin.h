@@ -34,6 +34,7 @@ public:
     */
     unsigned int getDimY();
 
+
     /*! @brief Mutateur : modifie la longueur du Jardin
         @param dx modifie la coordonnée x
     */

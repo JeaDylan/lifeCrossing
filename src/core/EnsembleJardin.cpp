@@ -6,9 +6,7 @@ EnsembleJardin::EnsembleJardin(){
     tabJardin = new vector<Jardin>;
     dimX = 3;
     dimY = 6;
-
-    //postion.setX() position en x du jardin sur le terrain
-    //position.setY() position en y 
+    banqueFruitLeg.banqueDeFruitLeg();
 }
 
 EnsembleJardin::~EnsembleJardin(){

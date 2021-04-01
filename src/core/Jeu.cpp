@@ -15,6 +15,8 @@ Jeu::Jeu() : ter(), perso(), jardin() {
 
         // mission.banqueMission(); //initialise les deux missions
 
+
+
  }
 
 EnsembleTerrain& Jeu::getTerrain(){ return ter; }
@@ -50,17 +52,7 @@ string rep;
 			perso.bas(ter.tabTerrain[1]);
 			break;
         case 'p' : //planter
-          /*
-            if(rep == "oui"){
-                char graine[10];
-                wprintw(winDialogue,"Que voulez-vous planter ? ",0,0);
-                wgetch(winDialogue);
-                //assert position valide -> fonction
-                //assert getOccupe == false -> fonction
-                //if (planter(graine,perso.getPosX(),perso.getPosY()) == true ){
-                   // ter.tabTerrain[1].setChar(perso.getPosX(),perso.getPosY(),'-');                
-                }                
-            }*/
+            
             break;
         case 'r' : //recolter
             string rep2;
@@ -104,19 +96,21 @@ string rep;
 
 
 bool Jeu::planter(string nom, unsigned int nx, unsigned int ny){
+    bool fin = false;
     //enlever la graine de l'inventaire du perso
     int i = jardin.recupIndice(nx,ny);
     jardin.assignerFruitLeg(nom,i);
     jardin.tabJardin->at(i).setOccupe(true);    
-    clock_t time_req;
-    time_req = clock();
-    while( (clock() - time_req) < jardin.tabJardin->at(i).getPlant().getTempsRecolte() ){
-             sleep(1);
-    }
+    unsigned int j = 0;  
+    while(j  < jardin.tabJardin->at(i).getPlant().getTempsRecolte() ){
+           j++;        
+    }      
+    
    
     assert(jardin.tabJardin->at(i).getPret() == false);
     jardin.tabJardin->at(i).setPret(true);
-    return true;
+    fin = true;
+    return fin;
 
 }
 

@@ -35,14 +35,16 @@ void EnsembleFruitLeg::suppFruitLeg(string nom){ //suppression d'un fruit ou leg
 
 FruitLegume EnsembleFruitLeg::chercherFruitLeg(string nomFruitLeg)const{
     int taille = tabFruitLeg->size();
-    for(int i = 0; i < taille ; i++){
+    int i;
+    for(i = 0; i < taille ; i++){
         if(nomFruitLeg == (*tabFruitLeg)[i].getNomGraine()){
                
                 return (*tabFruitLeg)[i];
         }
     }
-    cout << "Ce fruit ou legume n'est pas possede ou n'existe pas "<< endl;
-    exit(0);
+    if(i == taille){
+        cout << "Ce fruit ou legume n'est pas possede ou n'existe pas "<< endl;
+    }
 
 }
 
@@ -50,15 +52,16 @@ void EnsembleFruitLeg::afficheListeFruitLeg()const{
     cout << "Fruits et legumes disponibles : " <<endl;
     int taille = tabFruitLeg->size();
     for(int i = 0; i < taille; i++){
-        cout << " - " << (*tabFruitLeg)[i].getNomGraine() << endl;
+        cout << " - " << "("<< i<<")"<< (*tabFruitLeg)[i].getNomGraine() << endl;
     }
 
 }
 
+
 void EnsembleFruitLeg::banqueDeFruitLeg(){ //il faut ajuster/definir les prix et gain energie
 
     tabFruitLeg->push_back(FruitLegume("banane","fruit",4,8,5,50));
-    tabFruitLeg->push_back(FruitLegume("coco","fruit",10,20,30,60));
+    tabFruitLeg->push_back(FruitLegume("coco","fruit",10,20,30,9));
     tabFruitLeg->push_back(FruitLegume("fraise","fruit",1.4,3.9,15,9));
     tabFruitLeg->push_back(FruitLegume("framboise","fruit",1.6,4.1,13,1));
     tabFruitLeg->push_back(FruitLegume("orange","fruit",2.4,6.5,27,7));

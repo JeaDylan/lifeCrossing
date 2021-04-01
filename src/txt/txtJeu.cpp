@@ -45,27 +45,93 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, Jeu & jeu) {
 			waddch(winTerrain,ter.tabTerrain[1].getXY(i,j));
         }
     }
+	for(unsigned int k=0; k<3; k++){
+		if(jardin.tabJardin->at(k).getOccupe() == true){
+			wmove(winTerrain,jardin.tabJardin->at(k).getPosX(),jardin.tabJardin->at(k).getPosY());
+			waddch(winTerrain, 'o');
+			wgetch(winTerrain);
+		}
+	}
 	wmove(winTerrain,perso.getPosX(),perso.getPosY());
 	waddch(winTerrain,'P');
 	wgetch(winTerrain);
 
 	box(winDialogue,0,0);
 	wrefresh(winTerrain);
+	wrefresh(winDialogue);
+
+
+}
+
+
+
+
+string txtChoixGraine(int choix){
+	string rep;
+	switch(choix){
+		case 48://0
+			rep = "banane";
+			assert(rep == "banane");
+			break;
+		case 49: //1
+			rep = "coco";
+			assert(rep == "coco");
+			break;
+		case 50: //2
+			rep= "fraise";
+			assert(rep == "fraise");
+			break;
+		case 51: //3
+			rep= "framboise";
+			assert(rep == "framboise");
+			break;
+
+	}
+	return rep;
+}
+
+void txtAffPlant(WINDOW * winDialogue, Jeu & jeu){
+	int c;
+	string reponse;
+	mvwprintw(winDialogue,1,1,"Voulez-vous planter une graine? (y/n) "); 
+	c = wgetch(winDialogue); 
+	if(c == 'y'){
+	mvwprintw(winDialogue,3,1,"Quelle graine voulez-vous planter? (Entrez un nombre)");
+	c = wgetch(winDialogue);
+	reponse = txtChoixGraine(c);								
+	while(1){
+		if(jeu.planter(reponse,jeu.getPersonnage().getPosX(),jeu.getPersonnage().getPosY()) == true){
+			mvwprintw(winDialogue,5,1,"Bravo! Vous avez planter une graine, recoltez la..");
+			wrefresh(winDialogue);
+			werase(winDialogue);
+			break;
+		}
+		else{ printw(".");}	
+	}
+	}	
+	else{ 
+		mvwprintw(winDialogue,3,1," Dommage :( ");
+		werase(winDialogue);
+	}	
+
 }
 
 void txtBoucle (Jeu & jeu) {
 	// Creation d'une nouvelle fenetre en mode texte
 	// => fenetre de dimension et position (WIDTH,HEIGHT,STARTX,STARTY)
 	WINDOW * winTerrain = newwin(jeu.getConstTerrain().tabTerrain[1].getdimX(),jeu.getConstTerrain().tabTerrain[1].getdimY(),0,0);
-	WINDOW * winDialogue = newwin(10,70,jeu.getConstTerrain().tabTerrain[1].getdimX(),0);
+	WINDOW * winDialogue = newwin(20,70,jeu.getConstTerrain().tabTerrain[1].getdimX(),0);
 	int winDiaDebx,winDiaDeby;
 	getbegyx(winDialogue,winDiaDebx,winDiaDeby);
 
 	bool ok = true;
 	int c,d;
+	string reponse;
+	
 
 	keypad(winTerrain,true);
 	noecho();
+	cbreak();
 
 
 	do {
@@ -93,10 +159,8 @@ void txtBoucle (Jeu & jeu) {
 			case 'o':
 				jeu.actionClavier('b');
 				break;
-			case 'p':
-				mvwprintw(winDialogue,1,1,"Voulez-vous planter une graine? (oui/non) ");
-				wrefresh(winDialogue);
-                jeu.actionClavier('p');
+			case 'p':	
+				txtAffPlant(winDialogue,jeu);
 				break;
 			case 'q':
 				ok = false;
