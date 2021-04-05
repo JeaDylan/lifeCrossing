@@ -121,6 +121,7 @@ void Jeu::recolter(){
     string recolte = jardin.tabJardin->at(i).getPlant().getNomGraine();
     FruitLegume fruitLeg = jardin.banqueFruitLeg.chercherFruitLeg(recolte);
     //ajout fruitLeg à l'inventaire du perso
+    
     jardin.tabJardin->at(i).setOccupe(false); 
     jardin.tabJardin->at(i).setPret(false); 
     FruitLegume vide; 
