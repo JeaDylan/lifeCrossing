@@ -10,6 +10,8 @@
 
 
 void jouer(SDL_Surface * ecran);
-void deplacerJoueur(int **carte,SDL_Rect *pos,int direction);
+void marche(SDL_Surface * ecran);
+void deplacerJoueur(int **carte,SDL_Rect *pos,int direction, SDL_Surface *ecran);
+void deplacerMarche(int **carte,SDL_Rect *pos,int direction, SDL_Surface *ecran);
 
 #endif //_SDL_JEU
