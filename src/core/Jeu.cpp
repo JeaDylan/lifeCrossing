@@ -1,15 +1,23 @@
 #include "Jeu.h"
 
-Jeu::Jeu() : ter(), perso(), jardin() {
-         jardin.tabJardin->push_back(Jardin(1,12));//tabJardin[0]
-         jardin.tabJardin->push_back(Jardin(3,12));//tabJardin[1]
-         jardin.tabJardin->push_back(Jardin(5,12));//tabJardin[2]
+Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites() {
+
+         jardin.tabJardin->push_back(Jardin(1,3));//tabJardin[0]
+         jardin.tabJardin->push_back(Jardin(2,3));//tabJardin[1]
+         jardin.tabJardin->push_back(Jardin(1,2));//tabJardin[2]
+         jardin.tabJardin->push_back(Jardin(2,2));//tabJardin[3]
+         
+         pnjs.tabPnj.push_back(Pnj("Luc","Bonjour, je suis Luc !",Point2D(7,12)));
+         
+         activites.tabActivite.push_back(Activite("Cinema",100,Point2D(7,14),50,"xp"));
 
          ter.banqueDeTerrain();
-
-         ter.tabTerrain[1].setChar(1,12,'J');
-         ter.tabTerrain[1].setChar(3,12,'J');
-         ter.tabTerrain[1].setChar(5,12,'J');
+         ter.tabTerrain[1].setChar(1,3,'j');
+         ter.tabTerrain[1].setChar(2,3,'j');
+         ter.tabTerrain[1].setChar(1,2,'j');
+         ter.tabTerrain[1].setChar(2,2,'j');
+         ter.tabTerrain[1].setChar(7,12,'i');
+         ter.tabTerrain[1].setChar(7,14,'a');
 
         // ter.setChar(12,20,'M');
 
@@ -25,12 +33,19 @@ Personnage& Jeu::getPersonnage(){ return perso; }
 
 EnsembleJardin& Jeu::getJardin(){ return jardin; }
 
+EnsemblePnj& Jeu::getPnjs(){ return pnjs; }
+
+EnsembleActivite& Jeu::getActivites(){ return activites; }
+
 const EnsembleTerrain& Jeu::getConstTerrain()const{ return ter; }
 
 const Personnage& Jeu::getConstPersonnage()const{ return perso; }
 
 const EnsembleJardin& Jeu::getConstJardin()const{ return jardin;  }
 
+const EnsemblePnj& Jeu::getConstPnjs() const{ return pnjs; }
+
+const EnsembleActivite& Jeu::getConstActivites() const{ return activites; }
 
 
 
@@ -192,7 +207,4 @@ void Jeu::testRegression(){
     
     actionClavier('p');
     cout<<"Perso deplacé vers la gauche...OK"<<endl;
-
-
-
 }

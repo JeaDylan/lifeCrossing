@@ -7,31 +7,13 @@
 #include "txtJeu.h"
 #include "../core/Jeu.h"
 
-void draw_borders(WINDOW * screen) { 
-		int x, y, i; 
-		getmaxyx(screen, y, x);
-		 // 4 corners 
-		 mvwprintw(screen, 0, 0, "+"); 
-		 mvwprintw(screen, y - 1, 0, "+"); 
-		 mvwprintw(screen, 0, x - 1, "+"); 
-		 mvwprintw(screen, y - 1, x - 1, "+"); 
-		 // sides 
-		 for (i = 1; i < (y - 1); i++) { 
-			 mvwprintw(screen, i, 0, "|"); 
-			 mvwprintw(screen, i, x - 1, "|"); 
-			 } // top and bottom 
-			 for (i = 1; i < (x - 1); i++) { 
-				 mvwprintw(screen, 0, i, "-"); 
-				 mvwprintw(screen, y - 1, i, "-"); 
-				 } 
-	}
 
-
-void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, Jeu & jeu) {
+void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu & jeu) {
 	
 	const EnsembleTerrain& ter = jeu.getConstTerrain();
 	const Personnage& perso = jeu.getConstPersonnage();
   	const EnsembleJardin& jardin = jeu.getConstJardin();
+	const EnsemblePnj& pnjs = jeu.getConstPnjs();
 	
 	int y,x,yDeb,xDeb,yMax,xMax;
 
@@ -45,7 +27,7 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, Jeu & jeu) {
 			waddch(winTerrain,ter.tabTerrain[1].getXY(i,j));
         }
     }
-	for(unsigned int k=0; k<3; k++){
+	for(unsigned int k=0; k<4; k++){
 		if(jardin.tabJardin->at(k).getOccupe() == true){
 			wmove(winTerrain,jardin.tabJardin->at(k).getPosX(),jardin.tabJardin->at(k).getPosY());
 			waddch(winTerrain, 'o');
@@ -60,11 +42,14 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, Jeu & jeu) {
 	wrefresh(winTerrain);
 	wrefresh(winDialogue);
 
-
+	box(winCommandes,0,0);
+	mvwprintw(winCommandes,1,1,"Bienvenue sur Life Crossing 1.0 ! ");
+	mvwprintw(winCommandes,2,1, "Voici les modalités du jeu : ");
+	mvwprintw(winCommandes,3,1,"Touches : 'k' gauche 'm' droite 'o' haut 'l' bas");
+	mvwprintw(winCommandes,4,1,"     'q' quitter 'p' planter");
+	mvwprintw(winCommandes,5,1,"Description : 'x' obstacles 'j' jardin ");
+	mvwprintw(winCommandes,6,1,"     'i' personnage 'a' Activitee ");
 }
-
-
-
 
 string txtChoixGraine(int choix){
 	string rep;
@@ -116,11 +101,24 @@ void txtAffPlant(WINDOW * winDialogue, Jeu & jeu){
 
 }
 
+void txtAffPnj(WINDOW * winDialogue, Jeu & jeu) {
+	int c;
+	const char * pnjDialogue = new char[100];
+	pnjDialogue = jeu.getPnjs().tabPnj[0].getNom().c_str();
+	c = wgetch(winDialogue); 
+	if(c=='i') mvwprintw(winDialogue,1,1,pnjDialogue);
+		//if(jeu.getPersonnage().getPosX()==jeu.getPnjs().tabPnj[0].getPosition().x 
+		//&& jeu.getPersonnage().getPosY()==jeu.getPnjs().tabPnj[0].getPosition().y)
+		 
+}
+
 void txtBoucle (Jeu & jeu) {
 	// Creation d'une nouvelle fenetre en mode texte
 	// => fenetre de dimension et position (WIDTH,HEIGHT,STARTX,STARTY)
 	WINDOW * winTerrain = newwin(jeu.getConstTerrain().tabTerrain[1].getdimX(),jeu.getConstTerrain().tabTerrain[1].getdimY(),0,0);
-	WINDOW * winDialogue = newwin(20,70,jeu.getConstTerrain().tabTerrain[1].getdimX(),0);
+	WINDOW * winDialogue = newwin(15,70,jeu.getConstTerrain().tabTerrain[1].getdimX(),0);
+	WINDOW * winCommandes = newwin(jeu.getConstTerrain().tabTerrain[1].getdimX(),50,0,jeu.getConstTerrain().tabTerrain[1].getdimY());
+
 	int winDiaDebx,winDiaDeby;
 	getbegyx(winDialogue,winDiaDebx,winDiaDeby);
 
@@ -135,7 +133,8 @@ void txtBoucle (Jeu & jeu) {
 
 
 	do {
-	    txtAff(winTerrain,winDialogue,jeu);
+	    txtAff(winTerrain,winDialogue,winCommandes,jeu);
+		wrefresh(winCommandes);
 
         #ifdef _WIN32
         Sleep(100);
@@ -161,6 +160,9 @@ void txtBoucle (Jeu & jeu) {
 				break;
 			case 'p':	
 				txtAffPlant(winDialogue,jeu);
+				break;
+			case 'i':
+				txtAffPnj(winDialogue,jeu);
 				break;
 			case 'q':
 				ok = false;

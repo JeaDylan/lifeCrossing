@@ -1,0 +1,31 @@
+26
+1 7 maison
+1 8 maison
+1 9 maison
+2 7 maison
+2 8 maison
+2 9 maison
+6 14 cinema
+6 15 cinema
+6 16 cinema
+8 14 cinema
+8 15 cinema
+8 16 cinema
+7 15 cinema
+7 16 cinema
+14 2 Immeuble
+15 2 Immeuble
+16 2 Immeuble
+17 2 Immeuble
+14 3 Immeuble
+15 3 Immeuble
+16 3 Immeuble
+17 3 Immeuble
+14 4 Immeuble
+15 4 Immeuble
+16 4 Immeuble
+17 4 Immeuble
+
+
+
+

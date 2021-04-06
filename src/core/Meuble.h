@@ -14,11 +14,14 @@ using namespace std;
 
 class Meuble {
 private:
-    string nom;
-    Point2D dimension;
+    
 
 
 public:
+
+    string nom;
+    Point2D dimension;
+    
     /*! @brief Consturcteur par defaut : initialise les caractéristiques d'un meuble
     @param nomM Pas de nom (identifiant)
     @param dim Pas de Position 2D 

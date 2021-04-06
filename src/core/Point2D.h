@@ -9,10 +9,11 @@
 
 class Point2D {
 private:
-   
-    unsigned int x,y; 
+    
  
 public:
+
+    unsigned int x,y;
    
     /*! @brief Constructeur par defaut: initialise le point à (0,0).
     */

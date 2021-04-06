@@ -103,11 +103,30 @@ void EnsembleMeuble::banqueDeMeubleQuartier() {
 
 }
 
+void EnsembleMeuble::banqueDeMeubleQuartierFichier (string nom_fichier)
+    {
+        int i,taille ;
+        ifstream monFichier (nom_fichier) ;
+        Meuble vide;
+        if (monFichier.is_open())
+        {
+            monFichier >> taille  ;
+        for (i=0 ;i<taille ;i++)
+        {
+            tabMeuble.push_back(vide);
+            monFichier >> tabMeuble[i].dimension.x >> tabMeuble[i].dimension.y >> tabMeuble[i].nom; 
+        }
+        } 
+        else cout <<" le fichier n'est pas ouvert "<<endl;
+        monFichier.close() ;
+    }
+
 
 void EnsembleMeuble::testRegression() {
    cout<<"Tests pour le module EnsembleMeuble :"<<endl;
    EnsembleMeuble test;
    EnsembleMeuble testBanque;
+   EnsembleMeuble testBanqueF;
    assert(test.tabMeuble.size() == 0);
    cout<<"Constructeur par Défaut OK ..."<<endl;
 
@@ -134,6 +153,8 @@ void EnsembleMeuble::testRegression() {
    testBanque.banqueDeMeubleMaison();
    assert(testBanque.tabMeuble.size()==4);
    test.afficheListeMeuble();
+   testBanqueF.banqueDeMeubleQuartierFichier("./data/banqueMeubleQuartier.txt");
+   testBanqueF.afficheListeMeuble();
    cout<<"Test Regression EnsembleMeuble OK ..."<<endl;
 
 }

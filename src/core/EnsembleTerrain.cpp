@@ -33,10 +33,9 @@ void EnsembleTerrain::banqueDeTerrain() {
 
     // Création Quartier du personnage
     EnsembleMeuble ensembleMeubleQuartier;
-    ensembleMeubleQuartier.banqueDeMeubleQuartier();
+    ensembleMeubleQuartier.banqueDeMeubleQuartierFichier("./data/banqueMeubleQuartier.txt");
     Terrain quartier(20,20,"quartier",ensembleMeubleQuartier);
     tabTerrain.push_back(quartier);
-
 }
 
 void EnsembleTerrain::testRegression() {
