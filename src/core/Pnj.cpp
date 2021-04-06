@@ -31,6 +31,14 @@ string Pnj::getDialogue() const {
     return dialogue;
 }
 
+Point2D Pnj::getPosition() const {
+    return position;
+}
+
+/*Mission Pnj::getMission() const {
+    return mission;
+}*/
+
 void Pnj::setNom(string nomPNJ) {
     nom=nomPNJ;
 }
@@ -39,7 +47,7 @@ void Pnj::setDialogue(string dialoguePNJ) {
     dialogue=dialoguePNJ;
 }
 
-void Pnj::affichePNJ() {
+void Pnj::affichePNJ() const {
     cout << "- " << nom << "' " << dialogue <<" ' (" << position.getX() << ", " <<
         position.getY() << ")" << endl;
 }

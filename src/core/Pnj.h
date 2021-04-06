@@ -44,7 +44,12 @@ public:
     
     /*! @brief Accesseur : récupère la phrase de dialogue d'un PNJ */
     string getDialogue() const;
-
+    
+    /*! @brief Accesseur : récupère la position d'un PNJ */
+    Point2D getPosition() const;
+    
+    /*! @brief Accesseur : récupère la mission d'un PNJ */
+    //Mission getMission() const;
 
     /*! @brief Mutateur : modifie le nom du PNJ
         @param nomPNJ nom est remplacé par nomPNJ */
@@ -56,7 +61,7 @@ public:
 
 
     /*! @brief Affiche le PNJ*/
-    void affichePNJ();
+    void affichePNJ() const;
     
     /*! @brief Test des fonctions du module*/
     void testRegression();

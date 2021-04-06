@@ -56,7 +56,7 @@ public:
     */
     unsigned int getRecompense()const;
     
-    /*! @brief Accesseur: renvoie la récompense de l'activité
+    /*! @brief Accesseur: renvoie le type de récompense de l'activité
     */
     string getTypeRecompense()const;
 

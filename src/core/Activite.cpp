@@ -72,8 +72,8 @@ bool Activite::activiteEffectuee() const {
 }
 
 void Activite::afficheActivite() const {
-    cout << "L'activité nommée " << nom << " coûte " << prix <<". Elle se trouve à la position ("
-        << position.getX() << ", " << position.getY() <<") et vous donne " << recompense << typeRecompense << endl;
+    cout << "L'activité nommée " << nom << " coûte " << prix <<" pièces. Elle se trouve à la position ("
+        << position.getX() << ", " << position.getY() <<") et vous donne " << recompense << " " << typeRecompense << endl;
 }
 
 void Activite::testRegression() {
