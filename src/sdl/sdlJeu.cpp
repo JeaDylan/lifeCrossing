@@ -414,7 +414,7 @@ carte[11][25]=1;
 
 
 
-    SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
+    //SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
     
     positionFond.x=0;
     positionFond.y=0;

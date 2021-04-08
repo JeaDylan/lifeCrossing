@@ -7,6 +7,7 @@
 #include "../core/EnsemblePnj.h"
 #include "../core/Jauge.h"
 #include "../core/EnsembleActivite.h"
+#include "../core/Inventaire.h"
 
 
 using namespace std;
@@ -35,7 +36,7 @@ int main() {
     jardin.testRegression();
     t.testRegression();
     ensembleTerrain.testRegression();
-    perso.testRegression();
+    perso.testRegression(t);
     PNJ.testRegression();
     ensemblePNJ.testRegression();
     jauge.testRegression();

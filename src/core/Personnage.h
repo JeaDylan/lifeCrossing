@@ -13,6 +13,8 @@
 #include <strings.h>
 #include "Terrain.h"
 #include "Point2D.h"
+#include "Vie.h"
+#include "Inventaire.h"
 
 using namespace std;
 
@@ -21,11 +23,11 @@ private:
     string nom;
     char avatar;
     float argent;
-    //Vie vie;
+    Vie vie;
     Point2D position;
-    //Jauge niveau;
-    //Jauge xp;
-    //Inventaire inventaire;
+    Jauge niveau;
+    Jauge xp;
+    Inventaire inventaire;
 
 public:
     /*! @brief Constructeur par defaut : initialise les caractéristiques d'un personnage
@@ -34,10 +36,8 @@ public:
 
     /*! @brief Constructeur par copie : initialise les caractéristiques d'un personnage
     @param nomP nom du personnage (identifiant)
-    @param sexe sexe du personnage
-    @param avatar avatar du personnage
     */
-    Personnage(string nomP, float argentPerso,Point2D positionPerso);
+    Personnage(string nomP);
     
     /*! @brief Destructeur: suppression d'un personnage
     */
@@ -57,7 +57,7 @@ public:
 
     /*! @brief Accesseur : récupère la position en Y du personnage */
     unsigned int getPosY() const;
-    
+
     /*! @brief Mutateur : modifie le nom du personnage
     @param nomP nom est remplacé par nomP */
     void setNom(string nomP);
@@ -84,38 +84,38 @@ public:
     
     /*! @brief Déplacement sur la gauche du personnage
     @param terrain la position2D du personnage est modifiée d'une case vers la gauche */
-    void gauche (Terrain& terrain);
+    void gauche (Terrain &terrain);
 
     /*! @brief Déplacement sur la droite du personnage
     @param terrain la position2D du personnage est modifiée d'une case vers la droite */
-    void droite (Terrain& terrain);
+    void droite (Terrain &terrain);
 
     /*! @brief Déplacement vers le haut du personnage
     @param terrain la position2D du personnage est modifiée d'une case vers le haut */
-    void haut (Terrain& terrain);
+    void haut (Terrain &terrain);
 
     /*! @brief Déplacement vers le bas du personnage
     @param terrain la position2D du personnage est modifiée d'une case vers le bas */
-    void bas (Terrain& terrain);
+    void bas (Terrain &terrain);
 
     /*! @brief Choix de faire une activité
     @param terrain Le personnage peut choisir de faire une activité s'il s'approche d'une zone d'activité sur le terrain */
-    bool choixActivite (Terrain terrain);
+    bool choixActivite (Terrain terrain) const;
 
     /*! @brief Choix de discuter avec un PNJ
     @param terrain Le personnage peut choisir de discuter s'il s'approche d'un PNJ sur le terrain */
-    bool choixDiscuterPnj (Terrain terrain);
+    bool choixDiscuterPnj (Terrain terrain) const;
 
     /*! @brief Choix d'aller au marché
     @param terrain Le personnage peut choisir d'aller au marché s'il s'approche d'une zone de marché sur le terrain */
-    bool choixAcheterMarche (Terrain terrain);
+    bool choixAcheterMarche (Terrain terrain) const;
 
 
     /*! @brief Affiche les données du personnage */
     void affichePersonnage() const;
      
     /*! @brief Test des fonctions du module*/
-    void testRegression();
+    void testRegression(Terrain t);
 
 };
 
