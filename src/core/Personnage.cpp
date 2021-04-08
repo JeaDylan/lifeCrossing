@@ -116,6 +116,7 @@ bool Personnage::choixAcheterMarche (Terrain terrain) const {
 
 void Personnage::affichePersonnage() const {
     cout<<" - " << nom << " : ("<< avatar << "," << argent<<")"<<endl;
+    cout<< "Il se situe à la case ("<<position.getX()<<", " << position.getY() <<"), et possède " << argent <<"€"<<endl;
 }
 
 void Personnage::testRegression(Terrain terrain) {
