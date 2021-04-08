@@ -34,9 +34,9 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu
 			wgetch(winTerrain);
 		}
 	}
+
 	wmove(winTerrain,perso.getPosX(),perso.getPosY());
 	waddch(winTerrain,'P');
-	wgetch(winTerrain);
 
 	box(winDialogue,0,0);
 	wrefresh(winTerrain);
@@ -44,11 +44,11 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu
 
 	box(winCommandes,0,0);
 	mvwprintw(winCommandes,1,1,"Bienvenue sur Life Crossing 1.0 ! ");
-	mvwprintw(winCommandes,2,1, "Voici les modalités du jeu : ");
-	mvwprintw(winCommandes,3,1,"Touches : 'k' gauche 'm' droite 'o' haut 'l' bas");
-	mvwprintw(winCommandes,4,1,"     'q' quitter 'p' planter");
-	mvwprintw(winCommandes,5,1,"Description : 'x' obstacles 'j' jardin ");
-	mvwprintw(winCommandes,6,1,"     'i' personnage 'a' Activitee ");
+	mvwprintw(winCommandes,3,1, "Voici les modalités du jeu : ");
+	mvwprintw(winCommandes,4,1,"Touches : 'k' gauche 'm' droite 'o' haut 'l' bas");
+	mvwprintw(winCommandes,5,1,"     'q' quitter 'j' planter 'p' infos personnage ");
+	mvwprintw(winCommandes,6,1,"Description : 'x' obstacles 'j' jardin ");
+	mvwprintw(winCommandes,7,1,"     'i' personnage 'a' Activitee ");
 }
 
 string txtChoixGraine(int choix){
@@ -103,18 +103,60 @@ void txtAffPlant(WINDOW * winDialogue, Jeu & jeu){
 
 void txtAffPnj(WINDOW * winDialogue, Jeu & jeu) {
 	int c;
-	const char * pnjDialogue = new char[100];
-	pnjDialogue = jeu.getPnjs().tabPnj[0].getNom().c_str();
-	c = wgetch(winDialogue); 
-	if(c=='i') mvwprintw(winDialogue,1,1,pnjDialogue);
-		//if(jeu.getPersonnage().getPosX()==jeu.getPnjs().tabPnj[0].getPosition().x 
-		//&& jeu.getPersonnage().getPosY()==jeu.getPnjs().tabPnj[0].getPosition().y)
-		 
+	string nom;
+	if(jeu.getPersonnage().getPosX()==jeu.getPnjs().tabPnj[0].getPosition().x 
+		&& jeu.getPersonnage().getPosY()==jeu.getPnjs().tabPnj[0].getPosition().y) {
+			nom = jeu.getPnjs().tabPnj[0].getNom();
+			string ligne1 = "Bonjour je suis " + nom + " !";
+			const char * ligne1m = (const char *)ligne1.c_str();
+			mvwprintw(winDialogue,1,1,ligne1m);
+			mvwprintw(winDialogue,2,1,"Tu te trouves devant le cinema.");
+			mvwprintw(winDialogue,3,1,"Regarde un film et remporte des xp.");
+			mvwprintw(winDialogue,4,1,"Pour ce faire il te suffit de te placer sur a et appuyer sur a.");
+	}
+	c=wgetch(winDialogue);
+	if (c!='i') {
+		werase(winDialogue);
+	}
+}
+
+void txtAffPerso(WINDOW * winDialogue, Jeu & jeu) {
+	int c;
+	string ligne1 = jeu.getConstPersonnage().getNom() + " :";
+	const char * ligne1m = (const char *)ligne1.c_str();
+	string ligne2 = "- Argent : " + to_string(jeu.getConstPersonnage().getArgent());
+	const char * ligne2m = (const char *)ligne2.c_str();
+	//string ligne3 = "- Stock Fruit/Legume : " + jeu.getConstPersonnage().getInventaire().getFruitLeg().;
+
+	mvwprintw(winDialogue,1,1,ligne1m);
+	mvwprintw(winDialogue,2,1,ligne2m);
+	mvwprintw(winDialogue,4,1,"Inventaire : ");
+	//mvwprintw(winDialogue,5,1,);
+
+	c=wgetch(winDialogue);
+	if (c!='p') {
+		werase(winDialogue);
+	}
+}
+
+void txtAffActivite(WINDOW * winDialogue, Jeu & jeu) {
+	int c;
+	string ligne1 = "Bienvenue à l'activite " + jeu.getConstActivites().tabActivite[0].getNom() + " !";
+	const char * ligne1m = (const char *)ligne1.c_str();
+	if (jeu.getPersonnage().getPosX()==jeu.getActivites().tabActivite[0].getPosition().x
+		&& jeu.getPersonnage().getPosY()==jeu.getActivites().tabActivite[0].getPosition().y) {
+			mvwprintw(winDialogue,1,1,ligne1m);
+			jeu.getPersonnage().perteArgent(jeu.getActivites().tabActivite[0].getPrix());
+		}
+	c=wgetch(winDialogue);
+	if (c!='a') {
+		werase(winDialogue);
+	}
+	
 }
 
 void txtBoucle (Jeu & jeu) {
-	// Creation d'une nouvelle fenetre en mode texte
-	// => fenetre de dimension et position (WIDTH,HEIGHT,STARTX,STARTY)
+
 	WINDOW * winTerrain = newwin(jeu.getConstTerrain().tabTerrain[1].getdimX(),jeu.getConstTerrain().tabTerrain[1].getdimY(),0,0);
 	WINDOW * winDialogue = newwin(15,70,jeu.getConstTerrain().tabTerrain[1].getdimX(),0);
 	WINDOW * winCommandes = newwin(jeu.getConstTerrain().tabTerrain[1].getdimX(),50,0,jeu.getConstTerrain().tabTerrain[1].getdimY());
@@ -125,7 +167,6 @@ void txtBoucle (Jeu & jeu) {
 	bool ok = true;
 	int c,d;
 	string reponse;
-	
 
 	keypad(winTerrain,true);
 	noecho();
@@ -144,7 +185,7 @@ void txtBoucle (Jeu & jeu) {
 
 		//jeu.actionsAutomatiques();	
 		timeout(500);
-		c = wgetch(winTerrain);
+		c = wgetch(winDialogue);
 		switch (c) {
 			case 'k':
 				jeu.actionClavier('g');
@@ -158,11 +199,17 @@ void txtBoucle (Jeu & jeu) {
 			case 'o':
 				jeu.actionClavier('b');
 				break;
-			case 'p':	
+			case 'j':	
 				txtAffPlant(winDialogue,jeu);
 				break;
 			case 'i':
 				txtAffPnj(winDialogue,jeu);
+				break;
+			case 'p':
+				txtAffPerso(winDialogue,jeu);
+				break;
+			case 'a':
+				txtAffActivite(winDialogue,jeu);
 				break;
 			case 'q':
 				ok = false;

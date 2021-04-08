@@ -66,7 +66,7 @@ string rep;
 		case 'b' :
 			perso.bas(ter.tabTerrain[1]);
 			break;
-        case 'p' : //planter
+        case 'j' : //planter
             
             break;
         case 'r' : //recolter
