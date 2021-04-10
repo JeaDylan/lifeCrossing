@@ -23,13 +23,16 @@ private:
     string nom;
     char avatar;
     float argent;
-    Vie vie;
     Point2D position;
+    
+
+public:
+
+    Vie vie;
     Jauge niveau;
     Jauge xp;
     Inventaire inventaire;
 
-public:
     /*! @brief Constructeur par defaut : initialise les caractéristiques d'un personnage
     */
     Personnage();

@@ -53,6 +53,9 @@ public:
     
     /*! @brief Affiche les données de la jauge */
     void afficheJauge() const;
+
+    /*! @brief Renvoie les données de la jauge en chaîne de caractères */
+    string afficheJeuTxt() const;
      
     /*! @brief Test des fonctions du module*/
     void testRegression();

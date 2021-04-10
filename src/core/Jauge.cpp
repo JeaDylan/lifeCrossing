@@ -40,6 +40,10 @@ void Jauge::afficheJauge() const {
     cout<<" - " << niveauActuel << " / "<< niveauMax << endl;
 }
 
+string Jauge::afficheJeuTxt() const {
+    return to_string(niveauActuel) + " / " + to_string(niveauMax);
+}
+
 void Jauge::testRegression() {
     cout<<"Tests pour le module Jauge :"<<endl;
     assert(niveauActuel == 0 && niveauMax==100);

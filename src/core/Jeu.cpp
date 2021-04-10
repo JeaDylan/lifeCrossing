@@ -9,7 +9,7 @@ Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites() {
          
          pnjs.tabPnj.push_back(Pnj("Luc","Bonjour, je suis Luc !",Point2D(7,12)));
          
-         activites.tabActivite.push_back(Activite("Cinema",100,Point2D(7,14),50,"xp"));
+         activites.tabActivite.push_back(Activite("Cinema",10,Point2D(7,14),50,"xp"));
 
          ter.banqueDeTerrain();
          ter.tabTerrain[1].setChar(1,3,'j');
@@ -18,6 +18,7 @@ Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites() {
          ter.tabTerrain[1].setChar(2,2,'j');
          ter.tabTerrain[1].setChar(7,12,'i');
          ter.tabTerrain[1].setChar(7,14,'a');
+         ter.tabTerrain[1].setChar(15,4,'c');
 
         // ter.setChar(12,20,'M');
 

@@ -76,6 +76,11 @@ void Activite::afficheActivite() const {
         << position.getX() << ", " << position.getY() <<") et vous donne " << recompense << " " << typeRecompense << endl;
 }
 
+string Activite::affichejeuTxt() const {
+    return " - " + to_string(prix) + "$  + " 
+            + to_string(recompense) + " " + typeRecompense;
+}
+
 void Activite::testRegression() {
     cout<<"Tests pour le module Activite :"<<endl;
     assert(nom == " ");

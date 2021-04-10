@@ -6,7 +6,7 @@ const char persoChar[3]  = "P";
 Personnage::Personnage() {
     nom="sansNom";
     avatar=persoChar[0];
-    argent=0.0;
+    argent=200;
     position.setX(0);
     position.setY(0);
     vie.setPtsDeVie(100);
@@ -123,7 +123,7 @@ void Personnage::testRegression(Terrain terrain) {
     cout<<"Tests pour le module Personnage :"<<endl;
     assert(nom == "sansNom");
     assert(avatar == persoChar[0]);
-    assert(argent == 0);
+    assert(argent == 200);
     assert(position.getX()==0);
     assert(position.getY()==0);
     assert(niveau.getNiveau()==0);

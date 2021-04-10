@@ -26,19 +26,19 @@ private:
 public:
     /*! @brief Accesseur : renvoit les points de vie du Personnage
     */
-    int getPtsDeVie()const;
+    Jauge getPtsDeVie()const;
 
     /*! @brief Accesseur : renvoit les points de faim du Personnage
     */
-    int getFaim()const;
+    Jauge getFaim()const;
 
     /*! @brief Accesseur : renvoit les points de soif du Personnage
     */
-    int getSoif()const;
+    Jauge getSoif()const;
 
     /*! @brief Accesseur : renvoit les points de fatigue du Personnage
     */
-    int getFatigue()const;
+    Jauge getFatigue()const;
 
     /*! @brief Mutateur : modifie les points de vie du Personnage
     */

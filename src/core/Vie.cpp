@@ -2,14 +2,13 @@
 #include <cassert>
 
 
-int Vie::getPtsDeVie()const{ return ptsDeVie.getNiveau(); }
+Jauge Vie::getPtsDeVie()const{ return ptsDeVie; }
 
-int Vie::getFaim()const{ return faim.getNiveau(); }
+Jauge Vie::getFaim()const{ return faim; }
 
+Jauge Vie::getSoif()const{ return soif; }
 
-int Vie::getSoif()const{ return soif.getNiveau(); }
-
-int Vie::getFatigue()const{  return fatigue.getNiveau(); }
+Jauge Vie::getFatigue()const{  return fatigue; }
 
 void Vie::setPtsDeVie(int vi){ ptsDeVie.setNiveau(vi); }
     
@@ -23,11 +22,11 @@ void Vie::setFatigue(int fat){ fatigue.setNiveau(fat); }
 
 void Vie::testRegression(){
     cout <<"Debut test resgression Module Vie..."<<endl;
-    assert(getPtsDeVie() == 0);
-    assert(getFaim() == 0);
-    assert(getSoif() == 0);
+    assert(getPtsDeVie().getNiveau() == 0);
+    assert(getFaim().getNiveau() == 0);
+    assert(getSoif().getNiveau() == 0);
     setFaim(50);
-    assert(getFaim() == 50);
+    assert(getFaim().getNiveau() == 50);
     cout<<"Tout est OK!"<<endl;
 
 }

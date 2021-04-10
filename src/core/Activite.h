@@ -92,6 +92,9 @@ public:
     /*! @brief Affiche les données de l'activité */
     void afficheActivite() const;
     
+    /*! @brief Affiche les données de l'activité */
+    string affichejeuTxt() const;
+    
     /*! @brief Teste toutes les fonctions du module
     */
     void testRegression();
