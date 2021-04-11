@@ -1,9 +1,4 @@
 #include <iostream>
-#ifdef _WIN32
-#include <windows.h>
-#else
-#include <unistd.h>
-#endif // WIN32
 #include "txtJeu.h"
 #include "../core/Jeu.h"
 
@@ -13,13 +8,7 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu
 	const EnsembleTerrain& ter = jeu.getConstTerrain();
 	const Personnage& perso = jeu.getConstPersonnage();
   	const EnsembleJardin& jardin = jeu.getConstJardin();
-	const EnsemblePnj& pnjs = jeu.getConstPnjs();
-	
-	int y,x,yDeb,xDeb,yMax,xMax;
-
-	getyx(stdscr,y,x);
-	getbegyx(stdscr,yDeb,xDeb);
-	getmaxyx(stdscr,yMax,xMax);	
+	const EnsemblePnj& pnjs = jeu.getConstPnjs();	
 
 	for(unsigned int i=0;i<ter.tabTerrain[1].getdimX();++i) {
         for(unsigned int j=0;j<ter.tabTerrain[1].getdimY();++j) {
@@ -32,7 +21,6 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu
 			wmove(winTerrain,jardin.tabJardin->at(k).getPosX()
 				,jardin.tabJardin->at(k).getPosY());
 			waddch(winTerrain, 'o');
-			wgetch(winTerrain);
 		}
 	}
 
@@ -41,7 +29,6 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu
 
 	box(winDialogue,0,0);
 	wrefresh(winTerrain);
-	wrefresh(winDialogue);
 
 	box(winCommandes,0,0);
 	mvwprintw(winCommandes,1,1,"Bienvenue sur Life Crossing 1.0 ! ");
@@ -50,6 +37,7 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu
 	mvwprintw(winCommandes,5,1,"     'q' quitter 'j' planter 'p' infos personnage ");
 	mvwprintw(winCommandes,6,1,"Description : 'x' obstacles 'j' jardin ");
 	mvwprintw(winCommandes,7,1,"     'i' personnage 'a' Activitee 'c' Commerce ");
+	wrefresh(winCommandes);
 }
 
 string txtChoixGraine(int choix){
@@ -135,7 +123,7 @@ void txtAffPnj(WINDOW * winDialogue, Jeu & jeu) {
 	}
 
 	c=wgetch(winDialogue);
-	werase(winDialogue);
+	werase(winDialogue);	
 }
 
 void txtAffPerso(WINDOW * winDialogue, Jeu & jeu) {
@@ -201,6 +189,7 @@ void txtAffPerso(WINDOW * winDialogue, Jeu & jeu) {
 
 	c=wgetch(winDialogue);
 	werase(winDialogue);
+
 }
 
 void txtAffActivite(WINDOW * winDialogue, Jeu & jeu) {
@@ -208,8 +197,8 @@ void txtAffActivite(WINDOW * winDialogue, Jeu & jeu) {
 	int c;
 	Personnage perso;
 	EnsembleActivite activites;
-	perso = jeu.getPersonnage();
-	activites = jeu.getActivites();
+	perso = jeu.getConstPersonnage();
+	activites = jeu.getConstActivites();
 	
 	string ligne1 = "Vous venez de regarder un film ! ";
 	const char * ligne1m = (const char *) ligne1.c_str();
@@ -224,7 +213,8 @@ void txtAffActivite(WINDOW * winDialogue, Jeu & jeu) {
 			activites.tabActivite[0].getRecompense();
 			mvwprintw(winDialogue,1,1,ligne1m);
 			mvwprintw(winDialogue,2,1,ligne2m);
-			jeu.getPersonnage().perteArgent(activites.tabActivite[0].getPrix());
+			jeu.getPersonnage().
+			perteArgent(activites.tabActivite[0].getPrix());
 			jeu.getPersonnage().xp.setNiveau(nouvXp);
 		}
 
@@ -234,9 +224,22 @@ void txtAffActivite(WINDOW * winDialogue, Jeu & jeu) {
 
 void txtAffMarche(WINDOW * winDialogue, Jeu & jeu) {
 	int c;
-	
-
-
+	Personnage perso;
+	perso = jeu.getConstPersonnage();
+	if(perso.getPosX()==15,perso.getPosY()==4) {
+		const char * affm;
+		string affs;
+		mvwprintw(winDialogue,1,1,"Commerce :");
+		mvwprintw(winDialogue,2,1,"Fruits Legumes - 20$");
+		/*for (int i=0; i<jeu.getConstFruitLeg().tabFruitLeg->size();i++ ) {
+			affs = jeu.getConstFruitLeg().tabFruitLeg->at(i).affichejeuTxt();
+			aff.push_back(affs);
+			affm = (const char *) aff[i].c_str();
+			mvwprintw(winDialogue,i+3,1,affm);
+		}*/
+		mvwprintw(winDialogue,2,25,"Eau - 5$");
+		mvwprintw(winDialogue,3,25,"Nourriture - 10$");
+	}
 	c=wgetch(winDialogue);
 	werase(winDialogue);
 }
@@ -244,36 +247,21 @@ void txtAffMarche(WINDOW * winDialogue, Jeu & jeu) {
 
 void txtBoucle (Jeu & jeu) {
 
-	WINDOW * winTerrain = newwin(jeu.getConstTerrain().tabTerrain[1].getdimX(),
-								jeu.getConstTerrain().tabTerrain[1].getdimY(),0,0);
-	WINDOW * winDialogue = newwin(15,70
-								,jeu.getConstTerrain().tabTerrain[1].getdimX(),0);
-	WINDOW * winCommandes = newwin(jeu.getConstTerrain().tabTerrain[1].getdimX()
-									,50,0,jeu.getConstTerrain().tabTerrain[1].getdimY());
+	Terrain ter = jeu.getConstTerrain().tabTerrain[1];
 
-	int winDiaDebx,winDiaDeby;
-	getbegyx(winDialogue,winDiaDebx,winDiaDeby);
+	WINDOW * winTerrain = newwin(ter.getdimX(),ter.getdimY(),0,0);
+	WINDOW * winDialogue = newwin(15,70,ter.getdimX(),0);
+	WINDOW * winCommandes = newwin(ter.getdimX(),50,0,ter.getdimY());
 
 	bool ok = true;
 	int c,d;
 	string reponse;
 
-	keypad(winTerrain,true);
 	noecho();
-	cbreak();
-
 
 	do {
 	    txtAff(winTerrain,winDialogue,winCommandes,jeu);
-		wrefresh(winCommandes);
 
-        #ifdef _WIN32
-        Sleep(100);
-		#else
-		usleep(100000);
-        #endif // WIN32
-
-		//jeu.actionsAutomatiques();	
 		timeout(500);
 		c = wgetch(winDialogue);
 		switch (c) {
@@ -309,6 +297,11 @@ void txtBoucle (Jeu & jeu) {
 				break;
 		}
 	} while (ok);
-
+	wclear(winDialogue);
+	wclear(winTerrain);
+	wclear(winCommandes);
+	delwin(winDialogue);
+	delwin(winTerrain);
+	delwin(winCommandes);
 }
 

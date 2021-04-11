@@ -17,14 +17,11 @@ class FruitLegume {
 private:
     string nomGraine;
     string typeGraine;
-    float prixGraine;
-    float prixVente;
+    int prixGraine;
+    int prixVente;
     int gainEnergie;
     unsigned int tempsRecolte;
  
-    
-
-
 public:
     /*! @brief Constructeur par défaut : valeur par défaut d'un FruitLegume 
     */
@@ -38,7 +35,8 @@ public:
     @param gainE points de faim en plus
     @param tempsR temps de récolte 
     */
-    FruitLegume(string nomG, string typeG, float prixG, float prixV, int gainE, unsigned int tempsR);
+    FruitLegume(string nomG, string typeG, int prixG, 
+                int prixV, int gainE, unsigned int tempsR);
     
   
     /*! @brief Accesseur : récupère le nom d'une graine */
@@ -48,10 +46,10 @@ public:
     string getTypeGraine() const;
 
     /*! @brief Accesseur : récupère le prix d'achat d'une graine */
-    float getPrixGraine() const;
+    int getPrixGraine() const;
 
     /*! @brief Accesseur : récupère le prix de vente d'une graine */
-    float getPrixVente() const;
+    int getPrixVente() const;
     
     /*! @brief Accesseur : récupère le gain d'énergie d'une graine */
     int getGainEnergie() const;
@@ -71,11 +69,11 @@ public:
 
     /*! @brief Mutateur : modifie le prix d'achat d'une graine
         @param prixGr prixGraine est remplacé par prixGr */
-    void setPrixGraine(float prixGr);
+    void setPrixGraine(int prixGr);
 
       /*! @brief Mutateur : modifie le prix de vente d'une graine
           @param prixVe prixVente est remplacé par prixVe */
-    void setPrixVente(float prixVe);
+    void setPrixVente(int prixVe);
 
     /*! @brief Mutateur : modifie le gain d'energie d'un fruit ou légume
         @param gain gainEnergie est remplacé par gain */
@@ -85,6 +83,9 @@ public:
         @param temps tempsRecolte est remplacé par temps
     */
     void setTempsRecolte(unsigned int temps);
+
+    /*! @brief crée une chaîne de caractère pour l'affichage du Marché */
+    string affichejeuTxt() const;
      
     /*! @brief Test des fonctions du module*/
     void testRegression()const;
@@ -92,11 +93,5 @@ public:
 
 
 };
-
-
-
-
-
-
 
 #endif //_FRUIT_LEGUME

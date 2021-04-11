@@ -30,6 +30,7 @@ private :
 	EnsembleJardin jardin;
     EnsemblePnj pnjs;
     EnsembleActivite activites;
+    EnsembleFruitLeg fruitsLeg;
     //EnsembleMission mission;
 
 public :
@@ -41,13 +42,14 @@ public :
     EnsembleJardin& getJardin();
     EnsemblePnj& getPnjs();
     EnsembleActivite& getActivites();
-
+    EnsembleFruitLeg& getFruitLeg();
 
     const EnsembleTerrain& getConstTerrain () const;
     const Personnage& getConstPersonnage () const;
     const EnsembleJardin& getConstJardin() const;
     const EnsemblePnj& getConstPnjs() const;
     const EnsembleActivite& getConstActivites() const;
+    const EnsembleFruitLeg& getConstFruitLeg() const;
 
     /*! @brief Recolter range un FruitLegume dans l'inventaire du perso
     */

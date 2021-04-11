@@ -39,7 +39,7 @@ all: $(EXEC_NAME) ./doc/projet.doxy
 ./obj/EnsembleFruitLeg.o: ./src/core/EnsembleFruitLeg.cpp ./src/core/EnsembleFruitLeg.h ./src/core/FruitLegume.h
 	$(CC) $(CFLAGS) -c ./src/core/EnsembleFruitLeg.cpp -o ./obj/EnsembleFruitLeg.o	
 
-./obj/Jardin.o: ./src/core/Jardin.cpp ./src/core/Jardin.h 
+./obj/Jardin.o: ./src/core/Jardin.cpp ./src/core/Jardin.h  ./src/core/Point2D.h ./src/core/FruitLegume.h
 	$(CC) $(CFLAGS) -c ./src/core/Jardin.cpp -o ./obj/Jardin.o	
 
 ./obj/EnsembleJardin.o: ./src/core/EnsembleJardin.cpp ./src/core/EnsembleJardin.h ./src/core/Jardin.h 
@@ -84,7 +84,7 @@ all: $(EXEC_NAME) ./doc/projet.doxy
 ./obj/Jeu.o: ./src/core/Jeu.cpp ./src/core/Jeu.h ./src/core/Personnage.h ./src/core/EnsembleTerrain.h ./src/core/EnsembleJardin.h 
 	$(CC) $(CFLAGS) -c ./src/core/Jeu.cpp -o ./obj/Jeu.o
 
-./obj/txtJeu.o: ./src/txt/txtJeu.cpp  ./src/txt/txtJeu.h ./src/core/Jeu.h
+./obj/txtJeu.o: ./src/txt/txtJeu.cpp  ./src/txt/txtJeu.h ./src/core/Jeu.h ./src/core/Personnage.h ./src/core/EnsembleTerrain.h ./src/core/EnsembleJardin.h 
 	$(CC) $(CFLAGS) -c ./src/txt/txtJeu.cpp  -o ./obj/txtJeu.o
 
 ./obj/winTxt.o: ./src/txt/winTxt.cpp  ./src/txt/winTxt.h 

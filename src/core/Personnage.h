@@ -22,7 +22,7 @@ class Personnage {
 private:
     string nom;
     char avatar;
-    float argent;
+    int argent;
     Point2D position;
     
 
@@ -53,7 +53,7 @@ public:
     char getAvatar() const;
 
     /*! @brief Accesseur : récupère l'argent du personnage */
-    float getArgent() const;
+    int getArgent() const;
     
     /*! @brief Accesseur : récupère la position en X du personnage */
     unsigned int getPosX() const;
@@ -71,11 +71,11 @@ public:
     
     /*! @brief Mutateur : modifie l'argent du personnage (gain)
     @param gain argent += gain */
-    void gainArgent(float gain);
+    void gainArgent(int gain);
     
     /*! @brief Mutateur : modifie l'argent du personnage (perte)
     @param perte argent -= perte */
-    void perteArgent(float perte);
+    void perteArgent(int perte);
 
     /*! @brief Mutateur : modifie la position en X du personnage 
     @param posX position.X devient posX */
@@ -112,7 +112,6 @@ public:
     /*! @brief Choix d'aller au marché
     @param terrain Le personnage peut choisir d'aller au marché s'il s'approche d'une zone de marché sur le terrain */
     bool choixAcheterMarche (Terrain terrain) const;
-
 
     /*! @brief Affiche les données du personnage */
     void affichePersonnage() const;

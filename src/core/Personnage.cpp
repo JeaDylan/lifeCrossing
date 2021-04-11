@@ -49,7 +49,7 @@ char Personnage::getAvatar() const {
     return avatar;
 }
 
-float Personnage::getArgent() const {
+int Personnage::getArgent() const {
     return argent;
 }
 
@@ -69,11 +69,11 @@ void Personnage::setAvatar(char avatarP) {
     avatar=avatarP;
 }
 
-void Personnage::gainArgent(float gain) {
+void Personnage::gainArgent(int gain) {
     argent+=gain;
 }
 
-void Personnage::perteArgent(float perte) {
+void Personnage::perteArgent(int perte) {
     argent-=perte;
 }
 
@@ -133,8 +133,8 @@ void Personnage::testRegression(Terrain terrain) {
     cout<<"Constructeur par défaut OK ..."<<endl;
     Point2D posPerso(10,10);
     Personnage p=Personnage("Alpha");
-    p.gainArgent(150.0);
-    p.perteArgent(50.0);
+    p.gainArgent(150);
+    p.perteArgent(50);
     p.bas(terrain);
     p.droite(terrain);
     p.bas(terrain);
@@ -143,7 +143,7 @@ void Personnage::testRegression(Terrain terrain) {
     p.haut(terrain);
     assert(p.getNom()=="Alpha");
     assert(p.getPosX()==1&&p.getPosY()==1);
-    assert(p.getArgent()==100.0);
+    assert(p.getArgent()==100);
     cout<<"Constructeur par copie OK ..."<<endl;
     p.affichePersonnage();
 

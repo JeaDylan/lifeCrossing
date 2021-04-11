@@ -1,6 +1,6 @@
 #include "Jeu.h"
 
-Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites() {
+Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites(), fruitsLeg() {
 
          jardin.tabJardin->push_back(Jardin(1,3));//tabJardin[0]
          jardin.tabJardin->push_back(Jardin(2,3));//tabJardin[1]
@@ -10,7 +10,9 @@ Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites() {
          pnjs.tabPnj.push_back(Pnj("Luc","Bonjour, je suis Luc !",Point2D(7,12)));
          
          activites.tabActivite.push_back(Activite("Cinema",10,Point2D(7,14),50,"xp"));
-
+        
+         fruitsLeg.banqueDeFruitLeg();
+         
          ter.banqueDeTerrain();
          ter.tabTerrain[1].setChar(1,3,'j');
          ter.tabTerrain[1].setChar(2,3,'j');
@@ -38,6 +40,8 @@ EnsemblePnj& Jeu::getPnjs(){ return pnjs; }
 
 EnsembleActivite& Jeu::getActivites(){ return activites; }
 
+EnsembleFruitLeg& Jeu::getFruitLeg(){return fruitsLeg;}
+
 const EnsembleTerrain& Jeu::getConstTerrain()const{ return ter; }
 
 const Personnage& Jeu::getConstPersonnage()const{ return perso; }
@@ -48,7 +52,7 @@ const EnsemblePnj& Jeu::getConstPnjs() const{ return pnjs; }
 
 const EnsembleActivite& Jeu::getConstActivites() const{ return activites; }
 
-
+const EnsembleFruitLeg& Jeu::getConstFruitLeg() const{ return fruitsLeg;}
 
 
 
