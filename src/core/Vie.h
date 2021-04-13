@@ -56,6 +56,10 @@ public:
     */
     void setFatigue(int fatigue);
 
+    /*! @brief Augmente les varialbles de vie
+    */
+    void varieAuto();
+
     /*! @brief Teste toutes les fonctions du module
     */
     void testRegression();

@@ -18,7 +18,11 @@ void Vie::setSoif(int so){ soif.setNiveau(so); }
 
 void Vie::setFatigue(int fat){ fatigue.setNiveau(fat); }
 
-
+void Vie::varieAuto() {
+    setFaim(getFaim().getNiveau()+1);
+    setFatigue(getFatigue().getNiveau()+1);
+    setSoif(getSoif().getNiveau()+1);       
+}
 
 void Vie::testRegression(){
     cout <<"Debut test resgression Module Vie..."<<endl;

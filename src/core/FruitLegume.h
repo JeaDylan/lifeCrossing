@@ -85,7 +85,7 @@ public:
     void setTempsRecolte(unsigned int temps);
 
     /*! @brief crée une chaîne de caractère pour l'affichage du Marché */
-    string affichejeuTxt() const;
+    string affichejeuTxt(unsigned int i) const;
      
     /*! @brief Test des fonctions du module*/
     void testRegression()const;

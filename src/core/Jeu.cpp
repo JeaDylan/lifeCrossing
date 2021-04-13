@@ -54,7 +54,9 @@ const EnsembleActivite& Jeu::getConstActivites() const{ return activites; }
 
 const EnsembleFruitLeg& Jeu::getConstFruitLeg() const{ return fruitsLeg;}
 
-
+void Jeu::actionsAutomatiques() {
+    getPersonnage().vie.varieAuto();
+}
 
 void Jeu::actionClavier(const char touche){
 string rep;

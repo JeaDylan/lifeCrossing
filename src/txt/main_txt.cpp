@@ -9,11 +9,11 @@ int main ( int argc, char** argv ) {
 	initscr();
 	cbreak();
 	Jeu jeu;
-	string nom;
+	string nom;	
 	cout<< "Bonjour, veuillez entrer votre nom : "<<endl;
 	cin>>nom;
 	jeu.getPersonnage().setNom(nom);
-	txtBoucle(jeu);
+	txtBoucle(jeu);	
     termClear();
 	endwin();
 	return 0;

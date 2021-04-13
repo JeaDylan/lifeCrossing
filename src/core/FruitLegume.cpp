@@ -63,8 +63,8 @@ void FruitLegume::setTempsRecolte(unsigned int temps){
     tempsRecolte = temps ; 
 }
 
-string FruitLegume::affichejeuTxt() const {
-    return nomGraine + " - " + to_string(prixGraine) + "$";
+string FruitLegume::affichejeuTxt(unsigned int i) const {
+    return "(" + to_string(i) + ") " + nomGraine + " - " + to_string(prixGraine) + "$";
 }
 
 void FruitLegume::testRegression() const {

@@ -58,7 +58,7 @@ public :
 
     void recolter();
 
-    //void actionsAutomatiques ();
+    void actionsAutomatiques ();
     
     void actionClavier(const char touche); 
 
