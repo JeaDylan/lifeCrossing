@@ -33,26 +33,26 @@ Jauge Inventaire::getManger() const {
 }
 
 void Inventaire::setFruitLeg(int nouveau, bool augmente) {
-    assert(nouveau>0);
+    assert(nouveau>=0);
     if ( augmente && stockFruitLeg.getNiveau()+nouveau<stockFruitLeg.getNiveauMax()) 
     stockFruitLeg.setNiveau(stockFruitLeg.getNiveau()+nouveau);
-    if ( !augmente && stockFruitLeg.getNiveau()>nouveau)
+    if ( !augmente && stockFruitLeg.getNiveau()>=nouveau)
     stockFruitLeg.setNiveau(stockFruitLeg.getNiveau()-nouveau);
 }
 
 void Inventaire::setEau(int nouveau, bool augmente) {
-    assert(nouveau>0);
+    assert(nouveau>=0);
     if ( augmente && stockEau.getNiveau()+nouveau<stockEau.getNiveauMax()) 
     stockEau.setNiveau(stockEau.getNiveau()+nouveau);
-    if ( !augmente && stockEau.getNiveau()>nouveau)
+    if ( !augmente && stockEau.getNiveau()>=nouveau)
     stockEau.setNiveau(stockEau.getNiveau()-nouveau);
 }
 
 void Inventaire::setManger(int nouveau, bool augmente) {
-    assert(nouveau>0);
+    assert(nouveau>=0);
     if ( augmente && stockManger.getNiveau()+nouveau<stockManger.getNiveauMax()) 
     stockManger.setNiveau(stockManger.getNiveau()+nouveau);
-    if ( !augmente && stockManger.getNiveau()>nouveau)
+    if ( !augmente && stockManger.getNiveau()>=nouveau)
     stockManger.setNiveau(stockManger.getNiveau()-nouveau);
 }
 

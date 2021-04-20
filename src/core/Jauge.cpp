@@ -25,6 +25,7 @@ int Jauge::getNiveauMax() const {
 }
 
 void Jauge::setNiveau(int newNiveau) {
+    assert(newNiveau>=0);
     niveauActuel=newNiveau;
 }
 
@@ -33,7 +34,7 @@ void Jauge::setNiveauMax(int newNiveauMax) {
 }
 
 bool Jauge::jaugeRemplie() const {
-    return(niveauMax<niveauActuel);
+    return(niveauMax==niveauActuel);
 }
 
 void Jauge::afficheJauge() const {

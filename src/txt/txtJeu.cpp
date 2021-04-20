@@ -7,23 +7,23 @@
 
 void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu & jeu) {
 	
-	const EnsembleTerrain& ter = jeu.getConstTerrain();
+	EnsembleTerrain& ter = jeu.getTerrain();
 	const Personnage& perso = jeu.getConstPersonnage();
   	const EnsembleJardin& jardin = jeu.getConstJardin();
 
-	for(unsigned int i=0;i<ter.tabTerrain[1].getdimX();++i) {
-        for(unsigned int j=0;j<ter.tabTerrain[1].getdimY();++j) {
+	for(unsigned int i=0;i<ter.terrCourant.getdimX();++i) {
+        for(unsigned int j=0;j<ter.terrCourant.getdimY();++j) {
 			wmove(winTerrain,j,i);
-			waddch(winTerrain,ter.tabTerrain[1].getXY(i,j));
+			waddch(winTerrain,ter.terrCourant.getXY(i,j));
         }
     }
-	for(unsigned int k=0; k<4; k++){
+	/*for(unsigned int k=0; k<4; k++){
 		if(jardin.tabJardin->at(k).getOccupe() == true){
 			wmove(winTerrain,jardin.tabJardin->at(k).getPosX()
 				,jardin.tabJardin->at(k).getPosY());
 			waddch(winTerrain, 'o');
 		}
-	}
+	}*/
 
 	wmove(winTerrain,perso.getPosX(),perso.getPosY());
 	waddch(winTerrain,'P');
@@ -65,7 +65,7 @@ string txtChoixGraine(int choix){
 	return rep;
 }
 
-void txtAffPlant(WINDOW * winDialogue, Jeu & jeu){
+/*void txtAffPlant(WINDOW * winDialogue, Jeu & jeu){
 
 	int c;
 	string reponse;
@@ -92,7 +92,7 @@ void txtAffPlant(WINDOW * winDialogue, Jeu & jeu){
 		werase(winDialogue);
 	}	
 
-}
+}*/
 
 void txtAffPnj(WINDOW * winDialogue, Jeu & jeu) {
 
@@ -377,10 +377,61 @@ void txtAffMarche(WINDOW * winDialogue, Jeu & jeu) {
 	werase(winDialogue);
 }
 
+void changeTerrain(Jeu & jeu) {
+	// Quartier vers Maison
+	if(jeu.getPersonnage().getPosX()==jeu.getTerrain().tabTerrain[1].getPortails().tabPortail[0].position.x&&
+	jeu.getPersonnage().getPosY()==jeu.getTerrain().tabTerrain[1].getPortails().tabPortail[0].position.y) {
+		jeu.getTerrain().terrCourant=jeu.getTerrain().tabTerrain[0];
+		jeu.getPersonnage().setPosX(jeu.getTerrain().tabTerrain[0].getPortails().tabPortail[0].position.x+1);
+		jeu.getPersonnage().setPosY(jeu.getTerrain().tabTerrain[0].getPortails().tabPortail[0].position.y);
+	}
+	// Maison vers Quartier
+	if(jeu.getPersonnage().getPosX()==jeu.getTerrain().tabTerrain[0].getPortails().tabPortail[0].position.x&&
+	jeu.getPersonnage().getPosY()==jeu.getTerrain().tabTerrain[0].getPortails().tabPortail[0].position.y) {
+		jeu.getTerrain().terrCourant=jeu.getTerrain().tabTerrain[1];
+		jeu.getPersonnage().setPosX(jeu.getTerrain().tabTerrain[1].getPortails().tabPortail[0].position.x);
+		jeu.getPersonnage().setPosY(jeu.getTerrain().tabTerrain[1].getPortails().tabPortail[0].position.y);
+	}	
+}
+
+void dormir(WINDOW * winDialogue, Jeu & jeu) {
+	if(jeu.getPersonnage().getPosX()==7
+		&&jeu.getPersonnage().getPosY()==5
+		&&jeu.getTerrain().terrCourant.getNom()
+		==jeu.getTerrain().tabTerrain[0].getNom()) {
+		jeu.getPersonnage().vie.setFatigue(0);
+		mvwprintw(winDialogue,1,1,"Tu viens de te reposer.");
+	}
+	wgetch(winDialogue);
+	werase(winDialogue);
+}
+
+void manger(WINDOW * winDialogue, Jeu & jeu) {
+	Personnage perso;
+	EnsembleTerrain ter;
+	perso = jeu.getPersonnage();
+	ter = jeu.getTerrain();
+	if(perso.getPosX()==4&&perso.getPosY()==4
+	   &&ter.terrCourant.getNom()==ter.tabTerrain[0].getNom()) {
+		if(perso.inventaire.getManger().getNiveau()>0) {
+			// Baisse de la faim
+			jeu.getPersonnage().vie.setFaim
+			(perso.vie.getFaim().getNiveau() 
+			- perso.inventaire.getManger().getNiveau());
+			// Baisse de l'inventaire
+			jeu.getPersonnage().inventaire.setManger
+			(perso.inventaire.getManger().getNiveau(),false);
+			mvwprintw(winDialogue,1,1,"Tu viens de te nourrir.");
+		}
+		else mvwprintw(winDialogue,1,1,"Achetez à manger avant.");
+	}
+	wgetch(winDialogue);
+	werase(winDialogue);
+}
 
 void txtBoucle (Jeu & jeu) {
 
-	Terrain ter = jeu.getConstTerrain().tabTerrain[1];
+	Terrain ter = jeu.getTerrain().terrCourant;
 
 	WINDOW * winTerrain = newwin(ter.getdimX(),ter.getdimY(),0,0);
 	WINDOW * winDialogue = newwin(15,70,ter.getdimX(),0);
@@ -394,8 +445,8 @@ void txtBoucle (Jeu & jeu) {
 
 	do {		
 		txtAff(winTerrain,winDialogue,winCommandes,jeu);
-		//auto jeu.actionsAutomatiques();
 		timeout(500);
+		jeu.actionsAutomatiques();
 		c = wgetch(winDialogue);
 		switch (c) {
 			case 'k':
@@ -411,7 +462,7 @@ void txtBoucle (Jeu & jeu) {
 				jeu.actionClavier('b');
 				break;
 			case 'j':	
-				txtAffPlant(winDialogue,jeu);
+				//txtAffPlant(winDialogue,jeu);
 				break;
 			case 'i':
 				txtAffPnj(winDialogue,jeu);
@@ -424,6 +475,15 @@ void txtBoucle (Jeu & jeu) {
 				break;
 			case 'c':
 				txtAffMarche(winDialogue,jeu);
+				break;
+			case 'e':
+				changeTerrain(jeu);
+				break;
+			case 'd':
+				dormir(winDialogue,jeu);
+				break;
+			case 'n':
+				manger(winDialogue,jeu);
 				break;
 			case 'q':
 				ok = false;

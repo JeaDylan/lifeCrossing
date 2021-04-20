@@ -54,7 +54,7 @@ public:
     /*! @brief Remplie l'ensembleMeubleQuartier de tout les meubles du Quartier */
     void banqueDeMeubleQuartier();
 
-    void banqueDeMeubleQuartierFichier(string nom_fichier);
+    void banqueDeMeubleFichier(string nom_fichier);
 
     /*! @brief Test des fonctions du module
     */

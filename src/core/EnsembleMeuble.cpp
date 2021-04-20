@@ -103,7 +103,7 @@ void EnsembleMeuble::banqueDeMeubleQuartier() {
 
 }
 
-void EnsembleMeuble::banqueDeMeubleQuartierFichier (string nom_fichier)
+void EnsembleMeuble::banqueDeMeubleFichier (string nom_fichier)
     {
         int i,taille ;
         ifstream monFichier (nom_fichier) ;
@@ -153,7 +153,7 @@ void EnsembleMeuble::testRegression() {
    testBanque.banqueDeMeubleMaison();
    assert(testBanque.tabMeuble.size()==4);
    test.afficheListeMeuble();
-   testBanqueF.banqueDeMeubleQuartierFichier("./data/banqueMeubleQuartier.txt");
+   testBanqueF.banqueDeMeubleFichier("./data/banqueMeubleQuartier.txt");
    testBanqueF.afficheListeMeuble();
    cout<<"Test Regression EnsembleMeuble OK ..."<<endl;
 

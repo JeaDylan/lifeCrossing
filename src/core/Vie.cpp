@@ -10,15 +10,39 @@ Jauge Vie::getSoif()const{ return soif; }
 
 Jauge Vie::getFatigue()const{  return fatigue; }
 
-void Vie::setPtsDeVie(int vi){ ptsDeVie.setNiveau(vi); }
+void Vie::setPtsDeVie(int vi){
+    assert(vi>=0);
+    ptsDeVie.setNiveau(vi); 
+}
     
-void Vie::setFaim(int fa){ faim.setNiveau(fa); }
+void Vie::setFaim(int fa){
+    assert(fa>=0);
+    faim.setNiveau(fa); 
+}
     
-void Vie::setSoif(int so){ soif.setNiveau(so); }
+void Vie::setSoif(int so){
+    assert(so>=0);
+    soif.setNiveau(so);
+}
 
-void Vie::setFatigue(int fat){ fatigue.setNiveau(fat); }
+void Vie::setFatigue(int fat){
+    assert(fat>=0);
+    fatigue.setNiveau(fat); 
+}
 
 void Vie::varieAuto() {
+    if(getFaim().jaugeRemplie()) {
+        setFaim(0);
+        setPtsDeVie(getPtsDeVie().getNiveau()-5);
+    }
+    if(getFatigue().jaugeRemplie()) {
+        setFatigue(0);
+        setPtsDeVie(getPtsDeVie().getNiveau()-5);
+    }
+    if(getSoif().jaugeRemplie()) {
+        setSoif(0);
+        setPtsDeVie(getPtsDeVie().getNiveau()-5);
+    }
     setFaim(getFaim().getNiveau()+1);
     setFatigue(getFatigue().getNiveau()+1);
     setSoif(getSoif().getNiveau()+1);       

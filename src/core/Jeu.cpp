@@ -14,14 +14,7 @@ Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites(), fruitsLeg() {
          fruitsLeg.banqueDeFruitLeg();
          
          ter.banqueDeTerrain();
-         ter.tabTerrain[1].setChar(1,3,'j');
-         ter.tabTerrain[1].setChar(2,3,'j');
-         ter.tabTerrain[1].setChar(1,2,'j');
-         ter.tabTerrain[1].setChar(2,2,'j');
-         ter.tabTerrain[1].setChar(7,12,'i');
-         ter.tabTerrain[1].setChar(7,14,'a');
-         ter.tabTerrain[1].setChar(15,4,'c');
-
+         
         // ter.setChar(12,20,'M');
 
         // mission.banqueMission(); //initialise les deux missions
@@ -62,16 +55,16 @@ void Jeu::actionClavier(const char touche){
 string rep;
     switch(touche){
         case 'g' :
-			perso.gauche(ter.tabTerrain[1]);
+			perso.gauche(ter.terrCourant);
 			break;
 		case 'd' :
-			perso.droite(ter.tabTerrain[1]);
+			perso.droite(ter.terrCourant);
 			break;
 		case 'h' :
-			perso.haut(ter.tabTerrain[1]);
+			perso.haut(ter.terrCourant);
 			break;
 		case 'b' :
-			perso.bas(ter.tabTerrain[1]);
+			perso.bas(ter.terrCourant);
 			break;
         case 'j' : //planter
             
@@ -85,7 +78,7 @@ string rep;
                 if(jardin.estRecoltable(perso.getPosX(),perso.getPosY()) == true){
                 //assert position valide
                   recolter();
-                  ter.tabTerrain[1].setChar(perso.getPosX(),perso.getPosY(),'o');
+                  ter.terrCourant.setChar(perso.getPosX(),perso.getPosY(),'o');
                 }
                 
                 cout<<"La graine a été placée dans votre inventaire"<<endl;
@@ -202,9 +195,9 @@ void Jeu::testRegression(){
     assert(jardin.tabJardin->at(1).getPosX() == 3);
     assert(jardin.tabJardin->at(1).getPosY() == 12);
     cout <<"Jardin 2 initialisée...OK" <<endl;
-    assert(ter.tabTerrain[1].getXY(1,12) == 'J');
-    assert(ter.tabTerrain[1].getXY(3,12) == 'J');
-    assert(ter.tabTerrain[1].getXY(5,12) == 'J');
+    assert(ter.terrCourant.getXY(1,12) == 'J');
+    assert(ter.terrCourant.getXY(3,12) == 'J');
+    assert(ter.terrCourant.getXY(5,12) == 'J');
     cout <<"Le caractere J est placé...OK"<<endl;   
     perso.setPosX(20);
     perso.setPosY(10);

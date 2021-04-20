@@ -18,7 +18,7 @@ class EnsembleTerrain {
 public: 
   
     vector<Terrain> tabTerrain;
-    Terrain * terrCourant;
+    Terrain terrCourant;
    
 
     /*! @brief Constructeur par défaut : alloue sur le tas un tableau dynamique de Terrain 

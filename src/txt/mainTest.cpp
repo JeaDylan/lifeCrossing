@@ -8,6 +8,7 @@
 #include "../core/Jauge.h"
 #include "../core/EnsembleActivite.h"
 #include "../core/Inventaire.h"
+#include "../core/EnsemblePortail.h"
 
 
 using namespace std;
@@ -28,6 +29,8 @@ int main() {
     Activite a;
     EnsembleActivite ensembleActivite;
     Jauge jauge;
+    Portail portail;
+    EnsemblePortail portails;
     p.testRegression();
     m.testRegression();
     ensembleMeuble.testRegression();
@@ -42,5 +45,7 @@ int main() {
     jauge.testRegression();
     a.testRegression();
     ensembleActivite.testRegression();
+    portail.testRegression();
+    portails.testRegression();
    return 0;
 }

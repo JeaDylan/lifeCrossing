@@ -9,6 +9,7 @@
 #include <strings.h>
 #include <iostream>
 #include "EnsembleMeuble.h"
+#include "EnsemblePortail.h"
 
 
 class Terrain {
@@ -21,6 +22,7 @@ private:
     //EnsembleActivite ;
     //EnsemblePortail ;
     EnsembleMeuble meublesTerrain;
+    EnsemblePortail portailsTerrain;
  
 public:
    
@@ -42,7 +44,7 @@ public:
         @param meubles Ensemble de Meuble
     */
     Terrain(unsigned int x, unsigned int y, string nomTerrain,/*EnsemblePnj pnj, EnsembleActivite activites,
-    EnsemblePortail portails, */EnsembleMeuble meubles);
+    EnsemblePortail portails, */const EnsembleMeuble& meubles,const EnsemblePortail& portails);
 
     /*!
     @brief Renvoie vrai si on peut positionnner un personnage aux coordonnées (x,y), faux sinon
@@ -74,6 +76,10 @@ public:
     /*! @brief Accesseur : récupère les meubles du Terrain
     */
     EnsembleMeuble getMeubles () const;
+
+    /*! @brief Accesseur : récupère les Portails du Terrain
+    */
+    EnsemblePortail getPortails () const;
 
     /*! @brief Accesseur : récupère le nom du Terrain
     */

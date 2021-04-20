@@ -24,7 +24,7 @@ Terrain::~Terrain(){
 }
 
 Terrain::Terrain(unsigned int x, unsigned int y, string nomTerrain,
-EnsembleMeuble meubles) {
+const EnsembleMeuble& meubles,const EnsemblePortail& portails) {
     dimX=x;
     dimY=y;
     nom=nomTerrain;
@@ -42,6 +42,7 @@ EnsembleMeuble meubles) {
         }
     }
     meublesTerrain=meubles;
+    portailsTerrain=portails;
 }
 
 bool Terrain::estPositionPersoValide (unsigned int x,unsigned int y){
@@ -62,6 +63,10 @@ void Terrain::setChar(unsigned int x,unsigned int y,char symbole){
 
 EnsembleMeuble Terrain::getMeubles () const {
     return meublesTerrain;
+}
+
+EnsemblePortail Terrain::getPortails () const {
+    return portailsTerrain;
 }
 
 string Terrain::getNom () const {
@@ -90,8 +95,9 @@ char Terrain::getXY (unsigned int x,unsigned int y) const {
 void Terrain::testRegression() {
     cout<<"Tests pour le module Terrain :"<<endl;
     EnsembleMeuble ensembleMeuble;
+    EnsemblePortail ensemblePortail;
     ensembleMeuble.banqueDeMeubleMaison();
-    Terrain maison(10,10,"maison",ensembleMeuble);
+    Terrain maison(10,10,"maison",ensembleMeuble,ensemblePortail);
     maison.afficheTerrain();
     assert(dimX==15&&dimY==25);
     assert(nom=="nouveauTerrain");

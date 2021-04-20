@@ -1,0 +1,15 @@
+14
+3 3 table
+3 4 table
+4 3 table
+5 3 table
+5 4 table
+7 3 lit
+7 4 lit 
+7 6 lit
+7 7 lit
+8 3 lit
+8 4 lit 
+8 5 lit 
+8 6 lit
+8 7 lit
