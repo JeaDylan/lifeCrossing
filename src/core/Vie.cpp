@@ -11,7 +11,6 @@ Jauge Vie::getSoif()const{ return soif; }
 Jauge Vie::getFatigue()const{  return fatigue; }
 
 void Vie::setPtsDeVie(int vi){
-    assert(vi>=0);
     ptsDeVie.setNiveau(vi); 
 }
     

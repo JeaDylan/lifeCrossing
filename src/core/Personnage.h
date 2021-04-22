@@ -115,6 +115,10 @@ public:
 
     /*! @brief Affiche les données du personnage */
     void affichePersonnage() const;
+
+    /*! @brief Modifie les varialbles de Personnage
+    */
+    void varieAuto();
      
     /*! @brief Test des fonctions du module*/
     void testRegression(Terrain t);

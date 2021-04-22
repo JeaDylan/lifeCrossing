@@ -35,9 +35,10 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu
 	mvwprintw(winCommandes,1,1,"Bienvenue sur Life Crossing 1.0 ! ");
 	mvwprintw(winCommandes,3,1, "Voici les modalités du jeu : ");
 	mvwprintw(winCommandes,4,1,"Touches : 'k' gauche 'm' droite 'o' haut 'l' bas");
-	mvwprintw(winCommandes,5,1,"     'q' quitter 'j' planter 'p' infos personnage ");
+	mvwprintw(winCommandes,5,1,"     'q' quitter 'p' infos personnage ");
 	mvwprintw(winCommandes,6,1,"Description : 'x' obstacles 'j' jardin ");
-	mvwprintw(winCommandes,7,1,"     'i' personnage 'a' Activitee 'c' Commerce ");
+	mvwprintw(winCommandes,7,1,"     'i' personnage 'a' Activitee 'c' Commerce");
+	mvwprintw(winCommandes,8,1,"     'n' table à manger 'd' dormir");
 	wrefresh(winCommandes);
 }
 
@@ -65,34 +66,37 @@ string txtChoixGraine(int choix){
 	return rep;
 }
 
-/*void txtAffPlant(WINDOW * winDialogue, Jeu & jeu){
+void txtAffPlant(WINDOW * winDialogue, Jeu & jeu){
 
 	int c;
 	string reponse;
-	mvwprintw(winDialogue,1,1,"Voulez-vous planter une graine? (y/n) "); 
-	c =	wgetch(winDialogue); 
-	if(c == 'y'){
-	mvwprintw(winDialogue,3,1,"Quelle graine voulez-vous planter? (Entrez un nombre)");
-	wgetch(winDialogue);
-	reponse = txtChoixGraine(c);
+	Personnage perso;
+	perso = jeu.getPersonnage();
+	if(jeu.posJardinValide()){
+		mvwprintw(winDialogue,1,1,"Voulez-vous planter une graine? (y/n) "); 
+		c =	wgetch(winDialogue); 
+		if(c == 'y'){
+			mvwprintw(winDialogue,3,1,"Quelle graine voulez-vous planter? (Entrez un nombre)");
+			wgetch(winDialogue);
+			reponse = txtChoixGraine(c);
 
-	while(1){
-		if(jeu.planter(reponse,jeu.getPersonnage().getPosX()
-			,jeu.getPersonnage().getPosY()) == true) {
-			mvwprintw(winDialogue,5,1,"Bravo! Vous avez planter une graine, recoltez la..");
-			wrefresh(winDialogue);
-			werase(winDialogue);
-			break;
-		}
-		else{ printw(".");}	
-	}
-	}	
-	else{ 
+			while(1){
+			if(jeu.planter(reponse,jeu.getPersonnage().getPosX()
+				,jeu.getPersonnage().getPosY()) == true) {
+				mvwprintw(winDialogue,5,1,"Bravo! Vous avez planter une graine, recoltez la..");
+				wrefresh(winDialogue);
+				werase(winDialogue);
+				break;
+			}
+			else{ printw(".");}	
+			}
+		}	
+		else{ 
 		mvwprintw(winDialogue,3,1," Dommage :( ");
 		werase(winDialogue);
-	}	
-
-}*/
+		}
+	}
+}
 
 void txtAffPnj(WINDOW * winDialogue, Jeu & jeu) {
 
@@ -462,7 +466,7 @@ void txtBoucle (Jeu & jeu) {
 				jeu.actionClavier('b');
 				break;
 			case 'j':	
-				//txtAffPlant(winDialogue,jeu);
+				txtAffPlant(winDialogue,jeu);
 				break;
 			case 'i':
 				txtAffPnj(winDialogue,jeu);
@@ -488,9 +492,22 @@ void txtBoucle (Jeu & jeu) {
 			case 'q':
 				ok = false;
 				break;
+		}	
+		if(jeu.getPersonnage().vie.getPtsDeVie().getNiveau()==0) {	
+			ok=false;
 		}
 	  } while (ok); 
-	    	
+
+	if(jeu.getPersonnage().vie.getPtsDeVie().getNiveau()==0) {
+		ok=true;
+		do {
+			mvwprintw(winDialogue,1,1,"GAME OVER");
+			mvwprintw(winDialogue,2,1,"'q' pour quitter");
+			c=wgetch(winDialogue);
+			if(c=='q') ok=false;
+		} while(ok); 
+	}
+
 	wclear(winDialogue);
 	wclear(winTerrain);
 	wclear(winCommandes);

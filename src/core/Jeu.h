@@ -53,8 +53,10 @@ public :
 
     /*! @brief Recolter range un FruitLegume dans l'inventaire du perso
     */
-        
+    
     bool planter(string nom,unsigned int nx, unsigned int ny);
+
+    bool posJardinValide();
 
     void recolter();
 

@@ -49,10 +49,11 @@ const EnsembleFruitLeg& Jeu::getConstFruitLeg() const{ return fruitsLeg;}
 
 void Jeu::actionsAutomatiques() {
     getPersonnage().vie.varieAuto();
+    getPersonnage().varieAuto();
 }
 
 void Jeu::actionClavier(const char touche){
-string rep;
+    string rep;
     switch(touche){
         case 'g' :
 			perso.gauche(ter.terrCourant);
@@ -67,7 +68,7 @@ string rep;
 			perso.bas(ter.terrCourant);
 			break;
         case 'j' : //planter
-            
+
             break;
         case 'r' : //recolter
             string rep2;
@@ -106,9 +107,15 @@ string rep;
         
 }
 
-
-
-
+bool Jeu::posJardinValide() {
+    for(int i=0;i<getJardin().tabJardin->size();i++) {
+        if(getPersonnage().getPosX()==getJardin().tabJardin->at(i).getPosX()
+        &&getPersonnage().getPosY()==getJardin().tabJardin->at(i).getPosY()) {
+            return true;
+        }
+    }
+    return false;
+}
 
 bool Jeu::planter(string nom, unsigned int nx, unsigned int ny){
     bool fin = false;

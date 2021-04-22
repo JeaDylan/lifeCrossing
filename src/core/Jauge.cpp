@@ -25,8 +25,9 @@ int Jauge::getNiveauMax() const {
 }
 
 void Jauge::setNiveau(int newNiveau) {
-    assert(newNiveau>=0);
-    niveauActuel=newNiveau;
+    if(newNiveau<=0)
+    niveauActuel=0;
+    else niveauActuel=newNiveau;
 }
 
 void Jauge::setNiveauMax(int newNiveauMax) {

@@ -119,6 +119,13 @@ void Personnage::affichePersonnage() const {
     cout<< "Il se situe à la case ("<<position.getX()<<", " << position.getY() <<"), et possède " << argent <<"€"<<endl;
 }
 
+void Personnage::varieAuto() {
+    if(xp.jaugeRemplie()) {
+        xp.setNiveau(0);
+        niveau.setNiveau(niveau.getNiveau()+1);
+    }      
+}
+
 void Personnage::testRegression(Terrain terrain) {
     cout<<"Tests pour le module Personnage :"<<endl;
     assert(nom == "sansNom");
