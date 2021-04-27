@@ -31,14 +31,18 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu
 	box(winDialogue,0,0);
 	wrefresh(winTerrain);
 
+	string affTer = "Terrain : " + jeu.getTerrain().terrCourant.getNom();
+	const char * affTerm = (const char *) affTer.c_str();
+	wclear(winCommandes);
 	box(winCommandes,0,0);
 	mvwprintw(winCommandes,1,1,"Bienvenue sur Life Crossing 1.0 ! ");
+	mvwprintw(winCommandes,2,1,affTerm);
 	mvwprintw(winCommandes,3,1, "Voici les modalités du jeu : ");
 	mvwprintw(winCommandes,4,1,"Touches : 'k' gauche 'm' droite 'o' haut 'l' bas");
 	mvwprintw(winCommandes,5,1,"     'q' quitter 'p' infos personnage ");
 	mvwprintw(winCommandes,6,1,"Description : 'x' obstacles 'j' jardin ");
 	mvwprintw(winCommandes,7,1,"     'i' personnage 'a' Activitee 'c' Commerce");
-	mvwprintw(winCommandes,8,1,"     'n' table à manger 'd' dormir");
+	mvwprintw(winCommandes,8,1,"     'n' table à manger 'd' dormir 'e' entrer ");
 	wrefresh(winCommandes);
 }
 
@@ -100,25 +104,25 @@ void txtAffPlant(WINDOW * winDialogue, Jeu & jeu){
 
 void txtAffPnj(WINDOW * winDialogue, Jeu & jeu) {
 
-	int prixCine;
+	int prix;
 	string nomPnj,nomPerso;
 	Personnage perso;
 	EnsemblePnj pnjs;
 	perso = jeu.getPersonnage();
 	pnjs = jeu.getPnjs();
+	nomPerso = jeu.getPersonnage().getNom();
 
 	if(perso.getPosX()==pnjs.tabPnj[0].getPosition().x 
 		&&perso.getPosY()==pnjs.tabPnj[0].getPosition().y) {
 			
 			nomPnj = jeu.getPnjs().tabPnj[0].getNom();
-			nomPerso = jeu.getPersonnage().getNom();
-			prixCine = jeu.getActivites().tabActivite[0].getPrix();
+			prix = jeu.getActivites().tabActivite[0].getPrix();
 
 			string ligne1 = "Bonjour " + nomPerso 
 			+ ", je suis " + nomPnj + " !";
 			const char * ligne1m = (const char *) ligne1.c_str();
 
-			string ligne2 = "Cette activitée coûte " + to_string(prixCine)
+			string ligne2 = "Cette activitée coûte " + to_string(prix)
 							+ "$.";
 			const char * ligne2m = (const char *) ligne2.c_str();
 
@@ -127,6 +131,21 @@ void txtAffPnj(WINDOW * winDialogue, Jeu & jeu) {
 			mvwprintw(winDialogue,3,1,"Regarde un film et remporte des xp.");
 			mvwprintw(winDialogue,4,1,"Pour ce faire il te suffit de te placer sur a et appuyer sur a.");
 			mvwprintw(winDialogue,5,1,ligne2m);
+	}
+
+	if(perso.getPosX()==pnjs.tabPnj[1].getPosition().x 
+		&&perso.getPosY()==pnjs.tabPnj[1].getPosition().y) {
+			
+			nomPnj = jeu.getPnjs().tabPnj[1].getNom();
+
+			string ligne1 = "Bonjour " + nomPerso 
+			+ ", je suis " + nomPnj + " !";
+			const char * ligne1m = (const char *) ligne1.c_str();
+
+			mvwprintw(winDialogue,1,1,ligne1m);
+			mvwprintw(winDialogue,2,1,"Tu te trouves devant le Commerce de la ville.");
+			mvwprintw(winDialogue,3,1,"Mission : si tu remplie ton stock de Fruit/Legumes,");
+			mvwprintw(winDialogue,4,1," tu gagnes 200xp.");
 	}
 
 	wgetch(winDialogue);
@@ -377,6 +396,7 @@ void txtAffMarche(WINDOW * winDialogue, Jeu & jeu) {
 			break;
 		}
 	}
+	
 	wgetch(winDialogue);
 	werase(winDialogue);
 }
@@ -492,7 +512,8 @@ void txtBoucle (Jeu & jeu) {
 			case 'q':
 				ok = false;
 				break;
-		}	
+		}
+
 		if(jeu.getPersonnage().vie.getPtsDeVie().getNiveau()==0) {	
 			ok=false;
 		}

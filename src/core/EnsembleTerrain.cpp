@@ -68,16 +68,21 @@ void EnsembleTerrain::banqueDeTerrain() {
 
     // ajout PNJ
     tabTerrain[1].setChar(7,12,'i');
+    tabTerrain[1].setChar(15,6,'i');
+
+    // ajout Activités
     tabTerrain[1].setChar(7,14,'a');
+
+    // ajout Commerce
     tabTerrain[1].setChar(15,4,'c');
 
     // ajout 'manger'
     tabTerrain[0].setChar(4,4,'n');
 
-    //ajout 'dormir'
-    tabTerrain[0].setChar(7,5,'d');
+    // ajout 'dormir'
+    tabTerrain[0].setChar(7,5,'d');    
 
-    terrCourant = tabTerrain[1];
+    terrCourant = tabTerrain[0];
 }
 
 void EnsembleTerrain::testRegression() {

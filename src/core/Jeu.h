@@ -16,6 +16,8 @@
 #include "EnsembleJardin.h"
 #include "EnsemblePnj.h"
 #include "EnsembleActivite.h"
+#include "EnsembleMission.h"
+
 
 
 /**
@@ -31,7 +33,7 @@ private :
     EnsemblePnj pnjs;
     EnsembleActivite activites;
     EnsembleFruitLeg fruitsLeg;
-    //EnsembleMission mission;
+    EnsembleMission mission;
 
 public :
 
@@ -43,6 +45,7 @@ public :
     EnsemblePnj& getPnjs();
     EnsembleActivite& getActivites();
     EnsembleFruitLeg& getFruitLeg();
+    EnsembleMission& getMissions();
 
     const EnsembleTerrain& getConstTerrain () const;
     const Personnage& getConstPersonnage () const;
@@ -50,6 +53,7 @@ public :
     const EnsemblePnj& getConstPnjs() const;
     const EnsembleActivite& getConstActivites() const;
     const EnsembleFruitLeg& getConstFruitLeg() const;
+    const EnsembleMission& getConstMissions() const;
 
     /*! @brief Recolter range un FruitLegume dans l'inventaire du perso
     */

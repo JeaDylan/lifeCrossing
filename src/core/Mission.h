@@ -1,64 +1,61 @@
 /*!
 * @brief Mission est une classe qui représente une mission que le joueur peut
 * accomplir. Chaque mission est présentée par un PNJ (Personnage Non Joueur).
+* @file Mission.h
 */
 
 #ifndef _MISSION
 #define _MISSION
-
-
 #include <strings.h>
-#include <cassert>
 #include <iostream>
 using namespace std;
 
 class Mission {
 private:
    
-    unsigned int argent,xp,vie; //recompense
-    unsigned int num; //n° de mission =>identifiant 
-    string objectif; //intitulé de la mission
-    bool declenche; //utile pour declencher des missions a partir du tableau de mission
+    int recompense; 
+    string objectif;
     bool fini;    
-    void (*pfm)(void); //pointeur fonction mission pour attribuer une fonction a la mission 
  
 public:
-
+    /*! @brief Constructeur : initialise une mission
+    */
     Mission();
     
-    Mission(unsigned int arg,unsigned int xP,unsigned int vI,unsigned int nuM,bool dec,bool fin,void(*pf)(void));
-    
+    /*! @brief Constructeur par copie: initialise une mission
+        @param newRecompense recompense de la mission
+        @param obj objectif de la mission
+    */
+    Mission(int newRecompense, string obj);
 
-    unsigned int getArgent()const;
+    /*! @brief Destructeur : supprime la mission 
+    */
+    ~Mission();
 
-    unsigned int getXp()const;
+    /*! @brief Accesseur: renvoie la récompense de la mission
+    */
+    unsigned int getRecompense()const;
 
-    unsigned int getVie()const;
-
-    unsigned int getNum()const;
-
-    string getObjectif()const;
-
-    bool getDeclenche()const;
-
+    /*! @brief Accesseur: renvoie fini de la mission
+    */
     bool getFini()const;
 
-    int getPfm()const;
+    /*! @brief Accesseur: renvoie l'objectif de la mission
+    */
+    string getObjectif()const;
 
-    void setArgent(unsigned int arg);
+    /*! @brief Mutateur : modifie la récompense de la mission
+        @param newRecompense la nouvelle récompense de la mission
+    */
+    void setRecompense(unsigned int newRecompense);
 
-    void setXp(unsigned int xP);
-
-    void setVie(unsigned int vI);
-
-    void setNum(unsigned int nuM);
-
-    void setDeclenche(bool dec);
-
+    /*! @brief Mutateur: modifie la donnée membre fini
+    */
     void setFini(bool fin);
-
-    void setPfm(void(*pf)(void));
     
-
+    /*! @brief Teste toutes les fonctions du module
+    */
+    void testRegression();
+    
 };
 #endif // _MISSION

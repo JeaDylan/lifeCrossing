@@ -1,4 +1,5 @@
 #include "EnsembleMission.h"
+#include <cassert>
 
 
 
@@ -18,46 +19,19 @@ void EnsembleMission::ajouterMission(const Mission & mission){
     tabMission->push_back(mission);
 }
 
-
-void EnsembleMission::suppMission(unsigned int nuM){
-    int taille = tabMission->size();
-    for(int i=0; i<taille;i++){
-        if(nuM == (*tabMission)[i].getNum()){
-            tabMission->erase(tabMission->begin() + i);
-        }
-    }
+void EnsembleMission::banqueMission() {
+    ajouterMission(Mission(2,"Remplir stock Fruit/Leg")); 
 }
 
-Mission EnsembleMission::chercherMission(unsigned int nuM){
-    int taille = tabMission->size();
-    for(int i=0; i<taille;i++){
-        if(nuM == (*tabMission).getNum()){
-            return (*tabMission)[i];
-        }
-    }
-    cout<<"Error : la mission n'existe pas "<<endl;
-    exit(0);
-
+void EnsembleMission::testRegression() {
+   cout<<"Tests pour le module EnsembleMission :"<<endl;
+   EnsembleMission test;
+   assert(test.tabMission->size() == 0);
+   cout<<"Constructeur par Défaut OK ..."<<endl;
+   test.banqueMission();
+   assert(test.tabMission->size() == 1);
+   assert(test.tabMission->at(0).getObjectif() == "Remplir stock Fruit/Leg");
+   assert(test.tabMission->at(0).getRecompense() == 2);
+   cout<<"Test Regression EnsembleActivite OK ..."<<endl;
 }
-
-
-bool EnsembleMission::declencheMission(unsigned int nuM){
-      bool etat;
-      Mission active = chercherMision(nuM);
-      assert(active.getDeclenche() == false);
-      active.setDeclenche(true);
-      assert(active.getFini() == false);
-      active.(*pfm)(); //declenche la fonction de la mission
-      while(active.getFini() == false){
-          sleep(1);
-          etat = false;
-      }
-      assert(active.getFini()==true);
-      etat = true;
-      active.setDeclenche(false); //on remet les valeurs par defaut
-      active.setFini(false);
-      return etat;
-
-}
-
 

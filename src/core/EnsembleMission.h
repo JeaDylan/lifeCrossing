@@ -1,3 +1,9 @@
+/**
+    @brief Module gérant un ensemble de missions
+    @file EnsembleMission.h
+
+*/
+
 #ifndef _ENSEMBLE_MISSION
 #define _ENSEMBLE_MISSION
 
@@ -7,30 +13,33 @@
 
 using namespace std;
 
-
+/*! @class un EnsembleActivite = un tableau dynamique d'Activites
+*/
 class EnsembleMission {
 public:
+
     vector<Mission> * tabMission;
 
+    /*! @brief Constructeur par défaut : alloue sur le tas 
+    *   un tableau dynamique de missions
+    */
     EnsembleMission();
 
+    /*! @brief Destructeur : supprime le tableau alloué sur le tas 
+    */
     ~EnsembleMission();
 
+    /*! @brief Ajout d'une activite dans le tableau dynamique
+        @param mission Mission à ajouter au tableau 
+    */ 
     void ajouterMission(const Mission & mission);
 
-    void suppMission(unsigned int nuM);
-
-    bool declencheMission(unsigned int nuM);
-
+    /*! @brief Rempli l'ensembleMission de toutes les missions*/
     void banqueMission();
 
-    Mission chercherMision(unsigned int nuM);
-
-    bool mission_1();
-
-    bool mission_2();
-
-    bool mission_3();
+    /*! @brief Test des fonctions du module
+    */
+    void testRegression();
 
 };
 

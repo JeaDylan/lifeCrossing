@@ -1,5 +1,5 @@
-/** @brief Module gérant une activité
-    @file Activite.h
+/*! @brief Module gérant une activité
+*   @file Activite.h
 */
 
 #ifndef _ACTIVITE
@@ -103,4 +103,4 @@ public:
 
 
 
-#endif //_JEU
+#endif //_ACTIVITE

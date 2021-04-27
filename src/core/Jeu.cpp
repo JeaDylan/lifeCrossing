@@ -1,25 +1,22 @@
 #include "Jeu.h"
 
-Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites(), fruitsLeg() {
+Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites(), fruitsLeg() , mission() {
 
-         jardin.tabJardin->push_back(Jardin(1,3));//tabJardin[0]
-         jardin.tabJardin->push_back(Jardin(2,3));//tabJardin[1]
-         jardin.tabJardin->push_back(Jardin(1,2));//tabJardin[2]
-         jardin.tabJardin->push_back(Jardin(2,2));//tabJardin[3]
+        jardin.tabJardin->push_back(Jardin(1,3));//tabJardin[0]
+        jardin.tabJardin->push_back(Jardin(2,3));//tabJardin[1]
+        jardin.tabJardin->push_back(Jardin(1,2));//tabJardin[2]
+        jardin.tabJardin->push_back(Jardin(2,2));//tabJardin[3]
          
-         pnjs.tabPnj.push_back(Pnj("Luc","Bonjour, je suis Luc !",Point2D(7,12)));
+        pnjs.tabPnj.push_back(Pnj("Luc","Bonjour, je suis Luc !",Point2D(7,12)));
+        pnjs.tabPnj.push_back(Pnj("Jules","Bonjour, je suis Jules !",Point2D(15,6)));
          
-         activites.tabActivite.push_back(Activite("Cinema",10,Point2D(7,14),50,"xp"));
+        activites.tabActivite.push_back(Activite("Cinema",10,Point2D(7,14),50,"xp"));
         
-         fruitsLeg.banqueDeFruitLeg();
+        fruitsLeg.banqueDeFruitLeg();
          
-         ter.banqueDeTerrain();
-         
-        // ter.setChar(12,20,'M');
+        ter.banqueDeTerrain();
 
-        // mission.banqueMission(); //initialise les deux missions
-
-
+        mission.banqueMission();
 
  }
 
@@ -35,6 +32,8 @@ EnsembleActivite& Jeu::getActivites(){ return activites; }
 
 EnsembleFruitLeg& Jeu::getFruitLeg(){return fruitsLeg;}
 
+EnsembleMission& Jeu::getMissions(){return mission;}
+
 const EnsembleTerrain& Jeu::getConstTerrain()const{ return ter; }
 
 const Personnage& Jeu::getConstPersonnage()const{ return perso; }
@@ -47,9 +46,20 @@ const EnsembleActivite& Jeu::getConstActivites() const{ return activites; }
 
 const EnsembleFruitLeg& Jeu::getConstFruitLeg() const{ return fruitsLeg;}
 
+const EnsembleMission& Jeu::getConstMissions() const{ return mission;}
+
 void Jeu::actionsAutomatiques() {
     getPersonnage().vie.varieAuto();
     getPersonnage().varieAuto();
+
+    // Fonction mission1
+    if(getPersonnage().inventaire.getFruitLeg().jaugeRemplie()
+        &&getMissions().tabMission->at(0).getFini()==false) {
+			getPersonnage().niveau.setNiveau
+            (getPersonnage().niveau.getNiveau()
+            +getMissions().tabMission->at(0).getRecompense());
+			getMissions().tabMission->at(0).setFini(true);
+		}
 }
 
 void Jeu::actionClavier(const char touche){
@@ -88,21 +98,6 @@ void Jeu::actionClavier(const char touche){
                 cout << "La graine n'est pas prête...Attendez un peu!" <<endl;
             }
             break;
-
-     /*   case 'm' : //declencher mission     
-            string rep3;
-            int nuM;
-            cout << "Voulez-vous démarrer une mission? (oui/non)" <<endl;
-            cin >> rep3;
-             assert(rep2 == "oui" || rep2 == "non");
-            if(rep3 == "oui"){
-                cout << "Laquelle? (1/2)" <<endl;
-                cin > nuM;
-                if(nuM == 1)
-                    mission_1();
-                if(nuM == 2)
-                    mission_2();
-            */
     }
         
 }
@@ -136,8 +131,6 @@ bool Jeu::planter(string nom, unsigned int nx, unsigned int ny){
 
 }
 
-
-
 void Jeu::recolter(){
     int i = jardin.recupIndice(perso.getPosX(),perso.getPosY());
     string recolte = jardin.tabJardin->at(i).getPlant().getNomGraine();
@@ -151,47 +144,6 @@ void Jeu::recolter(){
 
         
 }
-
-
-/*bool Jeu::mission_1(){
-   //gagner 20 points de vie en mangeant des fruits ou legumes
-  
-   mission.ajouterMission(mission1); // mission[0] = mission1
-   assert(mission.tabMission->size() == 1 );
-   // Vie pdv_debut;
-   //pdv_debut.setPdv(vie.getPdv()); //on enregistre les pdv de depart
-   while(vie.getPdv() != pdv_debut.getPdv() + 20){
-          sleep(1);
-   }
-   assert(vie.getPdv() >= pdv_debut + 20 );      
-   mission1.setFini(true);
-   cout << "mission terminée! +25$ "<< endl;
-   gainArgent(25); //+25$
-   return true;
-
-}*/
-
-
-/*bool Jeu::mission_2(){
-    //planter deux graines
-   
-    
-    assert(mission.tabMission->size() == 2 );
-    int taille = jardin.tabJardin->size(); 
-    do{
-        int compteur = 0;
-        for(int i=0; i<taille;i++){
-            if(jardin.(*tabJardin)[i].plant.getOccupe() == true){//boucle qui compte le nb de parcelle occupé => nb graine plantée
-                count += 1;
-            }
-        }
-    assert(jardin.tabJardin->size() >= 2);
-
-    }while(count < 2);
-    return true;
-
-}*/
-
 
 void Jeu::testRegression(){
 
