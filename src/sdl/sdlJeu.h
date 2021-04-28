@@ -56,6 +56,17 @@ void sdlPlanter(SDL_Surface *ecran,const SDL_Rect *pos,bool &b,Jeu & jeu,Map & m
 */
 string transformeConstantes(int n);
 
+/*! @brief Gère les interactions avec les PNJ
+    @param ecran fenêtre gérée par SDL
+    @param pos position du joueur lorsqu'il interagit avec le PNJ
+*/
+void dialoguePNJ(SDL_Surface * ecran,SDL_Rect *pos,Map & map);
+
+/*! @brief Affiche les jauges de vie faim soif et fatigue
+
+*/
+void affichageJauge(SDL_Surface * ecran);
+
 
 
 #endif //_SDL_JEU

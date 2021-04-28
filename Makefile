@@ -5,7 +5,7 @@ OBJS_JEU_SDL = ./obj/main_sdl.o ./obj/sdlJeu.o  ./obj/Map.o  ./obj/Point2D.o ./o
 SRC_FILES = ./src/core/EnsemblePnj.h ./src/core/EnsembleActivite.h ./src/core/FruitLegume.h ./src/core/Point2D.h ./src/core/EnsembleFruitLeg.h ./src/core/Jardin.h ./src/core/EnsembleJardin.h ./src/core/Meuble.h ./src/core/EnsembleMeuble.h ./src/core/Terrain.h ./src/core/EnsembleTerrain.h ./src/core/Personnage.h ./src/core/Jauge.h ./src/core/Pnj.h ./src/core/Mission.h  ./src/core/EnsembleMission.h  ./src/core/Jeu.h ./src/core/Activite.h ./src/core/Inventaire.h ./src/core/Vie.h ./src/core/Portail.h ./src/core/EnsemblePortail.h
 
 CC = g++
-CFLAGS = -ggdb -Wall
+CFLAGS = -ggdb 
 
 all: $(EXEC_NAME) ./doc/projet.doxy
 

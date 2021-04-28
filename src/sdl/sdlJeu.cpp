@@ -139,6 +139,7 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
 
     SDL_BlitSurface(persoActuel,NULL,ecran,&position);
     
+    affichageJauge(ecran);
     SDL_Flip(ecran);
     }
 
@@ -316,13 +317,36 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
 
 
             case SDLK_RETURN:
+            if(nb_carte == 5){
+                //le joueur presse ENTRER à proximité du PNJ4
+                if (positionJoueur.x==15 && positionJoueur.y==9) {
+                    dialoguePNJ(ecran, &positionJoueur, map);
+                }
+                if (positionJoueur.x==15 && positionJoueur.y==10) {
+                    dialoguePNJ(ecran, &positionJoueur, map);
+                }
+                //le joueur presse ENTRER à proximité du PNJ3
+                if (positionJoueur.x==9 && positionJoueur.y==8) {
+                    dialoguePNJ(ecran, &positionJoueur, map);
+                }
+                //le joueur presse ENTRER à proximité du PNJ2
+                if (positionJoueur.x==10 && positionJoueur.y==5) {
+                    dialoguePNJ(ecran, &positionJoueur, map);
+                }
+                if (positionJoueur.x==10 && positionJoueur.y==6) {
+                    dialoguePNJ(ecran, &positionJoueur, map);
+                }
+                //le joueur presse ENTRER à proximité du PNJ1
+                if (positionJoueur.x==15 && positionJoueur.y==4) {
+                    dialoguePNJ(ecran, &positionJoueur, map);
+                }
+            }
             if(positionJoueur.x == 9 || positionJoueur.x == 11 || positionJoueur.x == 13 || positionJoueur.x == 15){
                 if(positionJoueur.y == 8 || positionJoueur.y == 10){
                     teleporter(ecran,8,jeu,map);
                 }
             }
-            if(positionJoueur.x == 14 || positionJoueur.x == 15 || positionJoueur.x == 16){
-                if(positionJoueur.y == 4){
+            if((positionJoueur.x == 14 || positionJoueur.x == 15 || positionJoueur.x == 16) && positionJoueur.y == 4){
                     teleporter(ecran,9,jeu,map);
                 }
             }
@@ -334,9 +358,7 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
 
             }
             break;
-
-            } 
-            break;            
+         
             
             
 
@@ -477,6 +499,7 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
     }
     
     
+    affichageJauge(ecran);
     SDL_Flip(ecran);
 
    
@@ -723,7 +746,8 @@ void sdlPlanter(SDL_Surface *ecran,const SDL_Rect *pos,bool &succes,Jeu & jeu,Ma
         positionInterface.x=0;
         positionInterface.y=0;
         SDL_BlitSurface(interface,NULL,ecran,&positionInterface);  
-
+        
+        affichageJauge(ecran);
         SDL_Flip(ecran);
         
     
@@ -842,4 +866,147 @@ string transformeConstantes(int n){
 
     }
     return reponse;
+}
+
+void dialoguePNJ(SDL_Surface * ecran, SDL_Rect *pos,Map & map){
+    SDL_Surface *dialPNJ1= NULL;
+    dialPNJ1 = IMG_Load("./data/dialPNJ1.png");
+
+    int continuer=1;
+    SDL_Event event;
+    SDL_Rect positionFond;
+    positionFond.x=0;
+    positionFond.y=50;
+    SDL_BlitSurface(dialPNJ1,NULL,ecran,&positionFond);
+    
+    affichageJauge(ecran);
+    SDL_Flip(ecran);
+    cout << "DialoguePNJ";
+    while(continuer){
+        SDL_WaitEvent(&event);
+        switch(event.type){
+            case SDL_QUIT:
+            continuer = 0;
+            break;
+
+            case SDL_KEYDOWN:
+            switch(event.key.keysym.sym){
+
+                case  SDLK_ESCAPE:
+                continuer = 0;
+                break;
+                
+                case SDLK_o:
+                SDL_FreeSurface(dialPNJ1);
+                map.carte5[pos->y][pos->x]=0;
+                continuer = 0;
+                break;
+                
+                case SDLK_n:
+                SDL_FreeSurface(dialPNJ1);
+                map.carte5[pos->y][pos->x]=0;
+                continuer = 0;
+                break;
+            }
+        }
+    }
+}
+
+void affichageJauge(SDL_Surface * ecran) {
+    SDL_Surface *imFaim= NULL;
+    SDL_Surface *imSoif= NULL;
+    SDL_Surface *imFatigue= NULL;
+    SDL_Surface *imVie= NULL;
+    SDL_Surface *jauge= NULL;
+    SDL_Surface *niveau= NULL;
+
+    SDL_FreeSurface(imFaim);
+    SDL_FreeSurface(imSoif);
+    SDL_FreeSurface(imFatigue);
+    SDL_FreeSurface(imVie);
+    SDL_FreeSurface(jauge);
+    SDL_FreeSurface(niveau);
+    
+    imFaim = IMG_Load("./data/faim.png");
+    imSoif = IMG_Load("./data/soif.png");
+    imFatigue = IMG_Load("./data/fatigue.png");
+    imVie = IMG_Load("./data/vie.png");
+    jauge = IMG_Load("./data/jauge.png");
+    niveau = IMG_Load("./data/niveau.png");
+    SDL_Rect positionJauge;
+    positionJauge.x=5;
+    positionJauge.y=5;
+    SDL_Rect vie;
+    vie.x=0;
+    vie.y=0;
+    vie.h=20;
+    vie.w=100; // varie en fonction de la vie du perso
+    SDL_Rect faim;
+    faim.x=0;
+    faim.y=0;
+    faim.h=20;
+    faim.w=80;// varie en fonction de la faim du perso
+    SDL_Rect soif;
+    soif.x=0;
+    soif.y=0;
+    soif.h=20;
+    soif.w=50;// varie en fonction de la soif du perso
+    SDL_Rect fatigue;
+    fatigue.x=0;
+    fatigue.y=0;
+    fatigue.h=20;
+    fatigue.w=20;// varie en fonction de la fatigue du perso
+    SDL_Rect xp;
+    xp.x=0;
+    xp.y=0;
+    xp.h=20;
+    xp.w=50;
+
+//affichage niveau + xp
+    SDL_BlitSurface(niveau, NULL, ecran, &positionJauge);
+    positionJauge.x+=20;
+    jauge = IMG_Load("./data/jauge0.png");
+    SDL_BlitSurface(jauge, NULL, ecran, &positionJauge);
+    jauge = IMG_Load("./data/jauge3.png");
+    SDL_BlitSurface(jauge, &xp, ecran, &positionJauge);
+//affichage vie
+    positionJauge.x=0;
+    positionJauge.y=300;
+    SDL_BlitSurface(imVie,NULL,ecran,&positionJauge);
+    positionJauge.x+=20;
+    if (vie.w > 70) jauge = IMG_Load("./data/jauge.png");
+    if (vie.w <= 70) jauge = IMG_Load("./data/jauge1.png");    
+    if (vie.w <= 30) jauge = IMG_Load("./data/jauge2.png");
+    SDL_BlitSurface(jauge, &vie, ecran, &positionJauge);
+//affichage faim
+    positionJauge.x-=20;
+    positionJauge.y+=25;
+    SDL_BlitSurface(imFaim,NULL,ecran,&positionJauge);
+    positionJauge.x+=20;
+    if (faim.w > 70) jauge = IMG_Load("./data/jauge.png");
+    if (faim.w <= 70) jauge = IMG_Load("./data/jauge1.png");    
+    if (faim.w <= 30) jauge = IMG_Load("./data/jauge2.png");
+    SDL_BlitSurface(jauge, &faim, ecran, &positionJauge);
+//affichage soif
+    positionJauge.x-=20;
+    positionJauge.y+=25;
+    SDL_BlitSurface(imSoif,NULL,ecran,&positionJauge);
+    positionJauge.x+=20;   
+    if (soif.w > 70) jauge = IMG_Load("./data/jauge.png"); 
+    if (soif.w <= 70) jauge = IMG_Load("./data/jauge1.png");    
+    if (soif.w <= 30) jauge = IMG_Load("./data/jauge2.png");
+    SDL_BlitSurface(jauge, &soif, ecran, &positionJauge);
+//affichage faim
+    positionJauge.x-=20;
+    positionJauge.y+=25;
+    SDL_BlitSurface(imFatigue,NULL,ecran,&positionJauge);
+    positionJauge.x+=20;   
+    if (fatigue.w > 70) jauge = IMG_Load("./data/jauge.png");
+    if (fatigue.w <= 70) jauge = IMG_Load("./data/jauge1.png");    
+    if (fatigue.w <= 30) jauge = IMG_Load("./data/jauge2.png");
+    SDL_BlitSurface(jauge, &fatigue, ecran, &positionJauge);
+
+    
+
+    
 }
