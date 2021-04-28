@@ -1399,6 +1399,132 @@ carte5[12][20]=1;
 carte5[12][21]=1;
 
 
+interfaceJardin=(int**)malloc(12*sizeof(int*));
+for( int p =0;p<13;p++){
+    interfaceJardin[p]=(int*)malloc(27*sizeof(int));
+}
+
+
+
+interfaceJardin[4][9] = 12;
+interfaceJardin[4][11] = 4;
+interfaceJardin[4][13] = 8;
+interfaceJardin[4][15] = 13;
+interfaceJardin[4][17] = 17;
+interfaceJardin[4][19] = 21;
+
+interfaceJardin[6][9] = 1;
+interfaceJardin[6][11] = 5;
+interfaceJardin[6][13] = 9;
+interfaceJardin[6][15] = 14;
+interfaceJardin[6][17] = 18;
+interfaceJardin[6][19] = 22;
+
+interfaceJardin[7][9] = 2;
+interfaceJardin[7][11] = 6;
+interfaceJardin[7][13] = 10;
+interfaceJardin[7][15] = 15;
+interfaceJardin[7][17] = 19;
+interfaceJardin[7][19] = 23;
+
+interfaceJardin[9][9] = 3;
+interfaceJardin[9][11] = 7;
+interfaceJardin[9][13] = 11;
+interfaceJardin[9][15] = 16;
+interfaceJardin[9][17] = 20;
+interfaceJardin[9][19] = 24;
+
+interfaceInventaire=(int**)malloc(12*sizeof(int*));
+for( int q =0;q<13;q++){
+    interfaceInventaire[q]=(int*)malloc(27*sizeof(int));
+}
+
+interfaceInventaire[2][11] = 5;
+interfaceInventaire[2][12] = 5;
+interfaceInventaire[2][13] = 5;
+
+interfaceInventaire[3][11] = 5;
+interfaceInventaire[3][12] = 5;
+interfaceInventaire[3][13] = 5;
+
+
+interfaceInventaire[4][11] = 5;
+interfaceInventaire[4][12] = 5;
+interfaceInventaire[4][13] = 5;
+
+
+
+interfaceInventaire[5][15] = 1;
+interfaceInventaire[5][17] = 1;
+interfaceInventaire[5][18] = 1;
+interfaceInventaire[5][20] = 1;
+
+
+interfaceInventaire[6][7] = 1;
+interfaceInventaire[6][8] = 1;
+interfaceInventaire[6][9] = 1;
+interfaceInventaire[6][10] = 1;
+interfaceInventaire[6][12] = 1;
+interfaceInventaire[6][13] = 1;
+interfaceInventaire[6][15] = 1;
+interfaceInventaire[6][17] = 1;
+interfaceInventaire[6][18] = 1;
+interfaceInventaire[6][20] = 1;
+
+interfaceInventaire[7][7] = 1;
+interfaceInventaire[7][8] = 1;
+interfaceInventaire[7][9] = 1;
+interfaceInventaire[7][10] = 1;
+interfaceInventaire[7][12] = 1;
+interfaceInventaire[7][13] = 1;
+interfaceInventaire[7][15] = 1;
+interfaceInventaire[7][17] = 1;
+interfaceInventaire[7][18] = 1;
+interfaceInventaire[7][20] = 1;
+
+interfaceInventaire[8][7] = 1;
+interfaceInventaire[8][8] = 1;
+interfaceInventaire[8][9] = 1;
+interfaceInventaire[8][10] = 1;
+interfaceInventaire[8][12] = 1;
+interfaceInventaire[8][13] = 1;
+interfaceInventaire[8][15] = 1;
+interfaceInventaire[8][17] = 1;
+interfaceInventaire[8][18] = 1;
+interfaceInventaire[8][20] = 1;
+
+
+interfaceInventaire[9][7] = 1;
+interfaceInventaire[9][8] = 1;
+interfaceInventaire[9][9] = 1;
+interfaceInventaire[9][10] = 1;
+interfaceInventaire[9][12] = 1;
+interfaceInventaire[9][13] = 1;
+interfaceInventaire[9][15] = 1;
+interfaceInventaire[9][17] = 1;
+interfaceInventaire[9][18] = 1;
+interfaceInventaire[9][20] = 1;
+
+
+interfaceInventaire[11][7] = 1;
+interfaceInventaire[11][8] = 1;
+interfaceInventaire[11][9] = 1;
+interfaceInventaire[11][10] = 1;
+interfaceInventaire[11][12] = 1;
+interfaceInventaire[11][13] = 1;
+interfaceInventaire[11][15] = 1;
+interfaceInventaire[11][17] = 1;
+interfaceInventaire[11][18] = 1;
+interfaceInventaire[11][20] = 1;
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1416,4 +1542,8 @@ Map::~Map(){
     carte4 = NULL;
     free(carte5);
     carte5 = NULL;
+    free(interfaceJardin);
+    interfaceJardin = NULL;
+    free(interfaceInventaire);
+    interfaceInventaire = NULL;
 }

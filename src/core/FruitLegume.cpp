@@ -41,8 +41,8 @@ unsigned int FruitLegume::getTempsRecolte()const{ return tempsRecolte; }
 void FruitLegume::setNomGraine(string nom){  nomGraine = nom ;}   
       
 void FruitLegume::setTypeGraine(string type){ 
-    assert(type == "fruit" || type == "legume");
-    typeGraine = type; }
+    typeGraine = type; 
+}
 
 void FruitLegume::setPrixGraine(int prixGr){
     assert(prixGr >= 0);

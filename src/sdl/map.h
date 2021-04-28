@@ -12,8 +12,10 @@ public:
     int **carte3;
     int **carte4;
     int **carte5;
+    int **interfaceJardin;
+    int **interfaceInventaire;
 
-    /*! @brief Constructeur : allocation dynamique et initialisation des 5 cartes utilisées
+    /*! @brief Constructeur : allocation dynamique et initialisation des 7 cartes utilisées
     */
     Map();
 

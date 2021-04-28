@@ -17,7 +17,7 @@ Personnage::Personnage() {
     niveau.setNiveauMax(100);
     xp.setNiveau(0);
     xp.setNiveauMax(100);
-    inventaire=Inventaire();
+   
 }
 
 Personnage::Personnage(string nomP) {
@@ -34,7 +34,7 @@ Personnage::Personnage(string nomP) {
     niveau.setNiveauMax(100);
     xp.setNiveau(0);
     xp.setNiveauMax(100);
-    inventaire=Inventaire();
+  
 }
 
 Personnage::~Personnage() {
@@ -63,6 +63,10 @@ unsigned int Personnage::getPosY() const {
 
 void Personnage::setNom(string nomP) {
     nom=nomP;
+}
+
+Vie Personnage::getVie() const{
+    return vie;
 }
 
 void Personnage::setAvatar(char avatarP) {
@@ -125,6 +129,21 @@ void Personnage::varieAuto() {
         niveau.setNiveau(niveau.getNiveau()+1);
     }      
 }
+
+bool Personnage::possedeFruitLeg(string fruitLeg, string type) const{
+    bool b = false;
+    int taille = inventaire.inventaireFruitLeg.tabFruitLeg ->size();
+    
+    for(int i = 0; i<taille; i++){
+        string typeI = inventaire.inventaireFruitLeg.tabFruitLeg->at(i).getTypeGraine();
+        string nom = inventaire.inventaireFruitLeg.tabFruitLeg->at(i).getNomGraine() ;
+        if(nom == fruitLeg && typeI == type ){            
+            b = true;
+        }
+    }
+    return b;
+}
+
 
 void Personnage::testRegression(Terrain terrain) {
     cout<<"Tests pour le module Personnage :"<<endl;

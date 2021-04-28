@@ -6,7 +6,6 @@ EnsembleJardin::EnsembleJardin(){
     tabJardin = new vector<Jardin>;
     dimX = 3;
     dimY = 6;
-    banqueFruitLeg.banqueDeFruitLeg();
 }
 
 EnsembleJardin::~EnsembleJardin(){
@@ -65,7 +64,8 @@ bool EnsembleJardin::estRecoltable(unsigned int x,unsigned int y){
 
 
 void EnsembleJardin::assignerFruitLeg(string nom,unsigned int indice){
-     banqueFruitLeg.banqueDeFruitLeg(); //instancie une banque de fruit leg 
+     EnsembleFruitLeg banqueFruitLeg;
+     banqueFruitLeg.banqueDeFruitLeg();
      (*tabJardin)[indice].setPlant(banqueFruitLeg.chercherFruitLeg(nom)); //le FruitLeg du jardin est initialisé avec une graine
 
 }

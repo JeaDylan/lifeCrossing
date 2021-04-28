@@ -6,6 +6,27 @@ Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites(), fruitsLeg() , missio
         jardin.tabJardin->push_back(Jardin(2,3));//tabJardin[1]
         jardin.tabJardin->push_back(Jardin(1,2));//tabJardin[2]
         jardin.tabJardin->push_back(Jardin(2,2));//tabJardin[3]
+
+        //position des jardins dans la version graphique
+         jardin.tabJardin->push_back(Jardin(9,3));//tabJardin[4]
+         jardin.tabJardin->push_back(Jardin(9,5));//tabJardin[5]
+         jardin.tabJardin->push_back(Jardin(9,7));//tabJardin[6]
+         jardin.tabJardin->push_back(Jardin(11,3));//tabJardin[7]
+         jardin.tabJardin->push_back(Jardin(11,5));//tabJardin[8]
+         jardin.tabJardin->push_back(Jardin(11,7));//tabJardin[9]
+         jardin.tabJardin->push_back(Jardin(14,3));//tabJardin[10]
+         jardin.tabJardin->push_back(Jardin(14,5));//tabJardin[11]
+         jardin.tabJardin->push_back(Jardin(14,7));//tabJardin[12]
+         jardin.tabJardin->push_back(Jardin(16,3));//tabJardin[13]
+         jardin.tabJardin->push_back(Jardin(16,5));//tabJardin[14]
+         jardin.tabJardin->push_back(Jardin(16,7));//tabJardin[15]
+
+
+         
+         //initialisation de l'inventaire du perso avec une banane, une fraise et une coco  (graine)       
+         perso.inventaire.ajouterFruitLeg(FruitLegume("banane","graine",4,8,5,50));
+         perso.inventaire.ajouterFruitLeg(FruitLegume("fraise","graine",4,8,5,50));
+         perso.inventaire.ajouterFruitLeg(FruitLegume("coco","graine",4,8,5,50));
          
         pnjs.tabPnj.push_back(Pnj("Luc","Bonjour, je suis Luc !",Point2D(7,12)));
         pnjs.tabPnj.push_back(Pnj("Jules","Bonjour, je suis Jules !",Point2D(15,6)));
@@ -77,27 +98,7 @@ void Jeu::actionClavier(const char touche){
 		case 'b' :
 			perso.bas(ter.terrCourant);
 			break;
-        case 'j' : //planter
-
-            break;
-        case 'r' : //recolter
-            string rep2;
-            cout<<"Voulez-vous récolter cette graine (oui/non)?"<<endl;
-            cin>>rep2;
-            assert(rep2 == "oui" || rep2 == "non");
-            if(rep2 == "oui"){
-                if(jardin.estRecoltable(perso.getPosX(),perso.getPosY()) == true){
-                //assert position valide
-                  recolter();
-                  ter.terrCourant.setChar(perso.getPosX(),perso.getPosY(),'o');
-                }
-                
-                cout<<"La graine a été placée dans votre inventaire"<<endl;
-            }
-            else {
-                cout << "La graine n'est pas prête...Attendez un peu!" <<endl;
-            }
-            break;
+       
     }
         
 }
@@ -113,37 +114,89 @@ bool Jeu::posJardinValide() {
 }
 
 bool Jeu::planter(string nom, unsigned int nx, unsigned int ny){
-    bool fin = false;
-    //enlever la graine de l'inventaire du perso
-    int i = jardin.recupIndice(nx,ny);
-    jardin.assignerFruitLeg(nom,i);
-    jardin.tabJardin->at(i).setOccupe(true);    
-    unsigned int j = 0;  
-    while(j  < jardin.tabJardin->at(i).getPlant().getTempsRecolte() ){
-           j++;        
-    }      
-    
+    bool succes = false;
+    int i = jardin.recupIndice(nx,ny);    // i = indice du jardin de coordonnée (nx,ny) dans le tableau ensembleJardin
+    bool possede = perso.possedeFruitLeg(nom,"graine");   //verifie si le perso dispose de la graine dans son inventaire    
+    if(possede == true){ 
+        if(jardin.tabJardin->at(i).getOccupe() == false){    //on verifie que la parcelle est libre (jardin occupé = faux)
+            perso.inventaire.inventaireFruitLeg.suppFruitLeg(nom,"graine"); //enlever la graine de l'inventaire du perso
+            jardin.assignerFruitLeg(nom,i); //un fruit est attribué au jardin de position (nx,ny) 
+            jardin.tabJardin->at(i).setOccupe(true); //jardin occupé = vrai
+            assert(jardin.tabJardin->at(i).getPret() == false); 
+            jardin.tabJardin->at(i).setPret(true);//concerne le temps de recolte
+            succes = true; 
+            perso.xp.setNiveau(perso.xp.getNiveau()+15); //augmente le niv d'XP du perso
+            cout<<"Graine de "<<nom<<" plantée avec succès! Récoltes-là à présent."<<endl;
+            cout<<"+15XP"<<endl;
+            cout<<"Niv XP actuel : "<<perso.xp.getNiveau()<<endl;
+        }else{
+            cout<<"Une graine est déjà plantée ici"<<endl;
+            succes = false;
+        }
+    }else{
+        cout<<"Tu ne possèdes aucune graine de "<<nom<<" dans ton inventaire. Tu peux allez en acheter au marché."<<endl;
+        succes = false;
+    }   
    
-    assert(jardin.tabJardin->at(i).getPret() == false);
-    jardin.tabJardin->at(i).setPret(true);
-    fin = true;
-    return fin;
+    
+    return succes;
 
 }
 
-void Jeu::recolter(){
-    int i = jardin.recupIndice(perso.getPosX(),perso.getPosY());
-    string recolte = jardin.tabJardin->at(i).getPlant().getNomGraine();
-    FruitLegume fruitLeg = jardin.banqueFruitLeg.chercherFruitLeg(recolte);
-    //ajout fruitLeg à l'inventaire du perso
-    
-    jardin.tabJardin->at(i).setOccupe(false); 
-    jardin.tabJardin->at(i).setPret(false); 
-    FruitLegume vide; 
-    jardin.tabJardin->at(i).getPlant() = vide; //on enleve la graine du jardin
+void Jeu::recolter(unsigned int nx,unsigned int ny){
+    int i = jardin.recupIndice(nx,ny);  // i = indice du jardin de coordonnée (nx,ny) dans le tableau ensembleJardin
+    string recolte = jardin.tabJardin->at(i).getPlant().getNomGraine(); //on recupere le nom du fruitLeg planté au jardin d'indice i
+    FruitLegume fruitLeg = jardin.tabJardin->at(i).getPlant(); //on "transforme" la graine en fruitLeg
+    perso.inventaire.ajouterFruitLeg(fruitLeg);    //ajout du fruitLeg a l'inventaire du perso
+    jardin.tabJardin->at(i).setOccupe(false); //jardin occupé = faux
+    jardin.tabJardin->at(i).setPret(false);  //concerne la gestion du temps
+    FruitLegume vide; //on instancie un fruitLeg vide
+    jardin.tabJardin->at(i).setPlant(vide); //on enleve la graine du jardin avec le fruitLeg vide
+    int valeur = rand()%20 + 1; 
+    perso.gainArgent(valeur); //le perso gagne de l'argent , somme aléatoire valeur
+    cout<<recolte<<" a été ajoutée à ton inventaire."<<endl;
+    cout<<" +"<<valeur<<"$"<<endl;
+    cout<<"Solde actuel :"<<perso.getArgent()<<"$"<<endl;
 
         
 }
+
+
+void Jeu::acheter(string reponse){
+    int solde = perso.getArgent();
+    FruitLegume achat = fruitsLeg.chercherFruitLeg(reponse); //on recupere le fruitLeg ou le perso a cliqué
+    int prix = achat.getPrixGraine(); //on recupere le prix de la graine
+    if((solde - prix)>= 0){ //on verifie que le perso a assez d'argent
+        achat.setTypeGraine("graine"); //on "transforme" le fruitLeg en graine
+        perso.inventaire.ajouterFruitLeg(achat); //on ajoute la graine à l'inventaire        
+        perso.perteArgent(prix); //le perso paie le prix
+        cout<<"-"<<prix<<"$"<<endl;
+        cout << "Tu as acheté une graine de "<<reponse<<endl;
+        cout<<"Solde actuel :"<<solde<<"$"<<endl;   
+    }else{
+        cout<<"Tu n'as pas assez d'argent"<<endl;
+    }
+    
+}
+
+void Jeu::vendre(string reponse){
+        FruitLegume vente = fruitsLeg.chercherFruitLeg(reponse); //on recupere le fruitLeg ou le perso a cliqué
+        string type = vente.getTypeGraine(); //on recupere le type du fruitLeg a vendre (fruit ou legume)
+        bool possede = perso.possedeFruitLeg(reponse,type); //on verifie que le perso possede le fruitLeg
+        if(possede == true){
+            int prix = vente.getPrixVente();
+            perso.gainArgent(prix);
+            cout<<"+"<<prix<<"$"<<endl;
+            perso.inventaire.suppFruitLeg(reponse,type);
+            cout<<"Vous avez vendu un(e) : "<<reponse<<endl;
+
+        }else{
+            cout <<"Tu ne possèdes pas ce fruit ou legume"<<endl;
+        }
+ 
+    
+}
+
 
 void Jeu::testRegression(){
 

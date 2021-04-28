@@ -3,6 +3,9 @@
 
 int main(int argc, char *argv[]){
 
+    Jeu jeu;
+    Map map;
+
     SDL_Surface * ecran = NULL;
     SDL_Surface * menu = NULL;
 
@@ -40,7 +43,7 @@ int main(int argc, char *argv[]){
                 break;    
 
                 case SDLK_p:
-                jouer(ecran);
+                jouer(ecran,jeu,map);
                 break;   
 
                      

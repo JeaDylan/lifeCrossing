@@ -37,8 +37,10 @@ public:
 
     /*! @brief Suppression d'un FruitLegume du tableau dynamique
         @param nomFruitLeg nom du FruitLegume à supprimer du tableau 
+        @param type (fruit/legume/graine)
     */
-    void suppFruitLeg(string nomFruitLeg);
+    void suppFruitLeg(string nomFruitLeg,string type);
+
 
     /*! @brief Donne des informations sur un FruitLegume
         @param nomFruitLeg nom du FruitLegume à rechercher 

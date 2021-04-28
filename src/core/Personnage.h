@@ -61,6 +61,9 @@ public:
     /*! @brief Accesseur : récupère la position en Y du personnage */
     unsigned int getPosY() const;
 
+    /*! @brief Accesseur : récupère les jauges de vie du personnage */
+    Vie getVie() const;
+
     /*! @brief Mutateur : modifie le nom du personnage
     @param nomP nom est remplacé par nomP */
     void setNom(string nomP);
@@ -119,6 +122,12 @@ public:
     /*! @brief Modifie les varialbles de Personnage
     */
     void varieAuto();
+
+    /*! @brief Verifie que le personnage possede un fruitLeg en particulier dans son inventaire
+        @param fruitLeg nom du fruitLeg recherché
+        @param type (graine/fruit/legume)  
+    */
+    bool possedeFruitLeg(string fruitLeg,string type) const;
      
     /*! @brief Test des fonctions du module*/
     void testRegression(Terrain t);

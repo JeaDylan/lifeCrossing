@@ -66,6 +66,24 @@ void Inventaire::afficheInventaire() const {
     stockManger.afficheJauge();
 }
 
+EnsembleFruitLeg Inventaire::getInventaireFruitLeg() const {
+    return inventaireFruitLeg;
+}
+
+void Inventaire::ajouterFruitLeg(const FruitLegume &fruitLeg){
+   
+    inventaireFruitLeg.tabFruitLeg->push_back(fruitLeg);
+    setFruitLeg(1,true);
+  
+}
+
+void Inventaire::suppFruitLeg(string fruitLeg,string type){
+    FruitLegume supp = inventaireFruitLeg.chercherFruitLeg(fruitLeg);
+    type = supp.getTypeGraine();
+    inventaireFruitLeg.suppFruitLeg(fruitLeg,type);
+    setFruitLeg(1,false);
+}
+
 void Inventaire::testRegression() {
     cout<<"Tests pour le module Inventaire :"<<endl;
     assert(stockFruitLeg.getNiveau() == 5);
@@ -80,4 +98,18 @@ void Inventaire::testRegression() {
     setEau(4,false);
     assert(stockEau.getNiveau()==1);
     afficheInventaire();
+    Inventaire test;
+    assert(test.inventaireFruitLeg.tabFruitLeg->size() == 0);
+    cout<<"Construction de inventaireFruitLeg...OK"<<endl;
+    //test.ajouterFruitLeg("banane");
+    assert(test.inventaireFruitLeg.tabFruitLeg->size()== 1);
+    assert(test.inventaireFruitLeg.tabFruitLeg->at(0).getNomGraine() == "banane");
+    cout<<"Ajout FruitLeg à l'inventaire...OK"<<endl;
+    //bool b = test.possedeFruitLeg("banane");
+    //assert(b == true);
+    //cout<<"possedeFruitLeg()...OK"<<endl;
+    test.suppFruitLeg("banane","fruit");
+    assert(inventaireFruitLeg.tabFruitLeg->size() == 0);
+    cout<<"Suppression du FruitLeg...OK"<<endl;
+
 }

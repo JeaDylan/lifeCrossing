@@ -16,7 +16,7 @@ public:
     unsigned int dimX;
     unsigned int dimY;
     Point2D position;
-    EnsembleFruitLeg banqueFruitLeg;
+    
     
 
     /*! @brief Constructeur : alloue un tableau dynamique de Jardin sur le tas 

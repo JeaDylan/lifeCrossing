@@ -55,14 +55,36 @@ public :
     const EnsembleFruitLeg& getConstFruitLeg() const;
     const EnsembleMission& getConstMissions() const;
 
-    /*! @brief Recolter range un FruitLegume dans l'inventaire du perso
-    */
-    
+   
+
+    /*! @brief Plante une graine. Renvoit true si la graine a été plantée avec succes
+        @param nom nom de la graineà planter
+        @param nx position en x du jardin où il faut planter la graine
+        @param ny position en y du jardin où il faut planter la graine
+    */        
     bool planter(string nom,unsigned int nx, unsigned int ny);
 
-    bool posJardinValide();
 
-    void recolter();
+    /*!
+        @brief Recolte une graine et place son fruit dans l'inventaire du perso
+        @param nx position en x du jardin où il faut planter la graine
+        @param ny position en y du jardin où il faut planter la graine
+    */ 
+    void recolter(unsigned int nx,unsigned int ny);
+
+    /*!
+        @brief Achete une graine de fruitLeg au marché 
+        @param reponse nom de la graine où le perso a cliqué
+    */ 
+    void acheter(string reponse);
+
+    /*!
+        @brief Vend une graine de fruitLeg au marché 
+        @param reponse nom de la graine où le perso a cliqué
+    */ 
+    void vendre(string reponse);
+    
+    bool posJardinValide();
 
     void actionsAutomatiques ();
     
