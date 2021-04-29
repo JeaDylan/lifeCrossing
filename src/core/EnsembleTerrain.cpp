@@ -79,6 +79,9 @@ void EnsembleTerrain::banqueDeTerrain() {
     // ajout 'manger'
     tabTerrain[0].setChar(4,4,'n');
 
+    // ajout 'boire'
+    tabTerrain[0].setChar(4,3,'b');
+
     // ajout 'dormir'
     tabTerrain[0].setChar(7,5,'d');    
 

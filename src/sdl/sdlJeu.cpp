@@ -54,6 +54,20 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
 
     while(continuer){
         SDL_WaitEvent(&event);
+        jeu.actionsAutomatiques();
+        cout<<"Vie:"<<endl;
+        cout<<"Points de vie: "<<jeu.getPersonnage().vie.getPtsDeVie().afficheJeuTxt()<<endl;
+        cout<<"Faim: "<<jeu.getPersonnage().vie.getFaim().afficheJeuTxt()<<endl;
+        cout<<"Fatigue: "<<jeu.getPersonnage().vie.getFatigue().afficheJeuTxt()<<endl;
+        cout<<"Soif :"<<jeu.getPersonnage().vie.getSoif().afficheJeuTxt()<<endl;
+        cout<<endl;
+        cout<<"Inventaire:"<<endl;
+        cout<<"Stock fruits/legs: "<<jeu.getPersonnage().inventaire.getFruitLeg().afficheJeuTxt()<<endl;
+        cout<<"Stock eau: "<<jeu.getPersonnage().inventaire.getEau().afficheJeuTxt()<<endl;
+        cout<<"Stock nourriture: "<<jeu.getPersonnage().inventaire.getManger().afficheJeuTxt()<<endl;
+        cout<<endl;
+        cout<<positionJoueur.x<<"/"<<positionJoueur.y<<endl;
+        cout<<endl;
         switch(event.type){
             case SDL_QUIT:
             continuer = 0;
@@ -156,8 +170,37 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
 
 }
 
+void dormir(Jeu & jeu) {
 
+	jeu.getPersonnage().vie.setFatigue(0);
+	cout<<"Tu viens de te reposer."<<endl;
+}
 
+void manger(Jeu & jeu) {
+	Personnage& perso = jeu.getPersonnage();
+		if(perso.inventaire.getManger().getNiveau()>0) {
+			// Baisse de la faim
+			perso.vie.setFaim(0);
+			// Baisse de l'inventaire
+			perso.inventaire.setManger
+			(1,false);
+			cout<<"Tu viens de te nourrir."<<endl;
+		}
+		else cout<<"Achetez à manger avant."<<endl;
+}
+
+void boire(Jeu & jeu) {
+	Personnage& perso = jeu.getPersonnage();
+		if(perso.inventaire.getEau().getNiveau()>0) {
+			// Baisse de la soif
+			perso.vie.setSoif(0);
+			// Baisse de l'inventaire
+			perso.inventaire.setEau
+			(1,false);
+			cout<<"Tu viens de boire."<<endl;
+		}
+		else cout<<"Achetez à boire avant."<<endl;
+}
 
 
 void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
@@ -274,6 +317,20 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
 
     while(continuer){
         SDL_WaitEvent(&event);
+        jeu.actionsAutomatiques();
+        cout<<"Vie:"<<endl;
+        cout<<"Points de vie: "<<jeu.getPersonnage().vie.getPtsDeVie().afficheJeuTxt()<<endl;
+        cout<<"Faim: "<<jeu.getPersonnage().vie.getFaim().afficheJeuTxt()<<endl;
+        cout<<"Fatigue: "<<jeu.getPersonnage().vie.getFatigue().afficheJeuTxt()<<endl;
+        cout<<"Soif :"<<jeu.getPersonnage().vie.getSoif().afficheJeuTxt()<<endl;
+        cout<<endl;
+        cout<<"Inventaire:"<<endl;
+        cout<<"Stock fruits/legs: "<<jeu.getPersonnage().inventaire.getFruitLeg().afficheJeuTxt()<<endl;
+        cout<<"Stock eau: "<<jeu.getPersonnage().inventaire.getEau().afficheJeuTxt()<<endl;
+        cout<<"Stock nourriture: "<<jeu.getPersonnage().inventaire.getManger().afficheJeuTxt()<<endl;
+        cout<<endl;
+        cout<<positionJoueur.x<<"/"<<positionJoueur.y<<endl;
+        cout<<endl;
         switch(event.type){
             case SDL_QUIT:
             continuer = 0;
@@ -357,10 +414,23 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
                 cout <<"Une bouteille d'eau a été ajoutée à votre inventaire"<<endl;
 
             }
+
+            if(positionJoueur.x==13&&positionJoueur.y==5) {
+                manger(jeu);
+            }
+
+            if(positionJoueur.x==17&&positionJoueur.y==4) {
+                dormir(jeu);
+            }
+
+            if(positionJoueur.x==14&&positionJoueur.y==5) {
+                boire(jeu);
+            }
+
             break;
          
             
-            
+        
 
             case SDL_MOUSEBUTTONUP:        
             switch(event.button.button){

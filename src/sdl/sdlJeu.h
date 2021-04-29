@@ -26,6 +26,23 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map);
     @param jeu moteur de jeu
     @param map réunit toutes les cartes du jeu
 */
+
+/*! @brief le perso mange la nourriture du 
+    stock de nourriture 
+    @param jeu moteur de jeu
+*/
+void manger(Jeu & jeu);
+
+/*! @brief le perso dort
+    @param jeu moteur de jeu
+*/
+void dormir(Jeu & jeu);
+
+/*! @brief le perso boit de l'eau de son stock d'eau
+    @param jeu moteur de jeu
+*/
+void boire(Jeu & jeu);
+
 void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map & map);
 
 /*! @brief Gère les téléportations et position du personnage

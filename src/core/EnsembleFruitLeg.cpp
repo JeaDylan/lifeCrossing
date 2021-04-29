@@ -72,7 +72,6 @@ void EnsembleFruitLeg::banqueDeFruitLeg(){ //il faut ajuster/definir les prix et
     tabFruitLeg->push_back(FruitLegume("tomate", "fruit",15,30,60,30));
     tabFruitLeg->push_back(FruitLegume("pasteque", "fruit",25,50,60,30));
     tabFruitLeg->push_back(FruitLegume("raisin", "fruit",18,36,60,30));
-
     tabFruitLeg->push_back(FruitLegume ("aubergine","legume",26,78,7,22));
     tabFruitLeg->push_back(FruitLegume ("brocolli","legume",12,36,32,62));
     tabFruitLeg->push_back(FruitLegume ("carotte","legume",22,66,17,18));
@@ -111,7 +110,7 @@ void EnsembleFruitLeg::testRegression(){
    testBanque.banqueDeFruitLeg();
    assert(testBanque.tabFruitLeg->at(0).getNomGraine() == "banane");
    assert(testBanque.tabFruitLeg->at(1).getNomGraine() == "coco");
-   assert(testBanque.tabFruitLeg->at(10).getNomGraine() == "aubergine");
+   assert(testBanque.tabFruitLeg->at(12).getNomGraine() == "aubergine");
    testBanque.afficheListeFruitLeg();
    cout<<"Test Regression EnsembleFruitLeg...OK"<<endl;
 

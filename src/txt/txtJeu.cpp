@@ -40,9 +40,9 @@ void txtAff(WINDOW * winTerrain,WINDOW * winDialogue, WINDOW * winCommandes, Jeu
 	mvwprintw(winCommandes,3,1, "Voici les modalités du jeu : ");
 	mvwprintw(winCommandes,4,1,"Touches : 'k' gauche 'm' droite 'o' haut 'l' bas");
 	mvwprintw(winCommandes,5,1,"     'q' quitter 'p' infos personnage ");
-	mvwprintw(winCommandes,6,1,"Description : 'x' obstacles 'j' jardin ");
+	mvwprintw(winCommandes,6,1,"Description : 'x' obstacles 'j' jardin 'e' entrer ");
 	mvwprintw(winCommandes,7,1,"     'i' personnage 'a' Activitee 'c' Commerce");
-	mvwprintw(winCommandes,8,1,"     'n' table à manger 'd' dormir 'e' entrer ");
+	mvwprintw(winCommandes,8,1,"     'n' table à manger 'd' dormir 'b' boire ");
 	wrefresh(winCommandes);
 }
 
@@ -105,12 +105,9 @@ void txtAffPlant(WINDOW * winDialogue, Jeu & jeu){
 void txtAffPnj(WINDOW * winDialogue, Jeu & jeu) {
 
 	int prix;
-	string nomPnj,nomPerso;
-	Personnage perso;
-	EnsemblePnj pnjs;
-	perso = jeu.getPersonnage();
-	pnjs = jeu.getPnjs();
-	nomPerso = jeu.getPersonnage().getNom();
+	string nomPnj,nomPerso = jeu.getPersonnage().getNom();
+	Personnage& perso = jeu.getPersonnage();
+	EnsemblePnj& pnjs = jeu.getPnjs();
 
 	if(perso.getPosX()==pnjs.tabPnj[0].getPosition().x 
 		&&perso.getPosY()==pnjs.tabPnj[0].getPosition().y) {
@@ -219,10 +216,8 @@ void txtAffPerso(WINDOW * winDialogue, Jeu & jeu) {
 
 void txtAffActivite(WINDOW * winDialogue, Jeu & jeu) {
 
-	Personnage perso;
-	EnsembleActivite activites;
-	perso = jeu.getConstPersonnage();
-	activites = jeu.getConstActivites();
+	Personnage& perso = jeu.getPersonnage();;
+	EnsembleActivite& activites = jeu.getActivites();
 	
 	string ligne1 = "Vous venez de regarder un film ! ";
 	const char * ligne1m = (const char *) ligne1.c_str();
@@ -248,11 +243,10 @@ void txtAffActivite(WINDOW * winDialogue, Jeu & jeu) {
 
 void txtAffMarche(WINDOW * winDialogue, Jeu & jeu) {
 
-	Personnage perso;
+	Personnage& perso = jeu.getPersonnage();
 	string dialogue;
 	const char * dialoguem;
 	int c;
-	perso = jeu.getConstPersonnage();
 	if(perso.getPosX()==15&&perso.getPosY()==4) {
 		mvwprintw(winDialogue,1,1,"Commerce :");
 		mvwprintw(winDialogue,2,1,"Fruits Legumes :");
@@ -267,130 +261,154 @@ void txtAffMarche(WINDOW * winDialogue, Jeu & jeu) {
 		switch (c)
 		{
 		case 'e':
-			jeu.getPersonnage().perteArgent(2);
-			jeu.getPersonnage().inventaire.setEau(5,true);
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,"Vous avez achetez de l'eau !");
+			if(perso.inventaire.getEau().jaugeRemplie()==false) {
+				perso.perteArgent(2);
+				perso.inventaire.setEau(5,true);
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,"Vous avez achetez de l'eau !");
+			}
 			break;
 		
 		case 'n':
-			jeu.getPersonnage().perteArgent(5);
-			jeu.getPersonnage().inventaire.setManger(5,true);
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,"Vous avez achetez à manger !");
+			if(perso.inventaire.getManger().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(5);
+				jeu.getPersonnage().inventaire.setManger(5,true);
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,"Vous avez achetez à manger !");
+			}
 			break;
 
 		case '0':
-			jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
-			.tabFruitLeg->at(0).getPrixGraine());
-			jeu.getPersonnage().inventaire.setFruitLeg(4,true);
-			dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
-			.tabFruitLeg->at(0).getNomGraine() + " ! ";
-			dialoguem = (const char *) dialogue.c_str();
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,dialoguem);
+			if(perso.inventaire.getFruitLeg().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
+				.tabFruitLeg->at(0).getPrixGraine());
+				jeu.getPersonnage().inventaire.setFruitLeg(4,true);
+				dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
+				.tabFruitLeg->at(0).getNomGraine() + " ! ";
+				dialoguem = (const char *) dialogue.c_str();
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,dialoguem);
+			}
 			break;
 		case '1':
-			jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
-			.tabFruitLeg->at(1).getPrixGraine());
-			jeu.getPersonnage().inventaire.setFruitLeg(10,true);
-			dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
-			.tabFruitLeg->at(1).getNomGraine() + " ! ";
-			dialoguem = (const char *) dialogue.c_str();
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,dialoguem);
+			if(perso.inventaire.getFruitLeg().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
+				.tabFruitLeg->at(1).getPrixGraine());
+				jeu.getPersonnage().inventaire.setFruitLeg(10,true);
+				dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
+				.tabFruitLeg->at(1).getNomGraine() + " ! ";
+				dialoguem = (const char *) dialogue.c_str();
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,dialoguem);
+			}
 			break;
 		case '2':
-			jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
-			.tabFruitLeg->at(2).getPrixGraine());
-			jeu.getPersonnage().inventaire.setFruitLeg(1,true);
-			dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
-			.tabFruitLeg->at(2).getNomGraine() + " ! ";
-			dialoguem = (const char *) dialogue.c_str();
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,dialoguem);
+			if(perso.inventaire.getFruitLeg().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
+				.tabFruitLeg->at(2).getPrixGraine());
+				jeu.getPersonnage().inventaire.setFruitLeg(1,true);
+				dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
+				.tabFruitLeg->at(2).getNomGraine() + " ! ";
+				dialoguem = (const char *) dialogue.c_str();
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,dialoguem);
+			}
 			break;
 		case '3':
-			jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
-			.tabFruitLeg->at(3).getPrixGraine());
-			jeu.getPersonnage().inventaire.setFruitLeg(1,true);
-			dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
-			.tabFruitLeg->at(3).getNomGraine() + " ! ";
-			dialoguem = (const char *) dialogue.c_str();
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,dialoguem);
+			if(perso.inventaire.getFruitLeg().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
+				.tabFruitLeg->at(3).getPrixGraine());
+				jeu.getPersonnage().inventaire.setFruitLeg(1,true);
+				dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
+				.tabFruitLeg->at(3).getNomGraine() + " ! ";
+				dialoguem = (const char *) dialogue.c_str();
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,dialoguem);
+			}
 			break;
 		case '4':
-			jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
-			.tabFruitLeg->at(4).getPrixGraine());
-			jeu.getPersonnage().inventaire.setFruitLeg(2,true);
-			dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
-			.tabFruitLeg->at(4).getNomGraine() + " ! ";
-			dialoguem = (const char *) dialogue.c_str();
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,dialoguem);
+			if(perso.inventaire.getFruitLeg().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
+				.tabFruitLeg->at(4).getPrixGraine());
+				jeu.getPersonnage().inventaire.setFruitLeg(2,true);
+				dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
+				.tabFruitLeg->at(4).getNomGraine() + " ! ";
+				dialoguem = (const char *) dialogue.c_str();
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,dialoguem);
+			}
 			break;
 		case '5':
-			jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
-			.tabFruitLeg->at(5).getPrixGraine());
-			jeu.getPersonnage().inventaire.setFruitLeg(3,true);
-			dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
-			.tabFruitLeg->at(5).getNomGraine() + " ! ";
-			dialoguem = (const char *) dialogue.c_str();
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,dialoguem);
+			if(perso.inventaire.getFruitLeg().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
+				.tabFruitLeg->at(5).getPrixGraine());
+				jeu.getPersonnage().inventaire.setFruitLeg(3,true);
+				dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
+				.tabFruitLeg->at(5).getNomGraine() + " ! ";
+				dialoguem = (const char *) dialogue.c_str();
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,dialoguem);
+			}
 			break;
 		case '6':
-			jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
-			.tabFruitLeg->at(6).getPrixGraine());
-			jeu.getPersonnage().inventaire.setFruitLeg(2,true);
-			dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
-			.tabFruitLeg->at(6).getNomGraine() + " ! ";
-			dialoguem = (const char *) dialogue.c_str();
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,dialoguem);
+			if(perso.inventaire.getFruitLeg().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
+				.tabFruitLeg->at(6).getPrixGraine());
+				jeu.getPersonnage().inventaire.setFruitLeg(2,true);
+				dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
+				.tabFruitLeg->at(6).getNomGraine() + " ! ";
+				dialoguem = (const char *) dialogue.c_str();
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,dialoguem);
+			}
 			break;
 		case '7':
-			jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
-			.tabFruitLeg->at(7).getPrixGraine());
-			jeu.getPersonnage().inventaire.setFruitLeg(2,true);
-			dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
-			.tabFruitLeg->at(7).getNomGraine() + " ! ";
-			dialoguem = (const char *) dialogue.c_str();
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,dialoguem);
+			if(perso.inventaire.getFruitLeg().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
+				.tabFruitLeg->at(7).getPrixGraine());
+				jeu.getPersonnage().inventaire.setFruitLeg(2,true);
+				dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
+				.tabFruitLeg->at(7).getNomGraine() + " ! ";
+				dialoguem = (const char *) dialogue.c_str();
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,dialoguem);
+			}
 			break;
 		case '8':
-			jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
-			.tabFruitLeg->at(8).getPrixGraine());
-			jeu.getPersonnage().inventaire.setFruitLeg(9,true);
-			dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
-			.tabFruitLeg->at(8).getNomGraine() + " ! ";
-			dialoguem = (const char *) dialogue.c_str();
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,dialoguem);
+			if(perso.inventaire.getFruitLeg().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
+				.tabFruitLeg->at(8).getPrixGraine());
+				jeu.getPersonnage().inventaire.setFruitLeg(9,true);
+				dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
+				.tabFruitLeg->at(8).getNomGraine() + " ! ";
+				dialoguem = (const char *) dialogue.c_str();
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,dialoguem);
+			}
 			break;
 		case '9':
-			jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
-			.tabFruitLeg->at(9).getPrixGraine());
-			jeu.getPersonnage().inventaire.setFruitLeg(5,true);
-			dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
-			.tabFruitLeg->at(9).getNomGraine() + " ! ";
-			dialoguem = (const char *) dialogue.c_str();
-			werase(winDialogue);
-			box(winDialogue,0,0);
-			mvwprintw(winDialogue,1,1,dialoguem);
+			if(perso.inventaire.getFruitLeg().jaugeRemplie()==false) {
+				jeu.getPersonnage().perteArgent(jeu.getConstFruitLeg()
+				.tabFruitLeg->at(9).getPrixGraine());
+				jeu.getPersonnage().inventaire.setFruitLeg(5,true);
+				dialogue = "Vous avez acheté un(e) " + jeu.getConstFruitLeg()
+				.tabFruitLeg->at(9).getNomGraine() + " ! ";
+				dialoguem = (const char *) dialogue.c_str();
+				werase(winDialogue);
+				box(winDialogue,0,0);
+				mvwprintw(winDialogue,1,1,dialoguem);
+			}
 			break;
 		default:
 			break;
@@ -431,20 +449,16 @@ void dormir(WINDOW * winDialogue, Jeu & jeu) {
 }
 
 void manger(WINDOW * winDialogue, Jeu & jeu) {
-	Personnage perso;
-	EnsembleTerrain ter;
-	perso = jeu.getPersonnage();
-	ter = jeu.getTerrain();
+	Personnage& perso = jeu.getPersonnage();
+	EnsembleTerrain& ter = jeu.getTerrain();
 	if(perso.getPosX()==4&&perso.getPosY()==4
 	   &&ter.terrCourant.getNom()==ter.tabTerrain[0].getNom()) {
 		if(perso.inventaire.getManger().getNiveau()>0) {
 			// Baisse de la faim
-			jeu.getPersonnage().vie.setFaim
-			(perso.vie.getFaim().getNiveau() 
-			- perso.inventaire.getManger().getNiveau());
+			jeu.getPersonnage().vie.setFaim(0);
 			// Baisse de l'inventaire
 			jeu.getPersonnage().inventaire.setManger
-			(perso.inventaire.getManger().getNiveau(),false);
+			(1,false);
 			mvwprintw(winDialogue,1,1,"Tu viens de te nourrir.");
 		}
 		else mvwprintw(winDialogue,1,1,"Achetez à manger avant.");
@@ -453,9 +467,28 @@ void manger(WINDOW * winDialogue, Jeu & jeu) {
 	werase(winDialogue);
 }
 
+void boire(WINDOW * winDialogue, Jeu & jeu) {
+	Personnage& perso = jeu.getPersonnage();
+	EnsembleTerrain& ter = jeu.getTerrain();
+	if(perso.getPosX()==4&&perso.getPosY()==3
+	   &&ter.terrCourant.getNom()==ter.tabTerrain[0].getNom()) {
+		if(perso.inventaire.getEau().getNiveau()>0) {
+			// Baisse de la soif
+			jeu.getPersonnage().vie.setSoif(0);
+			// Baisse de l'inventaire
+			jeu.getPersonnage().inventaire.setEau
+			(1,false);
+			mvwprintw(winDialogue,1,1,"Tu viens de boire.");
+		}
+	else mvwprintw(winDialogue,1,1,"Achetez à boire avant.");
+	}
+	wgetch(winDialogue);
+	werase(winDialogue);
+}
+
 void txtBoucle (Jeu & jeu) {
 
-	Terrain ter = jeu.getTerrain().terrCourant;
+	Terrain& ter = jeu.getTerrain().terrCourant;
 
 	WINDOW * winTerrain = newwin(ter.getdimX(),ter.getdimY(),0,0);
 	WINDOW * winDialogue = newwin(15,70,ter.getdimX(),0);
@@ -485,8 +518,11 @@ void txtBoucle (Jeu & jeu) {
 			case 'o':
 				jeu.actionClavier('b');
 				break;
-			case 'j':	
-				txtAffPlant(winDialogue,jeu);
+			case 'j':
+				mvwprintw(winDialogue,1,1,"Jardin en traveaux");
+				wgetch(winDialogue);
+				werase(winDialogue);
+				//txtAffPlant(winDialogue,jeu);
 				break;
 			case 'i':
 				txtAffPnj(winDialogue,jeu);
@@ -508,6 +544,9 @@ void txtBoucle (Jeu & jeu) {
 				break;
 			case 'n':
 				manger(winDialogue,jeu);
+				break;
+			case 'b':
+				boire(winDialogue,jeu);
 				break;
 			case 'q':
 				ok = false;
