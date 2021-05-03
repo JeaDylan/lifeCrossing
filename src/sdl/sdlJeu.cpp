@@ -118,6 +118,23 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
             case SDLK_DOWN:
             persoActuel = perso[BAS];
             deplacerJoueur(&positionJoueur,BAS,ecran,n,1,jeu,map);
+            if(n == 3){
+                n = 0;
+                int arg = jeu.getPersonnage().getArgent();
+                if(arg < jeu.getActivites().tabActivite[1].getPrix()){
+                    cout << "Tu ne possèdes pas assez d'argent pour faire cette activité. (Prix = 200$)"<<endl;
+                }else{
+                    teleporter(ecran,10,jeu,map);
+                    positionJoueur.x = 19;
+                    positionJoueur.y = 11;
+                    int nouvXp;
+                    nouvXp = jeu.getPersonnage().xp.getNiveau() + jeu.getActivites().tabActivite[1].getRecompense();
+                    jeu.getPersonnage().perteArgent(jeu.getActivites().tabActivite[1].getPrix());
+                    jeu.getPersonnage().xp.setNiveau(nouvXp);
+                    cout << "+"<<nouvXp<<"XP"<<endl;
+                }
+                
+            }
             break;
 
             case SDLK_RIGHT:
@@ -254,6 +271,16 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
         case 9:
         fond=IMG_Load("./data/interfaceMarcheVente.png");
         break;
+
+        case 10:
+        fond=IMG_Load("./data/carte10.png");
+        break;
+
+        case 11:
+        fond=IMG_Load("./data/carte11.png");
+        break;
+
+
     }
 
 
@@ -261,12 +288,28 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
    plant = IMG_Load("./data/plant2.png");
    plant2 = IMG_Load("./data/plant5.png");
 
- 
+    if(nb_carte == 10){
+        perso[BAS] = IMG_Load("./data/kirbyWater1.png");
+        perso[HAUT] = IMG_Load("./data/kirby2.png");
+        perso[DROITE] = IMG_Load("./data/kirbyWater1.png");
+        perso[GAUCHE] = IMG_Load("./data/kirbyWater6.png");
+        perso[PLOUF] = IMG_Load("./data/kirbyWater5.png");
+    }else{
+        if(nb_carte == 11){
+            perso[BAS] = IMG_Load("./data/kirbyWater3.png");
+            perso[HAUT] = IMG_Load("./data/kirbyWater2.png");
+            perso[DROITE] = IMG_Load("./data/kirbyWater4.png");
+            perso[GAUCHE] = IMG_Load("./data/kirbyWater7.png");
+            perso[PLOUF] = IMG_Load("./data/kirbyWater5.png");
+        }else{
+            perso[BAS] = IMG_Load("./data/kirby1.png");
+            perso[HAUT] = IMG_Load("./data/kirby2.png");
+            perso[DROITE] = IMG_Load("./data/kirby3.png");
+            perso[GAUCHE] = IMG_Load("./data/kirby4.png");
+        }
+    }
 
-    perso[BAS] = IMG_Load("./data/kirby1.png");
-    perso[HAUT] = IMG_Load("./data/kirby2.png");
-    perso[DROITE] = IMG_Load("./data/kirby3.png");
-    perso[GAUCHE] = IMG_Load("./data/kirby4.png");
+    
     
     
 
@@ -304,6 +347,19 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
         map.interfaceInventaire[3][12]=PERSO;
         positionJoueur.x= 12;
         positionJoueur.y = 3;
+        break;
+
+        case 10:
+        map.carte10[12][11]=PERSO;
+        positionJoueur.x= 11;
+        positionJoueur.y = 11;
+        break;
+
+        case 11:
+        map.carte11[1][12]=PERSO;
+        positionJoueur.x= 12;
+        positionJoueur.y = 1;
+        break;
 
     }
 
@@ -347,6 +403,10 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
             case SDLK_UP:
             persoActuel = perso[HAUT];
             deplacerJoueur(&positionJoueur,HAUT, ecran,n,nb_carte,jeu,map);
+            if(n == 1){
+                n = 0;
+                continuer = 0;
+            }  
             break;
 
             case SDLK_DOWN:
@@ -355,7 +415,7 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
             if(n == 1){
                 n = 0;
                 continuer = 0;
-            }
+            }            
             break;
 
             case SDLK_RIGHT:
@@ -371,6 +431,14 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
             persoActuel = perso[GAUCHE];
             deplacerJoueur(&positionJoueur,GAUCHE, ecran,n,nb_carte,jeu,map);
             break;
+
+            case SDLK_s:
+            if(nb_carte == 10 || nb_carte == 11){
+                persoActuel = perso[PLOUF];
+            }
+            break;
+
+           
 
 
             case SDLK_RETURN:
@@ -398,35 +466,46 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
                     dialoguePNJ(ecran, &positionJoueur, map);
                 }
             }
-            if(positionJoueur.x == 9 || positionJoueur.x == 11 || positionJoueur.x == 13 || positionJoueur.x == 15){
-                if(positionJoueur.y == 8 || positionJoueur.y == 10){
-                    teleporter(ecran,8,jeu,map);
+            if(nb_carte == 3){
+                if(positionJoueur.x == 9 || positionJoueur.x == 11 || positionJoueur.x == 13 || positionJoueur.x == 15){
+                    if(positionJoueur.y == 8 || positionJoueur.y == 10){
+                        teleporter(ecran,8,jeu,map);
+                    }
+                }
+                if((positionJoueur.x == 14 || positionJoueur.x == 15 || positionJoueur.x == 16) && positionJoueur.y == 4){
+                        teleporter(ecran,9,jeu,map);
+                }
+                
+                if((positionJoueur.x == 9 || positionJoueur.x == 10) && positionJoueur.y == 3){
+                    jeu.getPersonnage().inventaire.setEau(1,true);
+                    jeu.getPersonnage().perteArgent(10);
+                    cout<<"-10$"<<endl;
+                    cout <<"Une bouteille d'eau a été ajoutée à votre inventaire"<<endl;
+
                 }
             }
-            if((positionJoueur.x == 14 || positionJoueur.x == 15 || positionJoueur.x == 16) && positionJoueur.y == 4){
-                    teleporter(ecran,9,jeu,map);
+            if(nb_carte == 4){
+                if(positionJoueur.x==13&&positionJoueur.y==5) {
+                    manger(jeu);
+                }
+
+                if(positionJoueur.x==17&&positionJoueur.y==4) {
+                    dormir(jeu);
+                }
+
+                if(positionJoueur.x==14&&positionJoueur.y==5) {
+                    boire(jeu);
                 }
             }
-            if((positionJoueur.x == 9 || positionJoueur.x == 10) && positionJoueur.y == 3){
-                jeu.getPersonnage().inventaire.setEau(1,true);
-                jeu.getPersonnage().perteArgent(10);
-                cout<<"-10$"<<endl;
-                cout <<"Une bouteille d'eau a été ajoutée à votre inventaire"<<endl;
+
+            if(nb_carte == 10 && map.carte10[positionJoueur.y][positionJoueur.x] == EAU){
+                teleporter(ecran,11,jeu,map);
+                positionJoueur.x = 11;
+                positionJoueur.y = 9;
+            }
+            break;
 
             }
-
-            if(positionJoueur.x==13&&positionJoueur.y==5) {
-                manger(jeu);
-            }
-
-            if(positionJoueur.x==17&&positionJoueur.y==4) {
-                dormir(jeu);
-            }
-
-            if(positionJoueur.x==14&&positionJoueur.y==5) {
-                boire(jeu);
-            }
-
             break;
          
             
@@ -449,17 +528,11 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
                         }
                     }
                     if(nb_carte == 4){
-                            posX = positionClic.x;
-                            posY = positionClic.y;
-                            cout<<"posX = "<<posX<<" et posY = "<<posY<<endl;
                          if(positionClic.y == 4 && positionClic.x == 11){
                              teleporter(ecran,7,jeu,map);
                          }
                     }
                     if(nb_carte == 8){
-                        posX = positionClic.x;
-                        posY = positionClic.y;
-                        cout<<"posX = "<<posX<<" et posY = "<<posY<<endl;
                         reponse = transformeConstantes(map.interfaceJardin[positionClic.y][positionClic.x]);
                         if(reponse != ""){
                             jeu.acheter(reponse);                            
@@ -468,9 +541,6 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
                     }
 
                     if(nb_carte == 9){
-                        posX = positionClic.x;
-                        posY = positionClic.y;
-                        cout<<"posX = "<<posX<<" et posY = "<<posY<<endl;
                         reponse = transformeConstantes(map.interfaceJardin[positionClic.y][positionClic.x]);
                         if(reponse != ""){
                             jeu.vendre(reponse);                            
@@ -636,6 +706,20 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
                 break;
         }
 
+        if(nb_carte == 10){        
+            if(map.carte10[pos->y-1][pos->x] == MUR) //on verifie que la case en haut n'est pas un mur pour la carte 10
+                break;
+        }
+
+        if(nb_carte == 11){        
+            if(map.carte11[pos->y-1][pos->x] == MUR) //on verifie que la case en haut n'est pas un mur pour la carte 11
+                break;
+            if(map.carte11[pos->y-1][pos->x] == SURFACE){
+                n = 1;
+                break; 
+            }
+        }
+
 
         
         pos->y--;
@@ -646,11 +730,15 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
         if(nb_carte == 1){
             if(map.carte1[pos->y+1][pos->x] == MUR)//on verifie que la case en bas n'est pas un mur pour la carte 1
                 break;
+            if(positionJoueur.x == 19 && positionJoueur.y == 11){ //le joueur se trouve au bout du pont
+                n = 3;
+                break;
+            }
         }
         
         if(nb_carte == 2){
             if(positionJoueur.x == 13 && positionJoueur.y == 11 ){
-                n = 1;                                                         //alors le joueur se teleporte au a la plage
+                n = 1;                                                         //alors le joueur se teleporte a la plage
                 break; 
             }
             if(map.carte2[pos->y+1][pos->x] == MUR)//on verifie que la case en bas n'est pas un mur pour la carte 2
@@ -678,6 +766,21 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
 
         if(nb_carte == 7){
             if(map.interfaceInventaire[pos->y+1][pos->x] == MURI) //on verifie que la case en bas n'est pas un mur pour la carte 7
+                break;
+        }
+
+        if(nb_carte == 10){
+            if(map.carte10[pos->y+1][pos->x] == MUR) //on verifie que la case en bas n'est pas un mur pour la carte 10
+                break;
+
+            if((positionJoueur.x == 11 || positionJoueur.x == 12) && positionJoueur.y == 11){
+                n = 1;
+                break;
+            }
+        }
+
+        if(nb_carte == 11){
+            if(map.carte11[pos->y+1][pos->x] == MUR) //on verifie que la case en bas n'est pas un mur pour la carte 11
                 break;
         }
 
@@ -712,6 +815,16 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
 
         if(nb_carte == 7){
             if(map.interfaceInventaire[pos->y][pos->x-1] == MURI) //on verifie que la case a gauche n'est pas un mur pour la carte 7
+                break;
+        }
+
+        if(nb_carte == 10){
+            if(map.carte10[pos->y][pos->x-1] == MUR) //on verifie que la case a gauche n'est pas un mur pour la carte 10
+                break;
+        }
+
+        if(nb_carte == 11){
+            if(map.carte11[pos->y][pos->x-1] == MUR) //on verifie que la case a gauche n'est pas un mur pour la carte 11
                 break;
         }
             
@@ -754,6 +867,16 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
 
         if(nb_carte == 7){
             if(map.interfaceInventaire[pos->y][pos->x+1] == MURI) //on verifie que la case à doroite n'est pas un mur pour la carte 7
+                break;
+        }
+
+        if(nb_carte == 10){
+            if(map.carte10[pos->y][pos->x+1] == MUR) //on verifie que la case à doroite n'est pas un mur pour la carte 10
+                break;
+        }
+
+        if(nb_carte == 11){
+            if(map.carte11[pos->y][pos->x+1] == MUR) //on verifie que la case à doroite n'est pas un mur pour la carte 10
                 break;
         }
         pos->x++;
@@ -802,7 +925,7 @@ void sdlPlanter(SDL_Surface *ecran,const SDL_Rect *pos,bool &succes,Jeu & jeu,Ma
                 positionClic.y = event.button.y / 34;
                 reponse = transformeConstantes(map.interfaceJardin[positionClic.y][positionClic.x]);
                 succes = jeu.planter(reponse,a,b);  
-                continuer = 0;              
+                continuer = 0;         
                    
                 break; 
 

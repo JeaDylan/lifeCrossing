@@ -283,13 +283,13 @@ carte1[9][8]=1;
 carte1[9][9]=0;
 carte1[9][10]=0;
 carte1[9][11]=0;
-carte1[9][12]=0;
-carte1[9][13]=0;
-carte1[9][14]=0;
+carte1[9][12]=1;
+carte1[9][13]=1;
+carte1[9][14]=1;
 carte1[9][15]=0;
 carte1[9][16]=0;
 carte1[9][17]=0;
-carte1[9][18]=1;
+carte1[9][18]=0;
 carte1[9][19]=1;
 carte1[9][20]=1;
 carte1[9][21]=1;
@@ -310,16 +310,16 @@ carte1[10][6]=1;
 carte1[10][7]=1;
 carte1[10][8]=1;
 carte1[10][9]=1;
-carte1[10][10]=0;
-carte1[10][11]=1;
+carte1[10][10]=1;
+carte1[10][11]=0;
 carte1[10][12]=1;
 carte1[10][13]=1;
-carte1[10][14]=0;
-carte1[10][15]=0;
-carte1[10][16]=0;
-carte1[10][17]=0;
+carte1[10][14]=1;
+carte1[10][15]=1;
+carte1[10][16]=1;
+carte1[10][17]=1;
 carte1[10][18]=0;
-carte1[10][19]=1;
+carte1[10][19]=0;
 carte1[10][20]=1;
 carte1[10][21]=1;
 carte1[10][22]=1;
@@ -339,16 +339,16 @@ carte1[11][6]=1;
 carte1[11][7]=1;
 carte1[11][8]=1;
 carte1[11][9]=1;
-carte1[11][10]=0;
-carte1[11][11]=1;
-carte1[11][12]=1;
-carte1[11][13]=1;
+carte1[11][10]=1;
+carte1[11][11]=0;
+carte1[11][12]=0;
+carte1[11][13]=0;
 carte1[11][14]=1;
 carte1[11][15]=1;
 carte1[11][16]=1;
 carte1[11][17]=1;
 carte1[11][18]=0;
-carte1[11][19]=1;
+carte1[11][19]=0;
 carte1[11][20]=1;
 carte1[11][21]=1;
 carte1[11][22]=1;
@@ -377,7 +377,7 @@ carte1[12][15]=1;
 carte1[12][16]=1;
 carte1[12][17]=1;
 carte1[12][18]=1;
-carte1[12][19]=1;
+carte1[12][19]=0;
 carte1[12][20]=1;
 carte1[12][21]=1;
 carte1[12][22]=1;
@@ -972,9 +972,9 @@ carte4[3][5]=1;
 carte4[3][6]=0;
 carte4[3][7]=1;
 carte4[3][8]=1;
-carte4[3][9]=0;
-carte4[3][10]=5; //coffre
-carte4[3][11]=0;
+carte4[3][9]=1;
+carte4[3][10]=1; //coffre
+carte4[3][11]=1;
 carte4[3][12]=1;
 carte4[3][13]=0;
 carte4[3][14]=0;
@@ -990,17 +990,17 @@ carte4[3][21]=1;
 carte4[4][5]=1;
 carte4[4][6]=0;
 carte4[4][7]=1;
-carte4[4][8]=0;
+carte4[4][8]=1;
 carte4[4][9]=0;
 carte4[4][10]=0;
-carte4[4][11]=0;
+carte4[4][11]=1;
 carte4[4][12]=1;
-carte4[4][13]=0;
-carte4[4][14]=0;
+carte4[4][13]=1;
+carte4[4][14]=1;
 carte4[4][15]=1;
 carte4[4][16]=0;
 carte4[4][17]=0;
-carte4[4][18]=0;
+carte4[4][18]=1;
 carte4[4][19]=1;
 carte4[4][20]=0;
 carte4[4][21]=1;
@@ -1057,7 +1057,7 @@ carte4[7][14]=0;
 carte4[7][15]=1;
 carte4[7][16]=0;
 carte4[7][17]=0;
-carte4[7][18]=0;
+carte4[7][18]=1;
 carte4[7][19]=1;
 carte4[7][20]=0;
 carte4[7][21]=1;
@@ -1074,9 +1074,9 @@ carte4[8][11]=0;
 carte4[8][12]=0;
 carte4[8][13]=0;
 carte4[8][14]=0;
-carte4[8][15]=0;
-carte4[8][16]=1;
-carte4[8][17]=0;
+carte4[8][15]=1;
+carte4[8][16]=0;
+carte4[8][17]=1;
 carte4[8][18]=1;
 carte4[8][19]=1;
 carte4[8][20]=0;
@@ -1094,8 +1094,8 @@ carte4[9][12]=0;
 carte4[9][13]=0;
 carte4[9][14]=0;
 carte4[9][15]=0;
-carte4[9][16]=1;
-carte4[9][17]=0;
+carte4[9][16]=0;
+carte4[9][17]=1;
 carte4[9][18]=1;
 carte4[9][19]=1;
 carte4[9][20]=0;
@@ -1114,9 +1114,9 @@ carte4[10][11]=0;
 carte4[10][12]=0;
 carte4[10][13]=0;
 carte4[10][14]=0;
-carte4[10][15]=0;
-carte4[10][16]=0;
-carte4[10][17]=0;
+carte4[10][15]=1;
+carte4[10][16]=1;
+carte4[10][17]=1;
 carte4[10][18]=1;
 carte4[10][19]=1;
 carte4[10][20]=0;
@@ -1432,7 +1432,7 @@ interfaceJardin[9][11] = 7;
 interfaceJardin[9][13] = 11;
 interfaceJardin[9][15] = 16;
 interfaceJardin[9][17] = 20;
-interfaceJardin[9][19] = 24;
+interfaceJardin[9][18] = 24;
 
 interfaceInventaire=(int**)malloc(12*sizeof(int*));
 for( int q =0;q<13;q++){
@@ -1519,6 +1519,67 @@ interfaceInventaire[11][20] = 1;
 
 
 
+carte10=(int**)malloc(13*sizeof(int*));
+for(int j=0;j<13;j++){
+    carte10[j]=(int*)malloc(28*sizeof(int));
+    
+}
+
+for(int i = 0; i<28;i++){
+    for(int j=0;j<13;j++){
+        carte10[j][i] = 1;
+    }
+}
+
+
+for(int i = 6;i <20;i++){
+    for(int j=6; j<9;j++){
+        carte10[j][i] = 6;
+    }
+}
+
+
+carte10[9][11] = 0;
+carte10[9][12] = 0;
+
+carte10[10][11] = 0;
+carte10[10][12] = 0;
+
+carte10[11][11] = 0;
+carte10[11][12] = 0;
+
+carte10[12][11] = 0;
+carte10[12][12] = 0;
+
+
+
+carte11=(int**)malloc(13*sizeof(int*));
+for(int j=0;j<13;j++){
+    carte11[j]=(int*)malloc(28*sizeof(int));
+    
+}
+
+for(int i = 0; i<28;i++){
+    for(int j=0;j<13;j++){
+        carte11[j][i] = 0;
+    }
+}
+
+for(int i = 4; i<24;i++){
+    carte11[0][i] = 4;
+}
+
+for(int i = 4; i<24;i++){
+    carte11[12][i] = 1;
+}
+
+for(int j = 0; j<13;j++){
+    carte11[j][3] = 1;
+}
+
+for(int j = 0; j<13;j++){
+    carte11[j][24] = 1;
+}
 
 
 
@@ -1546,4 +1607,8 @@ Map::~Map(){
     interfaceJardin = NULL;
     free(interfaceInventaire);
     interfaceInventaire = NULL;
+    free(carte10);
+    carte10 = NULL;
+    free(carte11);
+    carte11 = NULL;
 }

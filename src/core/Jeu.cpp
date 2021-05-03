@@ -32,6 +32,7 @@ Jeu::Jeu() : ter(), perso(), jardin(), pnjs(), activites(), fruitsLeg() , missio
         pnjs.tabPnj.push_back(Pnj("Jules","Bonjour, je suis Jules !",Point2D(15,6)));
          
         activites.tabActivite.push_back(Activite("Cinema",10,Point2D(7,14),50,"xp"));
+        activites.tabActivite.push_back(Activite("Plongée",200,Point2D(19,12),500,"xp"));
         
         fruitsLeg.banqueDeFruitLeg();
          
