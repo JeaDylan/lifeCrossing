@@ -1,7 +1,6 @@
-/**
-    @brief Module gérant un ensemble de Terrain
-    @file EnsembleTerrain.h
-
+/*!
+* @brief Module gérant un ensemble de Terrain
+* @file EnsembleTerrain.h
 */
 
 #ifndef _ENSEMBLE_TERRAIN
@@ -11,7 +10,7 @@
 #include <iostream>
 
 
-/*! @brief un EnsembleTerrain = un tableau dynamique de Terrain
+/*! @brief EnsembleTerrain : un tableau dynamique de Terrain
 */
 class EnsembleTerrain {
 

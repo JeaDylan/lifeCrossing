@@ -1,7 +1,6 @@
-/**
-    @brief Module gérant un ensemble d'Activites
-    @file EnsembleActivite.h
-
+/*!
+* @brief Module gérant un ensemble d'Activites
+* @file EnsembleActivite.h
 */
 
 #ifndef _ENSEMBLE_ACTIVITE
@@ -12,7 +11,7 @@
 
 using namespace std;
 
-/*! @class un EnsembleActivite = un tableau dynamique d'Activites
+/*! @brief EnsembleActivite : un tableau dynamique d'Activites
 */
 class EnsembleActivite {
 

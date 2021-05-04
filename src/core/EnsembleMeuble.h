@@ -1,7 +1,6 @@
-/**
-    @brief Module gérant un ensemble de Meuble
-    @file EnsembleMeuble.h
-
+/*!
+* @brief Module gérant un ensemble de Meuble
+* @file EnsembleMeuble.h
 */
 
 #ifndef _ENSEMBLE_MEUBLE
@@ -13,7 +12,7 @@
 
 using namespace std;
 
-/*! @class un EnsembleMeuble = un tableau dynamique de Meuble
+/*! @brief EnsembleMeuble : un tableau dynamique de Meuble
 */
 class EnsembleMeuble {
 

@@ -1,6 +1,6 @@
 /*!
-* \brief Inventaire est une class qui qui contient les resources du personnage.
-* Eléments achetés par le personnage.
+* @brief Module gérant un inventaire
+* @file Inventaire.h
 */
 
 #ifndef _INVENTAIRE
@@ -13,6 +13,10 @@
 
 using namespace std;
 
+/*!
+* @brief Inventaire : class qui contient les resources du personnage.
+* Eléments achetés par le personnage.
+*/
 class Inventaire {
 private:
 

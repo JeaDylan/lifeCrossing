@@ -3,10 +3,6 @@
     @file Personnage.h
 */
 
-/*!
-* \brief Personnage est une class qui contient le Personnage jouable sur les terrain.
-*/
-
 #ifndef _PERSONNAGE
 #define _PERSONNAGE
 #include <iostream>
@@ -18,6 +14,9 @@
 
 using namespace std;
 
+/*!
+* @brief Personnage : Point2D se déplace sur les terrains.
+*/
 class Personnage {
 private:
     string nom;

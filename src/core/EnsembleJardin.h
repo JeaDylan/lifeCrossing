@@ -1,5 +1,6 @@
-/** @brief Module gérant tout le jardin
-    @file EnsembleJardin.h
+/*!
+* @brief Module gérant tout le jardin
+* @file EnsembleJardin.h
 */
 #ifndef _ENSEMBLE_JARDIN
 #define _ENSEMBLE_JARDIN
@@ -8,7 +9,7 @@
 
 
 
-/*! @brief un EnsembleJardin = un tableau dynamique de Jardin 
+/*! @brief EnsembleJardin : un tableau dynamique de Jardin 
 */
 class EnsembleJardin{
 public:

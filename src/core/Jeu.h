@@ -1,8 +1,6 @@
-/**
-    @brief Module gérant un Jeu (Crossing Life)
-
-    @file Jeu.h
-   
+/*!
+* @brief Module gérant un Jeu (Crossing Life)
+* @file Jeu.h
 */
 
 #ifndef _JEU_H
@@ -19,9 +17,9 @@
 #include "EnsembleMission.h"
 
 
-
-/**
-    @brief Un jeu  = un terrain, un personnage et un jardin
+/*!
+* @brief jeu  : un terrain, un personnage, un jardin des activites
+* , des missions, des PNJ et un commerce.
 */
 class Jeu {
 

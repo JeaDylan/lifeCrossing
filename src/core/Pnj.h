@@ -1,5 +1,5 @@
 /**
-    @brief Module gérant un Pnj
+    @brief Module gérant un Pnj (Personnage Non Joueur)
     @file Pnj.h
 
 */
@@ -11,7 +11,7 @@
 #include <iostream>
 using namespace std;
 
-/*! @class un PNJ = un personnage non jouable, défini par un nom, une position, une phrase de dialogue, 
+/*! @brief Pnj : un personnage non jouable, défini par un nom, une position, une phrase de dialogue, 
     et une mission 
 */
 class Pnj {

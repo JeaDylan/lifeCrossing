@@ -1,8 +1,8 @@
-/**
-    @brief Module gérant un FruitLegume
-    @file FruitLegume.h
-
+/*!
+* @brief Module gérant un FruitLegume
+* @file FruitLegume.h
 */
+
 #ifndef _FRUIT_LEGUME
 #define _FRUIT_LEGUME
 #include <strings.h>
@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-/*! @class un FruitLegume = une graine qui donne un fruit ou un legume definit par un nom, un type(fruit ou legume),
+/*! @brief FruitLegume : une graine qui donne un fruit ou un legume definit par un nom, un type(fruit ou legume),
     un prix,un gain et un temps de récolte
 */
 class FruitLegume {

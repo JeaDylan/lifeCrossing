@@ -1,6 +1,6 @@
-/**
-    @brief Module gérant la Vie du personnage
-    @file Vie.h
+/*!
+* @brief Module gérant la Vie du personnage
+* @file Vie.h
 */
 
 #ifndef _VIE
@@ -13,7 +13,7 @@
 using namespace std; 
 
 /*!
-* \brief Vie est une classe qui réunit les différents niveaux~(Jauge) de santé du Personnage (santé, faim,soif...) 
+* @brief Vie : classe qui réunit les différents niveaux~(Jauge) de santé du Personnage (santé, faim,soif...) 
 */
 
 class Vie{

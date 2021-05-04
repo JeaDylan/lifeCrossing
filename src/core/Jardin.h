@@ -1,5 +1,6 @@
-/** @brief Module gérant un parcelle de jardin
-    @file Jardin.h
+/*! 
+* @brief Module gérant un parcelle de jardin
+* @file Jardin.h
 */
 
 #ifndef _JARDIN
@@ -8,7 +9,7 @@
 #include "FruitLegume.h"
 
 
-/*! @brief un Jardin = une parcelle de Jardin
+/*! @brief Jardin : une parcelle de Jardin
 */
 class Jardin{
 private:

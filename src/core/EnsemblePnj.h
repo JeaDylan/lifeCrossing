@@ -1,7 +1,6 @@
-/**
-    @brief Module gérant un ensemble de PNJ
-    @file EnsemblePnj.h
-
+/*!
+* @brief Module gérant un ensemble de PNJ
+* @file EnsemblePnj.h
 */
 
 #ifndef _ENSEMBLE_PNJ
@@ -12,7 +11,7 @@
 
 using namespace std;
 
-/*! @class un EnsemblePnj = un tableau dynamique de Pnj
+/*! @brief EnsemblePnj : un tableau dynamique de Pnj
 */
 class EnsemblePnj {
 

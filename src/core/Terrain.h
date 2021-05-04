@@ -1,6 +1,6 @@
 /*!
-* \brief Terrain est une classe qui crée des terrains ou le joueur peut se déolacer.
-*
+* @brief Module gérant des terrains.
+* @file Terrain.h
 */
 
 #ifndef _TERRAIN
@@ -11,7 +11,9 @@
 #include "EnsembleMeuble.h"
 #include "EnsemblePortail.h"
 
-
+/*!
+* @brief Terrain : classe qui crée des terrains ou le joueur peut se déplacer.
+*/
 class Terrain {
 private:
    

@@ -1,5 +1,6 @@
 #ignore le dossier doc
-doc
+doc/html
+doc/latex
 #ignore le dossier obj
 obj
 #ignore le dossier bin

@@ -1,6 +1,5 @@
-/*!
-* \brief Meuble est une class qui qui contient des Meubles qui apparaitront sur les terrain.
-* Eléments de décoration.
+/*! @brief Module gérant un portail
+*   @file Portail.h
 */
 
 #ifndef _PORTAIL
@@ -11,7 +10,9 @@
 #include "Point2D.h"
 
 using namespace std;
-
+/*!
+* @brief Portail : Permet de passer d'un terrain é l'autre.
+*/
 class Portail {
 private:
     

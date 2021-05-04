@@ -1,7 +1,6 @@
-/**
-    @brief Module gérant un ensemble de missions
-    @file EnsembleMission.h
-
+/*!
+* @brief Module gérant un ensemble de missions
+* @file EnsembleMission.h
 */
 
 #ifndef _ENSEMBLE_MISSION
@@ -13,7 +12,7 @@
 
 using namespace std;
 
-/*! @class un EnsembleActivite = un tableau dynamique d'Activites
+/*! @brief EnsembleActivite : un tableau dynamique d'Activites
 */
 class EnsembleMission {
 public:

@@ -1,6 +1,5 @@
 /*!
-* @brief Mission est une classe qui représente une mission que le joueur peut
-* accomplir. Chaque mission est présentée par un PNJ (Personnage Non Joueur).
+*  @brief Module gérant une mission
 * @file Mission.h
 */
 
@@ -10,6 +9,9 @@
 #include <iostream>
 using namespace std;
 
+/*! @brief Mission : classe qui représente une mission que le joueur peut
+* accomplir. Chaque mission est présentée par un PNJ (Personnage Non Joueur).
+*/
 class Mission {
 private:
    

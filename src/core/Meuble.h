@@ -1,6 +1,6 @@
 /*!
-* \brief Meuble est une class qui qui contient des Meubles qui apparaitront sur les terrain.
-* Eléments de décoration.
+* @brief Module gérant un meuble
+* @file Meuble.h
 */
 
 #ifndef _MEUBLE
@@ -12,6 +12,10 @@
 
 using namespace std;
 
+/*!
+* @brief Meuble : class qui contient des Meubles qui apparaitront sur les terrain.
+* Eléments de décoration et obstacles.
+*/
 class Meuble {
 private:
     

@@ -1,7 +1,6 @@
-/**
-    @brief Module gérant un ensemble de Portails
-    @file EnsemblePortail.h
-
+/*!
+* @brief Module gérant un ensemble de Portails
+* @file EnsemblePortail.h
 */
 
 #ifndef _ENSEMBLE_PORTAIL
@@ -13,7 +12,7 @@
 
 using namespace std;
 
-/*! @class un EnsemblePortail = un tableau dynamique de Portail
+/*! @brief EnsemblePortail : un tableau dynamique de Portail
 */
 class EnsemblePortail {
 

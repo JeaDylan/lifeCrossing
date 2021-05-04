@@ -1,12 +1,15 @@
 /*!
-* \brief Point2D est une classe qui crée des points à deux dimensions.
-*
-* Les Points2D servent à situer les éléments du jeu dans l'espace
+* @brief Module gérant un point à deux dimensions.
+* @file Point2D.h
 */
 
 #ifndef _POINT2D
 #define _POINT2D
 
+/*!
+* @brief Point2D est une classe qui crée des points à deux dimensions.
+* Les Points2D servent à situer les éléments du jeu dans l'espace
+*/
 class Point2D {
 private:
     

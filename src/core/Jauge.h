@@ -3,9 +3,6 @@
     @file Jauge.h
 */
 
-/*!
-* \brief Jauge est une class qui gère le système de niveau (xp, santé, faim...) dans le jeu
-*/
 
 #ifndef _JAUGE
 #define _JAUGE
@@ -14,6 +11,9 @@
 
 using namespace std;
 
+/*!
+* @brief Jauge : class qui gère le système de niveau (xp, santé, faim...) dans le jeu.
+*/
 class Jauge {
 private:
     int niveauActuel;

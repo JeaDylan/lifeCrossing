@@ -1,7 +1,6 @@
-/**
-    @brief Module gérant un ensemble de FruitLegume
-    @file EnsembleFruitLeg.h
-
+/*!
+* @brief Module gérant un ensemble de FruitLegume
+* @file EnsembleFruitLeg.h
 */
 
 #ifndef _ENSEMBLE_FRUIT_LEG
@@ -13,7 +12,7 @@
 
 using namespace std;
 
-/*! @brief un EnsembleFruitLeg = un tableau dynamique de FruitLegume
+/*! @brief EnsembleFruitLeg : un tableau dynamique de FruitLegume
 */
 class EnsembleFruitLeg {
 
