@@ -173,7 +173,7 @@ void Jeu::acheter(string reponse){
         perso.perteArgent(prix); //le perso paie le prix
         cout<<"-"<<prix<<"$"<<endl;
         cout << "Tu as acheté une graine de "<<reponse<<endl;
-        cout<<"Solde actuel :"<<solde<<"$"<<endl;   
+        cout<<"Solde actuel :"<<solde-prix<<"$"<<endl;   
     }else{
         cout<<"Tu n'as pas assez d'argent"<<endl;
     }

@@ -2,8 +2,8 @@
 #include "Jauge.h"
 
 Jauge::Jauge() {
-    niveauActuel=0;
-    niveauMax=100;
+    niveauActuel=10000;
+    niveauMax=10000;
 }
 
 Jauge::Jauge(int niv, int nivMax) {
@@ -37,7 +37,11 @@ void Jauge::setNiveauMax(int newNiveauMax) {
 }
 
 bool Jauge::jaugeRemplie() const {
-    return(niveauMax==niveauActuel);
+    return(niveauMax <= niveauActuel);
+}
+
+bool Jauge::jaugeVide() const {
+    return(0==niveauActuel);
 }
 
 void Jauge::afficheJauge() const {

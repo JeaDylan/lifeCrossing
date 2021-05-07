@@ -51,6 +51,9 @@ public:
     /*! @brief test si la jauge est remplie en renvoyant true si elle l'est */
     bool jaugeRemplie() const;
     
+    /*! @brief test si la jauge est vide en renvoyant true si elle l'est */
+    bool jaugeVide() const;
+
     /*! @brief Affiche les données de la jauge */
     void afficheJauge() const;
 

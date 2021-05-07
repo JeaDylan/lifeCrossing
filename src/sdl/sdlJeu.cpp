@@ -53,6 +53,19 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
     int n;
 
     while(continuer){
+        //affichage de l'écran de mort si la vie du personnage atteint 0
+        if (jeu.getPersonnage().vie.getPtsDeVie().getNiveau() <=0) {
+            SDL_Surface *wasted = NULL;
+            wasted=IMG_Load("./data/wasted.png");
+            SDL_Rect positionFond;
+            positionFond.x=276;
+            positionFond.y=10;
+            SDL_BlitSurface(wasted,NULL,ecran,&positionFond);
+            SDL_Flip(ecran);
+            cout << "Vous etes morts" << endl;
+            continuer = 0;
+            break;
+        }
         SDL_WaitEvent(&event);
         jeu.actionsAutomatiques();
         cout<<"Vie:"<<endl;
@@ -65,8 +78,10 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
         cout<<"Stock fruits/legs: "<<jeu.getPersonnage().inventaire.getFruitLeg().afficheJeuTxt()<<endl;
         cout<<"Stock eau: "<<jeu.getPersonnage().inventaire.getEau().afficheJeuTxt()<<endl;
         cout<<"Stock nourriture: "<<jeu.getPersonnage().inventaire.getManger().afficheJeuTxt()<<endl;
+        cout<<"Argent: "<<jeu.getPersonnage().getArgent()<<endl;
         cout<<endl;
         cout<<positionJoueur.x<<"/"<<positionJoueur.y<<endl;
+        cout<<"Niveau :"<<jeu.getPersonnage().niveau.getNiveau()<<" // XP : "<<jeu.getPersonnage().xp.getNiveau()<<" / "<<jeu.getPersonnage().xp.getNiveauMax();
         cout<<endl;
         switch(event.type){
             case SDL_QUIT:
@@ -76,78 +91,83 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
             case SDL_KEYDOWN:
             switch(event.key.keysym.sym){
 
-            case  SDLK_ESCAPE:
-            continuer = 0;
-            break;
-             
-            case SDLK_RETURN:
-            if(positionJoueur.x == 24 && positionJoueur.y == 3){
-                teleporter(ecran,3,jeu,map);
-                positionJoueur.x = 24; //on remet le perso devant la porte du magasin
-                positionJoueur.y = 3;
+                case  SDLK_ESCAPE:
+                continuer = 0;
                 break;
-            }
-            if(positionJoueur.x == 10 && positionJoueur.y == 4){
-                teleporter(ecran,4,jeu,map);
-                positionJoueur.x = 10; //on remet le perso devant la porte de la maison
-                positionJoueur.y = 4;
-                break;
-
-            }
-            if(positionJoueur.x == 2 && positionJoueur.y == 4){
-                teleporter(ecran,5,jeu,map);
-                positionJoueur.x = 2; //on remet le perso devant la porte de la maison des PNJ
-                positionJoueur.y = 5;
-                break;
-
-            }
-            break;
-
-            case SDLK_UP:
-            persoActuel = perso[HAUT];
-            deplacerJoueur(&positionJoueur,HAUT,ecran,n,1,jeu,map);
-            if(n == 2){
-                n = 0;
-                teleporter(ecran,2,jeu,map);
-                positionJoueur.x = 12;
-                positionJoueur.y = 1;
-                break;
-            }
-            break;
-
-            case SDLK_DOWN:
-            persoActuel = perso[BAS];
-            deplacerJoueur(&positionJoueur,BAS,ecran,n,1,jeu,map);
-            if(n == 3){
-                n = 0;
-                int arg = jeu.getPersonnage().getArgent();
-                if(arg < jeu.getActivites().tabActivite[1].getPrix()){
-                    cout << "Tu ne possèdes pas assez d'argent pour faire cette activité. (Prix = 200$)"<<endl;
-                }else{
-                    teleporter(ecran,10,jeu,map);
-                    positionJoueur.x = 19;
-                    positionJoueur.y = 11;
-                    int nouvXp;
-                    nouvXp = jeu.getPersonnage().xp.getNiveau() + jeu.getActivites().tabActivite[1].getRecompense();
-                    jeu.getPersonnage().perteArgent(jeu.getActivites().tabActivite[1].getPrix());
-                    jeu.getPersonnage().xp.setNiveau(nouvXp);
-                    cout << "+"<<nouvXp<<"XP"<<endl;
-                }
                 
+                case SDLK_RETURN:
+                if(positionJoueur.x == 24 && positionJoueur.y == 3){
+                    teleporter(ecran,3,jeu,map);
+                    positionJoueur.x = 24; //on remet le perso devant la porte du magasin
+                    positionJoueur.y = 3;
+                    break;
+                }
+                if(positionJoueur.x == 10 && positionJoueur.y == 4){
+                    teleporter(ecran,4,jeu,map);
+                    positionJoueur.x = 10; //on remet le perso devant la porte de la maison
+                    positionJoueur.y = 4;
+                    break;
+
+                }
+                if(positionJoueur.x == 2 && positionJoueur.y == 4){
+                    teleporter(ecran,5,jeu,map);
+                    positionJoueur.x = 2; //on remet le perso devant la porte de la maison des PNJ
+                    positionJoueur.y = 5;
+                    break;
+
+                }
+                if(positionJoueur.x == 1 && positionJoueur.y == 7){
+                    jeu.getPersonnage().vie.setPtsDeVie(0);
+                    break;
+
+                }
+                break;
+
+                case SDLK_UP:
+                persoActuel = perso[HAUT];
+                deplacerJoueur(&positionJoueur,HAUT,ecran,n,1,jeu,map);
+                if(n == 2){
+                    n = 0;
+                    teleporter(ecran,2,jeu,map);
+                    positionJoueur.x = 12;
+                    positionJoueur.y = 1;
+                    break;
+                }
+                break;
+
+                case SDLK_DOWN:
+                persoActuel = perso[BAS];
+                deplacerJoueur(&positionJoueur,BAS,ecran,n,1,jeu,map);
+                if(n == 3){
+                    n = 0;
+                    int arg = jeu.getPersonnage().getArgent();
+                    if(arg < jeu.getActivites().tabActivite[1].getPrix()){
+                        cout << "Tu ne possèdes pas assez d'argent pour faire cette activité. (Prix = 200$)"<<endl;
+                    }else{
+                        teleporter(ecran,10,jeu,map);
+                        positionJoueur.x = 19;
+                        positionJoueur.y = 11;
+                        int nouvXp;
+                        nouvXp = jeu.getPersonnage().xp.getNiveau() + jeu.getActivites().tabActivite[1].getRecompense();
+                        jeu.getPersonnage().perteArgent(jeu.getActivites().tabActivite[1].getPrix());
+                        jeu.getPersonnage().xp.setNiveau(nouvXp);
+                        cout << "+"<<jeu.getActivites().tabActivite[1].getRecompense()<<"XP"<<endl;
+                    }
+                    
+                }
+                break;
+
+                case SDLK_RIGHT:
+                persoActuel = perso[DROITE];
+                deplacerJoueur(&positionJoueur,DROITE,ecran,n,1,jeu,map);
+                break;
+
+                case SDLK_LEFT:
+                persoActuel = perso[GAUCHE];
+                deplacerJoueur(&positionJoueur,GAUCHE,ecran,n,1,jeu,map);
+                break;
             }
-            break;
-
-            case SDLK_RIGHT:
-            persoActuel = perso[DROITE];
-            deplacerJoueur(&positionJoueur,DROITE,ecran,n,1,jeu,map);
-            break;
-
-            case SDLK_LEFT:
-            persoActuel = perso[GAUCHE];
-            deplacerJoueur(&positionJoueur,GAUCHE,ecran,n,1,jeu,map);
-            break;
-        }
-        break;     
+            break;     
 
        
         
@@ -156,23 +176,27 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
 
 
 
-    SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
-    
-    positionFond.x=0;
-    positionFond.y=0;
-    SDL_BlitSurface(fond,NULL,ecran,&positionFond);
-    
+        SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
+        
+        positionFond.x=0;
+        positionFond.y=0;
+        SDL_BlitSurface(fond,NULL,ecran,&positionFond);
+        
 
-     
+        
 
-    position.x = positionJoueur.x*TAILLE_BLOC;
-    position.y = positionJoueur.y*TAILLE_BLOC;
+        position.x = positionJoueur.x*TAILLE_BLOC;
+        position.y = positionJoueur.y*TAILLE_BLOC;
 
-    SDL_BlitSurface(persoActuel,NULL,ecran,&position);
-    
-    affichageJauge(ecran);
-    SDL_Flip(ecran);
+        SDL_BlitSurface(persoActuel,NULL,ecran,&position);
+        
+        affichageJauge(ecran, jeu);
+        SDL_Flip(ecran);
+        
     }
+
+    
+
 
     SDL_EnableKeyRepeat(0,0); //desactive la repetition des touche
     
@@ -184,20 +208,23 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
         SDL_FreeSurface(perso[i]); //on libère les images du perso en memoire
     }
 
-
+    
 }
 
 void dormir(Jeu & jeu) {
 
-	jeu.getPersonnage().vie.setFatigue(0);
+	jeu.getPersonnage().vie.setFatigue(10000);
 	cout<<"Tu viens de te reposer."<<endl;
 }
 
 void manger(Jeu & jeu) {
 	Personnage& perso = jeu.getPersonnage();
 		if(perso.inventaire.getManger().getNiveau()>0) {
-			// Baisse de la faim
-			perso.vie.setFaim(0);
+			// Baisse de la faim et +1 pt de vie
+			perso.vie.setFaim(perso.vie.getFaim().getNiveau() + 2500);
+            if (perso.vie.getPtsDeVie().getNiveau()<100) {
+                perso.vie.setPtsDeVie(perso.vie.getPtsDeVie().getNiveau() + 1);
+            }
 			// Baisse de l'inventaire
 			perso.inventaire.setManger
 			(1,false);
@@ -210,7 +237,7 @@ void boire(Jeu & jeu) {
 	Personnage& perso = jeu.getPersonnage();
 		if(perso.inventaire.getEau().getNiveau()>0) {
 			// Baisse de la soif
-			perso.vie.setSoif(0);
+			perso.vie.setSoif(perso.vie.getSoif().getNiveau() + 2500);
 			// Baisse de l'inventaire
 			perso.inventaire.setEau
 			(1,false);
@@ -374,6 +401,10 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
     while(continuer){
         SDL_WaitEvent(&event);
         jeu.actionsAutomatiques();
+        //si la vie du personnage tombe à 0 on arrête la fonction
+        if (jeu.getPersonnage().vie.getPtsDeVie().getNiveau() <=0) {
+            continuer = 0;
+        }
         cout<<"Vie:"<<endl;
         cout<<"Points de vie: "<<jeu.getPersonnage().vie.getPtsDeVie().afficheJeuTxt()<<endl;
         cout<<"Faim: "<<jeu.getPersonnage().vie.getFaim().afficheJeuTxt()<<endl;
@@ -384,8 +415,10 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
         cout<<"Stock fruits/legs: "<<jeu.getPersonnage().inventaire.getFruitLeg().afficheJeuTxt()<<endl;
         cout<<"Stock eau: "<<jeu.getPersonnage().inventaire.getEau().afficheJeuTxt()<<endl;
         cout<<"Stock nourriture: "<<jeu.getPersonnage().inventaire.getManger().afficheJeuTxt()<<endl;
+        cout<<"Argent: "<<jeu.getPersonnage().getArgent()<<endl;
         cout<<endl;
         cout<<positionJoueur.x<<"/"<<positionJoueur.y<<endl;
+        cout<<"Niveau :"<<jeu.getPersonnage().niveau.getNiveau()<<" // XP : "<<jeu.getPersonnage().xp.getNiveau()<<" / "<<jeu.getPersonnage().xp.getNiveauMax();
         cout<<endl;
         switch(event.type){
             case SDL_QUIT:
@@ -445,25 +478,25 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
             if(nb_carte == 5){
                 //le joueur presse ENTRER à proximité du PNJ4
                 if (positionJoueur.x==15 && positionJoueur.y==9) {
-                    dialoguePNJ(ecran, &positionJoueur, map);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
                 }
                 if (positionJoueur.x==15 && positionJoueur.y==10) {
-                    dialoguePNJ(ecran, &positionJoueur, map);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
                 }
                 //le joueur presse ENTRER à proximité du PNJ3
                 if (positionJoueur.x==9 && positionJoueur.y==8) {
-                    dialoguePNJ(ecran, &positionJoueur, map);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
                 }
                 //le joueur presse ENTRER à proximité du PNJ2
                 if (positionJoueur.x==10 && positionJoueur.y==5) {
-                    dialoguePNJ(ecran, &positionJoueur, map);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
                 }
                 if (positionJoueur.x==10 && positionJoueur.y==6) {
-                    dialoguePNJ(ecran, &positionJoueur, map);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
                 }
                 //le joueur presse ENTRER à proximité du PNJ1
                 if (positionJoueur.x==15 && positionJoueur.y==4) {
-                    dialoguePNJ(ecran, &positionJoueur, map);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
                 }
             }
             if(nb_carte == 3){
@@ -639,8 +672,10 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
     }
     
     
-    affichageJauge(ecran);
+    affichageJauge(ecran, jeu);
     SDL_Flip(ecran);
+
+    
 
    
     
@@ -940,7 +975,7 @@ void sdlPlanter(SDL_Surface *ecran,const SDL_Rect *pos,bool &succes,Jeu & jeu,Ma
         positionInterface.y=0;
         SDL_BlitSurface(interface,NULL,ecran,&positionInterface);  
         
-        affichageJauge(ecran);
+        affichageJauge(ecran, jeu);
         SDL_Flip(ecran);
         
     
@@ -1061,7 +1096,7 @@ string transformeConstantes(int n){
     return reponse;
 }
 
-void dialoguePNJ(SDL_Surface * ecran, SDL_Rect *pos,Map & map){
+void dialoguePNJ(SDL_Surface * ecran, SDL_Rect *pos,Map & map, Jeu &jeu){
     SDL_Surface *dialPNJ1= NULL;
     dialPNJ1 = IMG_Load("./data/dialPNJ1.png");
 
@@ -1072,7 +1107,7 @@ void dialoguePNJ(SDL_Surface * ecran, SDL_Rect *pos,Map & map){
     positionFond.y=50;
     SDL_BlitSurface(dialPNJ1,NULL,ecran,&positionFond);
     
-    affichageJauge(ecran);
+    affichageJauge(ecran, jeu);
     SDL_Flip(ecran);
     cout << "DialoguePNJ";
     while(continuer){
@@ -1105,7 +1140,7 @@ void dialoguePNJ(SDL_Surface * ecran, SDL_Rect *pos,Map & map){
     }
 }
 
-void affichageJauge(SDL_Surface * ecran) {
+void affichageJauge(SDL_Surface * ecran, Jeu & jeu) {
     SDL_Surface *imFaim= NULL;
     SDL_Surface *imSoif= NULL;
     SDL_Surface *imFatigue= NULL;
@@ -1130,30 +1165,31 @@ void affichageJauge(SDL_Surface * ecran) {
     positionJauge.x=5;
     positionJauge.y=5;
     SDL_Rect vie;
+    Vie life = jeu.getPersonnage().vie;
     vie.x=0;
     vie.y=0;
     vie.h=20;
-    vie.w=100; // varie en fonction de la vie du perso
+    vie.w=life.getPtsDeVie().getNiveau(); // la barre varie en fonction de la vie du perso
     SDL_Rect faim;
     faim.x=0;
     faim.y=0;
     faim.h=20;
-    faim.w=80;// varie en fonction de la faim du perso
+    faim.w=life.getFaim().getNiveau()*100/life.getFaim().getNiveauMax();// la barre varie en fonction de la faim du perso
     SDL_Rect soif;
     soif.x=0;
     soif.y=0;
     soif.h=20;
-    soif.w=50;// varie en fonction de la soif du perso
+    soif.w=life.getSoif().getNiveau()*100/life.getSoif().getNiveauMax();// la barre varie en fonction de la soif du perso
     SDL_Rect fatigue;
     fatigue.x=0;
     fatigue.y=0;
     fatigue.h=20;
-    fatigue.w=20;// varie en fonction de la fatigue du perso
+    fatigue.w=life.getFatigue().getNiveau()*100/life.getFatigue().getNiveauMax();// la barre varie en fonction de la fatigue du perso
     SDL_Rect xp;
     xp.x=0;
     xp.y=0;
     xp.h=20;
-    xp.w=50;
+    xp.w=jeu.getPersonnage().xp.getNiveau();
 
 //affichage niveau + xp
     SDL_BlitSurface(niveau, NULL, ecran, &positionJauge);
@@ -1200,6 +1236,5 @@ void affichageJauge(SDL_Surface * ecran) {
     SDL_BlitSurface(jauge, &fatigue, ecran, &positionJauge);
 
     
-
     
 }

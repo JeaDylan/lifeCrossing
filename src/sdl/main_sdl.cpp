@@ -21,6 +21,8 @@ int main(int argc, char *argv[]){
     SDL_WM_SetCaption("Crossing Life 1.0",NULL);
 
     menu = IMG_Load("./data/menu2.png");
+         SDL_BlitSurface(menu,NULL,ecran,&positionMenu);
+         SDL_Flip(ecran);
 
      positionMenu.x = 0;
      positionMenu.y = 0;
@@ -43,21 +45,18 @@ int main(int argc, char *argv[]){
                 break;    
 
                 case SDLK_p:
+                SDL_FreeSurface(menu);
                 jouer(ecran,jeu,map);
                 break;   
 
                      
              }
              break;
-
+         
              
 
          }
-         SDL_BlitSurface(menu,NULL,ecran,&positionMenu);
-         SDL_Flip(ecran);
      }
-
-     SDL_FreeSurface(menu);
      SDL_Quit();
      return EXIT_SUCCESS;
 

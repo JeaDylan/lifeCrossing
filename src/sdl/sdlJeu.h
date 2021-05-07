@@ -77,12 +77,12 @@ string transformeConstantes(int n);
     @param ecran fenêtre gérée par SDL
     @param pos position du joueur lorsqu'il interagit avec le PNJ
 */
-void dialoguePNJ(SDL_Surface * ecran,SDL_Rect *pos,Map & map);
+void dialoguePNJ(SDL_Surface * ecran,SDL_Rect *pos,Map & map, Jeu &jeu);
 
 /*! @brief Affiche les jauges de vie faim soif et fatigue
 
 */
-void affichageJauge(SDL_Surface * ecran);
+void affichageJauge(SDL_Surface * ecran, Jeu & jeu);
 
 
 

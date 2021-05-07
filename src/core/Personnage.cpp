@@ -27,9 +27,12 @@ Personnage::Personnage(string nomP) {
     position.setX(0);
     position.setY(0);
     vie.setPtsDeVie(100);
-    vie.setFaim(0);
-    vie.setSoif(0);
-    vie.setFatigue(0);
+    vie.setFaim(10000);
+    vie.getFaim().setNiveauMax(10000);
+    vie.setSoif(10000);
+    vie.getSoif().setNiveauMax(10000);
+    vie.setFatigue(10000);
+    vie.getFatigue().setNiveauMax(10000);
     niveau.setNiveau(0);
     niveau.setNiveauMax(100);
     xp.setNiveau(0);
@@ -123,10 +126,14 @@ void Personnage::affichePersonnage() const {
     cout<< "Il se situe à la case ("<<position.getX()<<", " << position.getY() <<"), et possède " << argent <<"€"<<endl;
 }
 
-void Personnage::varieAuto() {
+void Personnage::varieAuto() { 
     if(xp.jaugeRemplie()) {
-        xp.setNiveau(0);
-        niveau.setNiveau(niveau.getNiveau()+1);
+        int niv = xp.getNiveau()/100;
+        cout << "AAAAAA" << niv;
+        int newXP = xp.getNiveau()%100;
+        cout << "AAAAAA" << newXP;
+        xp.setNiveau(newXP);
+        niveau.setNiveau(niveau.getNiveau()+niv);
     }      
 }
 
