@@ -133,7 +133,7 @@ void Personnage::varieAuto() {
         xp.setNiveau(newXP);
         niveau.setNiveau(niveau.getNiveau()+niv);
         cout << xp.getNiveau() << endl;
-    }      
+    }    
 }
 
 bool Personnage::possedeFruitLeg(string fruitLeg, string type) const{
@@ -155,7 +155,7 @@ void Personnage::testRegression(Terrain terrain) {
     cout<<"Tests pour le module Personnage :"<<endl;
     assert(nom == "sansNom");
     assert(avatar == persoChar[0]);
-    assert(argent == 200);
+    assert(argent == 500);
     assert(position.getX()==0);
     assert(position.getY()==0);
     assert(niveau.getNiveau()==0);

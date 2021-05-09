@@ -141,7 +141,7 @@ void txtAffPnj(WINDOW * winDialogue, Jeu & jeu) {
 
 			mvwprintw(winDialogue,1,1,ligne1m);
 			mvwprintw(winDialogue,2,1,"Tu te trouves devant le Commerce de la ville.");
-			mvwprintw(winDialogue,3,1,"Mission : si tu remplie ton stock de Fruit/Legumes,");
+			mvwprintw(winDialogue,3,1,"Mission : si tu remplie ton stock de nourriture,");
 			mvwprintw(winDialogue,4,1," tu gagnes 200xp.");
 	}
 
@@ -165,7 +165,7 @@ void txtAffPerso(WINDOW * winDialogue, Jeu & jeu) {
 	string ligne2_2 = "- XP : " + jeu.getConstPersonnage()
 					.xp.afficheJeuTxt();
 	const char * ligne2_2m = (const char *) ligne2_2.c_str();
-
+	
 	string ligne3 = "- Stock Fruit/Legume : " + jeu.getConstPersonnage().
 					inventaire.getFruitLeg().afficheJeuTxt();
 	const char * ligne3m = (const char *) ligne3.c_str();
@@ -548,11 +548,22 @@ void txtBoucle (Jeu & jeu) {
 			case 'b':
 				boire(winDialogue,jeu);
 				break;
+			case 'f':
+				jeu.getPersonnage().vie.setPtsDeVie(5);
+				break;
 			case 'q':
 				ok = false;
 				break;
 		}
 
+		//Mission
+		if(!jeu.getMissions().tabMission->at(0).getFini()
+		&&jeu.getPersonnage().inventaire.getManger().jaugeRemplie()) {
+        	jeu.getPersonnage().niveau.setNiveau
+			(jeu.getPersonnage().niveau.getNiveau()+2);
+			jeu.getMissions().tabMission->at(0).setFini(true);
+    	}  
+		// Fin du jeu
 		if(jeu.getPersonnage().vie.getPtsDeVie().getNiveau()==0) {	
 			ok=false;
 		}

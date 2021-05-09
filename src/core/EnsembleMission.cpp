@@ -32,9 +32,9 @@ void EnsembleMission::testRegression() {
    assert(test.tabMission->size() == 0);
    cout<<"Constructeur par Défaut OK ..."<<endl;
    test.banqueMission();
-   assert(test.tabMission->size() == 1);
-   assert(test.tabMission->at(0).getObjectif() == "Remplir stock Fruit/Leg");
-   assert(test.tabMission->at(0).getRecompense() == 2);
+   assert(test.tabMission->size() == 4);
+   assert(test.tabMission->at(0).getObjectif() == "Acheter à boire au marché");
+   assert(test.tabMission->at(0).getRecompense() == 80);
    cout<<"Test Regression EnsembleActivite OK ..."<<endl;
 }
 
