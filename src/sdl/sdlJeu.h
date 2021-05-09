@@ -77,10 +77,24 @@ string transformeConstantes(int n);
     @param ecran fenêtre gérée par SDL
     @param pos position du joueur lorsqu'il interagit avec le PNJ
 */
-void dialoguePNJ(SDL_Surface * ecran,SDL_Rect *pos,Map & map, Jeu &jeu);
+void dialoguePNJ(SDL_Surface * ecran,SDL_Rect *pos,Map & map, Jeu &jeu, int num);
+
+/*! @brief Affiche la mission en cours s'il y en a une, en appuyant sur la touche M
+    @param ecran fenêtre gérée par SDL
+    @param jeu moteur de jeu
+*/
+void affichageMission(SDL_Surface * ecran, Jeu & jeu);
+
+/*! @brief Affiche un message en cas de succès de mission
+    @param ecran fenêtre gérée par SDL
+    @param jeu moteur de jeu
+    @param miss l'indice de la mission
+*/
+void affichageReussie(SDL_Surface * ecran, Jeu & jeu, string miss);
 
 /*! @brief Affiche les jauges de vie faim soif et fatigue
-
+    @param ecran fenêtre gérée par SDL
+    @param jeu moteur de jeu
 */
 void affichageJauge(SDL_Surface * ecran, Jeu & jeu);
 

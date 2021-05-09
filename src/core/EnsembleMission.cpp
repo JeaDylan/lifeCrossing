@@ -20,7 +20,10 @@ void EnsembleMission::ajouterMission(const Mission & mission){
 }
 
 void EnsembleMission::banqueMission() {
-    ajouterMission(Mission(2,"Remplir stock Fruit/Leg")); 
+    ajouterMission(Mission(80,"Acheter à boire au marché")); 
+    ajouterMission(Mission(50,"Se nourrir")); 
+    ajouterMission(Mission(100,"Planter une graine")); 
+    ajouterMission(Mission(120,"Dormir")); 
 }
 
 void EnsembleMission::testRegression() {

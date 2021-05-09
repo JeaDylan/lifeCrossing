@@ -30,21 +30,21 @@ void Vie::setFatigue(int fat){
 }
 
 void Vie::varieAuto() {
-    if(getFaim().jaugeVide()) {
-        setFaim(10000);
+    if(getFaim().jaugeRemplie()) {
+        setFaim(0);
         setPtsDeVie(getPtsDeVie().getNiveau()-5);
     }
-    if(getFatigue().jaugeVide()) {
-        setFatigue(10000);
+    if(getFatigue().jaugeRemplie()) {
+        setFatigue(0);
         setPtsDeVie(getPtsDeVie().getNiveau()-5);
     }
-    if(getSoif().jaugeVide()) {
-        setSoif(10000);
+    if(getSoif().jaugeRemplie()) {
+        setSoif(0);
         setPtsDeVie(getPtsDeVie().getNiveau()-5);
     }
-    setFaim(getFaim().getNiveau()-5);
-    setFatigue(getFatigue().getNiveau()-5);
-    setSoif(getSoif().getNiveau()-5);       
+    setFaim(getFaim().getNiveau()+1);
+    setFatigue(getFatigue().getNiveau()+1);
+    setSoif(getSoif().getNiveau()+1);       
 }
 
 void Vie::testRegression(){

@@ -17,6 +17,7 @@ private:
    
     int recompense; 
     string objectif;
+    bool active;    
     bool fini;    
  
 public:
@@ -38,7 +39,11 @@ public:
     */
     unsigned int getRecompense()const;
 
-    /*! @brief Accesseur: renvoie fini de la mission
+    /*! @brief Accesseur: renvoie si la mission est active
+    */
+    bool getActive()const;
+
+    /*! @brief Accesseur: renvoie si la mission est finie
     */
     bool getFini()const;
 
@@ -50,10 +55,20 @@ public:
         @param newRecompense la nouvelle récompense de la mission
     */
     void setRecompense(unsigned int newRecompense);
+    
+    /*! @brief Mutateur: modifie la donnée membre active
+        @param actif un booleen qui dit si la mission est active ou non
+    */
+    void setActive(bool actif);
 
     /*! @brief Mutateur: modifie la donnée membre fini
+        @param fini un booleen qui dit si la mission est finie ou non
     */
     void setFini(bool fin);
+    
+    /*! @brief Si la mission est terminée, le booleen "fini" passe à false et "active" repasse à false
+    */
+    void missionFinie();
     
     /*! @brief Teste toutes les fonctions du module
     */

@@ -4,6 +4,7 @@
 int main(int argc, char *argv[]){
 
     Jeu jeu;
+    jeu.getMissions().banqueMission();
     Map map;
 
     SDL_Surface * ecran = NULL;

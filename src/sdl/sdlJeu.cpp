@@ -1,53 +1,32 @@
 #include "sdlJeu.h"
 
-
-
-
-
 SDL_Rect position, positionJoueur,positionClic;
-
 
 
 void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
     
-   
-    
     SDL_Surface *perso[4] =  {NULL};
     SDL_Surface *persoActuel = NULL;
 
-   
-
     SDL_Rect positionFond;
     SDL_Surface *fond=NULL;
-
-
 
     SDL_Event event;
     int continuer = 1;
     int i = 0, j=0;
 
-    
-
-
    fond=IMG_Load("./data/carte1.png"); 
-  
-
-  
 
     perso[BAS] = IMG_Load("./data/kirby1.png");
     perso[HAUT] = IMG_Load("./data/kirby2.png");
     perso[DROITE] = IMG_Load("./data/kirby3.png");
     perso[GAUCHE] = IMG_Load("./data/kirby4.png");
     
-    
-
     persoActuel = perso[BAS];
 
     positionJoueur.x = 12;
     positionJoueur.y = 5;
-
     map.carte1[5][12]=PERSO;
-
 
     SDL_EnableKeyRepeat(100,100);
     int n;
@@ -66,8 +45,9 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
             continuer = 0;
             break;
         }
-        SDL_WaitEvent(&event);
         jeu.actionsAutomatiques();
+        SDL_WaitEvent(&event);
+
         cout<<"Vie:"<<endl;
         cout<<"Points de vie: "<<jeu.getPersonnage().vie.getPtsDeVie().afficheJeuTxt()<<endl;
         cout<<"Faim: "<<jeu.getPersonnage().vie.getFaim().afficheJeuTxt()<<endl;
@@ -83,6 +63,7 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
         cout<<positionJoueur.x<<"/"<<positionJoueur.y<<endl;
         cout<<"Niveau :"<<jeu.getPersonnage().niveau.getNiveau()<<" // XP : "<<jeu.getPersonnage().xp.getNiveau()<<" / "<<jeu.getPersonnage().xp.getNiveauMax();
         cout<<endl;
+
         switch(event.type){
             case SDL_QUIT:
             continuer = 0;
@@ -166,15 +147,14 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
                 persoActuel = perso[GAUCHE];
                 deplacerJoueur(&positionJoueur,GAUCHE,ecran,n,1,jeu,map);
                 break;
+
+                
+                case SDLK_m:
+                affichageMission(ecran, jeu);
+                break;
             }
-            break;     
-
-       
-        
-        
+            break;
         }
-
-
 
         SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
         
@@ -182,38 +162,24 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
         positionFond.y=0;
         SDL_BlitSurface(fond,NULL,ecran,&positionFond);
         
-
-        
-
         position.x = positionJoueur.x*TAILLE_BLOC;
         position.y = positionJoueur.y*TAILLE_BLOC;
 
         SDL_BlitSurface(persoActuel,NULL,ecran,&position);
-        
         affichageJauge(ecran, jeu);
         SDL_Flip(ecran);
         
     }
-
-    
-
-
     SDL_EnableKeyRepeat(0,0); //desactive la repetition des touche
     
- 
-
-
-
     for(i=0;i<4;i++){
         SDL_FreeSurface(perso[i]); //on libère les images du perso en memoire
     }
-
-    
 }
 
 void dormir(Jeu & jeu) {
 
-	jeu.getPersonnage().vie.setFatigue(10000);
+	jeu.getPersonnage().vie.setFatigue(0);
 	cout<<"Tu viens de te reposer."<<endl;
 }
 
@@ -221,7 +187,7 @@ void manger(Jeu & jeu) {
 	Personnage& perso = jeu.getPersonnage();
 		if(perso.inventaire.getManger().getNiveau()>0) {
 			// Baisse de la faim et +1 pt de vie
-			perso.vie.setFaim(perso.vie.getFaim().getNiveau() + 2500);
+			perso.vie.setFaim(0);
             if (perso.vie.getPtsDeVie().getNiveau()<100) {
                 perso.vie.setPtsDeVie(perso.vie.getPtsDeVie().getNiveau() + 1);
             }
@@ -236,8 +202,11 @@ void manger(Jeu & jeu) {
 void boire(Jeu & jeu) {
 	Personnage& perso = jeu.getPersonnage();
 		if(perso.inventaire.getEau().getNiveau()>0) {
-			// Baisse de la soif
-			perso.vie.setSoif(perso.vie.getSoif().getNiveau() + 2500);
+			// Baisse de la soif et +1 point de vie
+			perso.vie.setSoif(0);
+            if (perso.vie.getPtsDeVie().getNiveau()<100) {
+                perso.vie.setPtsDeVie(perso.vie.getPtsDeVie().getNiveau() + 1);
+            }
 			// Baisse de l'inventaire
 			perso.inventaire.setEau
 			(1,false);
@@ -245,7 +214,6 @@ void boire(Jeu & jeu) {
 		}
 		else cout<<"Achetez à boire avant."<<endl;
 }
-
 
 void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
 
@@ -255,20 +223,14 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
     SDL_Surface *plant2= NULL;
     SDL_Surface *inventaire=NULL;
 
-
     SDL_Rect positionFond;
     SDL_Surface *fond=NULL;
     
-
-
-
     SDL_Event event;
     bool continuer = 1;
     int i = 0, j=0;
     int posX,posY;
 
-    
-    
     switch(nb_carte){
         case 2:
         fond=IMG_Load("./data/carte2.png"); 
@@ -307,10 +269,7 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
         fond=IMG_Load("./data/carte11.png");
         break;
 
-
     }
-
-
 
    plant = IMG_Load("./data/plant2.png");
    plant2 = IMG_Load("./data/plant5.png");
@@ -336,13 +295,7 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
         }
     }
 
-    
-    
-    
-
     persoActuel = perso[BAS];
-
-  
 
     switch(nb_carte){
         case 2:
@@ -387,11 +340,7 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
         positionJoueur.x= 12;
         positionJoueur.y = 1;
         break;
-
     }
-
-    
-
 
     SDL_EnableKeyRepeat(100,100);
     int n;
@@ -405,6 +354,7 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
         if (jeu.getPersonnage().vie.getPtsDeVie().getNiveau() <=0) {
             continuer = 0;
         }
+
         cout<<"Vie:"<<endl;
         cout<<"Points de vie: "<<jeu.getPersonnage().vie.getPtsDeVie().afficheJeuTxt()<<endl;
         cout<<"Faim: "<<jeu.getPersonnage().vie.getFaim().afficheJeuTxt()<<endl;
@@ -420,6 +370,7 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
         cout<<positionJoueur.x<<"/"<<positionJoueur.y<<endl;
         cout<<"Niveau :"<<jeu.getPersonnage().niveau.getNiveau()<<" // XP : "<<jeu.getPersonnage().xp.getNiveau()<<" / "<<jeu.getPersonnage().xp.getNiveauMax();
         cout<<endl;
+
         switch(event.type){
             case SDL_QUIT:
             continuer = 0;
@@ -431,7 +382,6 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
             case  SDLK_ESCAPE:
             continuer = 0;
             break;
-
 
             case SDLK_UP:
             persoActuel = perso[HAUT];
@@ -471,32 +421,33 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
             }
             break;
 
-           
-
+            case SDLK_m:
+            affichageMission(ecran, jeu);
+            break;
 
             case SDLK_RETURN:
             if(nb_carte == 5){
-                //le joueur presse ENTRER à proximité du PNJ4
+                //le joueur presse ENTRER à proximité du PNJ1
                 if (positionJoueur.x==15 && positionJoueur.y==9) {
-                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu, 0);
                 }
                 if (positionJoueur.x==15 && positionJoueur.y==10) {
-                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
-                }
-                //le joueur presse ENTRER à proximité du PNJ3
-                if (positionJoueur.x==9 && positionJoueur.y==8) {
-                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu, 0);
                 }
                 //le joueur presse ENTRER à proximité du PNJ2
+                if (positionJoueur.x==9 && positionJoueur.y==8) {
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu, 1);
+                }
+                //le joueur presse ENTRER à proximité du PNJ3
                 if (positionJoueur.x==10 && positionJoueur.y==5) {
-                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu, 2);
                 }
                 if (positionJoueur.x==10 && positionJoueur.y==6) {
-                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu, 2);
                 }
-                //le joueur presse ENTRER à proximité du PNJ1
+                //le joueur presse ENTRER à proximité du PNJ4
                 if (positionJoueur.x==15 && positionJoueur.y==4) {
-                    dialoguePNJ(ecran, &positionJoueur, map, jeu);
+                    dialoguePNJ(ecran, &positionJoueur, map, jeu, 3);
                 }
             }
             if(nb_carte == 3){
@@ -511,6 +462,12 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
                 
                 if((positionJoueur.x == 9 || positionJoueur.x == 10) && positionJoueur.y == 3){
                     jeu.getPersonnage().inventaire.setEau(1,true);
+                    //cas de réussite de la mission n°1
+                    if (jeu.getMissions().tabMission->at(0).getActive()) {
+                        affichageReussie(ecran, jeu, "1");
+                        jeu.getPersonnage().xp.setNiveau(jeu.getPersonnage().xp.getNiveau()+80);
+                        jeu.getMissions().tabMission->at(0).missionFinie();
+                    }
                     jeu.getPersonnage().perteArgent(10);
                     cout<<"-10$"<<endl;
                     cout <<"Une bouteille d'eau a été ajoutée à votre inventaire"<<endl;
@@ -519,10 +476,25 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
             }
             if(nb_carte == 4){
                 if(positionJoueur.x==13&&positionJoueur.y==5) {
+                    //cas de réussite de la mission n°2
+                    if (jeu.getMissions().tabMission->at(1).getActive()) {
+                        affichageReussie(ecran, jeu, "2");
+                        jeu.getMissions().tabMission->at(1).missionFinie();
+                        jeu.getPersonnage().xp.setNiveau(jeu.getPersonnage().xp.getNiveau()+50);
+                        jeu.getPersonnage().inventaire.setManger(3, true);
+                    }
                     manger(jeu);
                 }
 
-                if(positionJoueur.x==17&&positionJoueur.y==4) {
+                if((positionJoueur.x==17&&positionJoueur.y==4) || (positionJoueur.x==16&&positionJoueur.y==4) 
+                    || (positionJoueur.x==17&&positionJoueur.y==5) || (positionJoueur.x==16&&positionJoueur.y==5) ) {
+                    
+                    //cas de réussite de la mission n°4
+                    if (jeu.getMissions().tabMission->at(3).getActive()) {
+                        affichageReussie(ecran, jeu, "4");
+                        jeu.getMissions().tabMission->at(3).missionFinie();
+                        jeu.getPersonnage().xp.setNiveau(jeu.getPersonnage().xp.getNiveau()+120);
+                    }
                     dormir(jeu);
                 }
 
@@ -541,9 +513,6 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
             }
             break;
          
-            
-        
-
             case SDL_MOUSEBUTTONUP:        
             switch(event.button.button){
                 case SDL_BUTTON_LEFT:                   
@@ -554,10 +523,15 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
                             posX = positionClic.x;
                             posY = positionClic.y;
                             sdlPlanter(ecran,&positionClic,b,jeu,map);
-                            if(b == true)  
-                                                          
+                            if(b) {
+                                //cas de réussite de la mission n°3
+                                if (jeu.getMissions().tabMission->at(2).getActive()) {
+                                    affichageReussie(ecran, jeu, "3");
+                                    jeu.getMissions().tabMission->at(2).missionFinie();
+                                    jeu.getPersonnage().xp.setNiveau(jeu.getPersonnage().getArgent()+100);
+                                }
                                 map.carte2[posY][posX] = 4 ;
-
+                            }
                         }
                     }
                     if(nb_carte == 4){
@@ -572,16 +546,12 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
                         }
 
                     }
-
                     if(nb_carte == 9){
                         reponse = transformeConstantes(map.interfaceJardin[positionClic.y][positionClic.x]);
                         if(reponse != ""){
                             jeu.vendre(reponse);                            
                         }
-
                     }
-            
-           
                 break;
 
                 case SDL_BUTTON_RIGHT:
@@ -591,113 +561,89 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
                             jeu.recolter(positionClic.x,positionClic.y);
                             map.carte2[positionClic.y][positionClic.x] = 3 ;
                         }
-                break;
-        
-        
+                break;        
             }
-            
-            break;     
-        
-        
-        
-        
+            break;        
         }
 
-    
+        SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
+        
+        positionFond.x=0;
+        positionFond.y=0;
+        SDL_BlitSurface(fond,NULL,ecran,&positionFond);
 
-    SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
-    
-    positionFond.x=0;
-    positionFond.y=0;
-    SDL_BlitSurface(fond,NULL,ecran,&positionFond);
-
-    if(nb_carte == 2){
-        for(i=0;i<11;i++){
-            for(j=0;j<26;j++){
-                position.x=j*TAILLE_BLOC;
-                position.y=i*TAILLE_BLOC;
-            
-            switch(map.carte2[i][j]){
-                case PLANT:
-                SDL_BlitSurface(plant,NULL,ecran,&position);
-                break;
-
-                case PLANT2:
-                SDL_BlitSurface(plant2,NULL,ecran,&position);
-                break;
-            }
-
-            }
-        }
-    }
-    if(nb_carte == 7){
-        int k = 0;
-        int taille = jeu.getPersonnage().inventaire.inventaireFruitLeg.tabFruitLeg->size();
-        while(k < taille){
+        if(nb_carte == 2){
             for(i=0;i<11;i++){
                 for(j=0;j<26;j++){
+                    position.x=j*TAILLE_BLOC;
+                    position.y=i*TAILLE_BLOC;
+                
+                switch(map.carte2[i][j]){
+                    case PLANT:
+                    SDL_BlitSurface(plant,NULL,ecran,&position);
+                    break;
 
-                    if(k != taille){   
-                        if(map.interfaceInventaire[i][j] == 1){
-                            string rep;                            
-                            position.x=j*TAILLE_BLOC;
-                            position.y=i*TAILLE_BLOC;
-                            string fruitLeg = jeu.getPersonnage().inventaire.inventaireFruitLeg.tabFruitLeg->at(k).getNomGraine();
-                            string type = jeu.getPersonnage().inventaire.inventaireFruitLeg.tabFruitLeg->at(k).getTypeGraine();
-                            if(type == "graine"){
-                                rep = "./data/fruitLeg/graine/"+fruitLeg+"G.png";
-                            }else{
-                                rep = "./data/fruitLeg/"+fruitLeg+".png";
+                    case PLANT2:
+                    SDL_BlitSurface(plant2,NULL,ecran,&position);
+                    break;
+                }
+
+                }
+            }
+        }
+        if(nb_carte == 7){
+            int k = 0;
+            int taille = jeu.getPersonnage().inventaire.inventaireFruitLeg.tabFruitLeg->size();
+            while(k < taille){
+                for(i=0;i<11;i++){
+                    for(j=0;j<26;j++){
+
+                        if(k != taille){   
+                            if(map.interfaceInventaire[i][j] == 1){
+                                string rep;                            
+                                position.x=j*TAILLE_BLOC;
+                                position.y=i*TAILLE_BLOC;
+                                string fruitLeg = jeu.getPersonnage().inventaire.inventaireFruitLeg.tabFruitLeg->at(k).getNomGraine();
+                                string type = jeu.getPersonnage().inventaire.inventaireFruitLeg.tabFruitLeg->at(k).getTypeGraine();
+                                if(type == "graine"){
+                                    rep = "./data/fruitLeg/graine/"+fruitLeg+"G.png";
+                                }else{
+                                    rep = "./data/fruitLeg/"+fruitLeg+".png";
+                                }
+                                inventaire = IMG_Load(rep.c_str());                        
+                                SDL_BlitSurface(inventaire,NULL,ecran,&position);
+                                k++;
+                            
                             }
-                            inventaire = IMG_Load(rep.c_str());                        
-                            SDL_BlitSurface(inventaire,NULL,ecran,&position);
-                            k++;
-                        
+                            
                         }
-                        
                     }
                 }
             }
         }
+
+        if(nb_carte != 8 && nb_carte != 9){ 
+            position.x = positionJoueur.x*TAILLE_BLOC;
+            position.y = positionJoueur.y*TAILLE_BLOC;
+
+            SDL_BlitSurface(persoActuel,NULL,ecran,&position);
+        }
+        
+        affichageJauge(ecran, jeu);
+        SDL_Flip(ecran);
     }
-
-    
-
- 
-    if(nb_carte != 8 && nb_carte != 9){ 
-        position.x = positionJoueur.x*TAILLE_BLOC;
-        position.y = positionJoueur.y*TAILLE_BLOC;
-
-        SDL_BlitSurface(persoActuel,NULL,ecran,&position);
-    }
-    
-    
-    affichageJauge(ecran, jeu);
-    SDL_Flip(ecran);
-
-    
-
-   
-    
-    
-    }
-
-   
 
     SDL_FreeSurface(plant);
     SDL_FreeSurface(plant2);
- 
 
     SDL_FreeSurface(fond);
     SDL_FreeSurface(inventaire);
 
-
     for(i=0;i<4;i++){
         SDL_FreeSurface(perso[i]); //on libère les images du perso en memoire
     }
-
-
 }
+
 
 void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int nb_carte,Jeu & jeu,Map & map){
 
@@ -712,40 +658,33 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
             if(map.carte1[pos->y-1][pos->x] == MUR) //on verifie que la case en haut n'est pas un mur pour la carte 1
                 break;
         }
-
         if(nb_carte == 2){
             
             if(map.carte2[pos->y-1][pos->x] == MUR) //on verifie que la case en haut n'est pas un mur pour la carte 2
                 break;
         }
-        
         if(nb_carte == 3){
             if(map.carte3[pos->y-1][pos->x] == MUR) //on verifie que la case en haut n'est pas un mur pour la carte 3
                 break;
-        }
-            
+        }  
         if(nb_carte == 4){
             if(map.carte4[pos->y-1][pos->x] == MUR) //on verifie que la case en haut n'est pas un mur pour la carte 4
                 break;
         }
-
         if(nb_carte == 5){
         
             if(map.carte5[pos->y-1][pos->x] == MUR) //on verifie que la case en haut n'est pas un mur pour la carte 5
                 break;
         }
-
         if(nb_carte == 7){
         
             if(map.interfaceInventaire[pos->y-1][pos->x] == MURI) //on verifie que la case en haut n'est pas un mur pour la carte 7
                 break;
         }
-
         if(nb_carte == 10){        
             if(map.carte10[pos->y-1][pos->x] == MUR) //on verifie que la case en haut n'est pas un mur pour la carte 10
                 break;
         }
-
         if(nb_carte == 11){        
             if(map.carte11[pos->y-1][pos->x] == MUR) //on verifie que la case en haut n'est pas un mur pour la carte 11
                 break;
@@ -755,8 +694,6 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
             }
         }
 
-
-        
         pos->y--;
         break;
 
@@ -770,7 +707,6 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
                 break;
             }
         }
-        
         if(nb_carte == 2){
             if(positionJoueur.x == 13 && positionJoueur.y == 11 ){
                 n = 1;                                                         //alors le joueur se teleporte a la plage
@@ -778,18 +714,15 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
             }
             if(map.carte2[pos->y+1][pos->x] == MUR)//on verifie que la case en bas n'est pas un mur pour la carte 2
                 break;
-        }
-        
+        }        
         if(nb_carte == 3){
             if(map.carte3[pos->y+1][pos->x] == MUR) //on verifie que la case en bas n'est pas un mur pour la carte 3
                 break;
-        }
-        
+        }        
         if(nb_carte == 4){
             if(map.carte4[pos->y+1][pos->x] == MUR) //on verifie que la case en bas n'est pas un mur pour la carte 4
                 break;
         }
-
         if(nb_carte == 5){
             if(positionJoueur.x == 15 && positionJoueur.y == 11){
                 n = 1;
@@ -798,12 +731,10 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
             if(map.carte5[pos->y+1][pos->x] == MUR) //on verifie que la case en bas n'est pas un mur pour la carte 5
                 break;
         }
-
         if(nb_carte == 7){
             if(map.interfaceInventaire[pos->y+1][pos->x] == MURI) //on verifie que la case en bas n'est pas un mur pour la carte 7
                 break;
         }
-
         if(nb_carte == 10){
             if(map.carte10[pos->y+1][pos->x] == MUR) //on verifie que la case en bas n'est pas un mur pour la carte 10
                 break;
@@ -813,12 +744,10 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
                 break;
             }
         }
-
         if(nb_carte == 11){
             if(map.carte11[pos->y+1][pos->x] == MUR) //on verifie que la case en bas n'est pas un mur pour la carte 11
                 break;
         }
-
         pos->y++;
         break;
 
@@ -916,10 +845,7 @@ void deplacerJoueur(SDL_Rect *pos,int direction, SDL_Surface *ecran,int &n,int n
         }
         pos->x++;
         break;
-
-
     }
-
 }
 
 
@@ -952,7 +878,6 @@ void sdlPlanter(SDL_Surface *ecran,const SDL_Rect *pos,bool &succes,Jeu & jeu,Ma
             }
             break; 
 
-
             case SDL_MOUSEBUTTONUP:
             switch(event.button.button){
                 case SDL_BUTTON_LEFT:
@@ -961,30 +886,22 @@ void sdlPlanter(SDL_Surface *ecran,const SDL_Rect *pos,bool &succes,Jeu & jeu,Ma
                 reponse = transformeConstantes(map.interfaceJardin[positionClic.y][positionClic.x]);
                 succes = jeu.planter(reponse,a,b);  
                 continuer = 0;         
-                   
                 break; 
 
-            }//fin switch 2
+            }
 
 
-        }//fin switch 1  
+        }  
 
         SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
     
         positionInterface.x=0;
         positionInterface.y=0;
         SDL_BlitSurface(interface,NULL,ecran,&positionInterface);  
-        
         affichageJauge(ecran, jeu);
         SDL_Flip(ecran);
-        
-    
-    
-    }//fin while
-
-
+    }
     SDL_FreeSurface(interface);
-
 }
 
 string transformeConstantes(int n){
@@ -1096,48 +1013,136 @@ string transformeConstantes(int n){
     return reponse;
 }
 
-void dialoguePNJ(SDL_Surface * ecran, SDL_Rect *pos,Map & map, Jeu &jeu){
-    SDL_Surface *dialPNJ1= NULL;
-    dialPNJ1 = IMG_Load("./data/dialPNJ1.png");
-
+void dialoguePNJ(SDL_Surface * ecran, SDL_Rect *pos,Map & map, Jeu &jeu, int num){
+    SDL_Surface *dialPNJ= NULL;
+    SDL_Surface *missioncours= NULL;
     int continuer=1;
     SDL_Event event;
     SDL_Rect positionFond;
     positionFond.x=0;
     positionFond.y=50;
-    SDL_BlitSurface(dialPNJ1,NULL,ecran,&positionFond);
-    
-    affichageJauge(ecran, jeu);
-    SDL_Flip(ecran);
-    cout << "DialoguePNJ";
-    while(continuer){
-        SDL_WaitEvent(&event);
-        switch(event.type){
-            case SDL_QUIT:
-            continuer = 0;
+    if (jeu.getMissions().tabMission->at(0).getActive() || jeu.getMissions().tabMission->at(1).getActive()
+        || jeu.getMissions().tabMission->at(2).getActive() || jeu.getMissions().tabMission->at(3).getActive()) {
+        positionFond.x=400;
+        positionFond.y=150;
+        missioncours = IMG_Load("./data/missioncours.png");
+        SDL_BlitSurface(missioncours,NULL,ecran,&positionFond);
+        SDL_Flip(ecran);
+        SDL_Delay(3000);
+    } 
+    else if (jeu.getMissions().tabMission->at(num).getFini()) {
+        positionFond.x=400;
+        positionFond.y=150;
+        missioncours = IMG_Load("./data/missionfinie.png");
+        SDL_BlitSurface(missioncours,NULL,ecran,&positionFond);
+        SDL_Flip(ecran);
+        SDL_Delay(3000);
+    }
+    else {
+        switch (num) {
+            case 0:
+            dialPNJ = IMG_Load("./data/dialPNJ1.png");
+            SDL_BlitSurface(dialPNJ,NULL,ecran,&positionFond);
             break;
+            case 1:
+            dialPNJ = IMG_Load("./data/dialPNJ2.png");
+            SDL_BlitSurface(dialPNJ,NULL,ecran,&positionFond);
+            break;
+            case 2:
+            dialPNJ = IMG_Load("./data/dialPNJ3.png");
+            SDL_BlitSurface(dialPNJ,NULL,ecran,&positionFond);
+            break;
+            case 3:
+            dialPNJ = IMG_Load("./data/dialPNJ4.png");
+            SDL_BlitSurface(dialPNJ,NULL,ecran,&positionFond);
+            break;
+        }
+        affichageJauge(ecran, jeu);
+        SDL_Flip(ecran);
+        cout << "DialoguePNJ";
+        while(continuer){
+            SDL_WaitEvent(&event);
+            switch(event.type){
+                case SDL_QUIT:
+                continuer = 0;
+                break;
 
-            case SDL_KEYDOWN:
-            switch(event.key.keysym.sym){
+                case SDL_KEYDOWN:
+                switch(event.key.keysym.sym){
 
-                case  SDLK_ESCAPE:
-                continuer = 0;
-                break;
-                
-                case SDLK_o:
-                SDL_FreeSurface(dialPNJ1);
-                map.carte5[pos->y][pos->x]=0;
-                continuer = 0;
-                break;
-                
-                case SDLK_n:
-                SDL_FreeSurface(dialPNJ1);
-                map.carte5[pos->y][pos->x]=0;
-                continuer = 0;
-                break;
+                    case  SDLK_ESCAPE:
+                    continuer = 0;
+                    break;
+                    
+                    case SDLK_o:
+                    continuer = 0;
+                    jeu.getMissions().tabMission->at(num).setActive(true);
+                    break;
+                    
+                    case SDLK_n:
+                    SDL_FreeSurface(dialPNJ);
+                    continuer = 0;
+                    break;
+                }
             }
         }
     }
+}
+
+void affichageMission(SDL_Surface * ecran, Jeu & jeu) {
+    SDL_Surface *missioncours= NULL;
+    SDL_Surface *missioncours2= NULL;
+    SDL_Event event;
+    int continuer = 1;
+    SDL_Rect positionFond;
+    for (int i=0; i<4; i++) {
+        if (jeu.getMissions().tabMission->at(i).getActive()) {
+            positionFond.x=750;
+            positionFond.y=200;
+            missioncours = IMG_Load("./data/missionactive.png");
+            SDL_BlitSurface(missioncours,NULL,ecran,&positionFond);
+            positionFond.y=220;
+            if (i==0) missioncours2 = IMG_Load("./data/dialPNJ1.png");
+            if (i==1) missioncours2 = IMG_Load("./data/dialPNJ2.png");
+            if (i==2) missioncours2 = IMG_Load("./data/dialPNJ3.png");
+            if (i==3) missioncours2 = IMG_Load("./data/dialPNJ4.png");
+            SDL_BlitSurface(missioncours2,NULL,ecran,&positionFond);
+            SDL_Flip(ecran);
+            SDL_WaitEvent(&event);
+            while(continuer){
+                SDL_WaitEvent(&event);
+                switch(event.type){
+                    case SDL_QUIT:
+                    continuer = 0;
+                    break;
+
+                    case SDL_KEYDOWN:
+                    switch(event.key.keysym.sym){
+                        
+                        case SDLK_m:
+                        SDL_FreeSurface(missioncours2);
+                        SDL_FreeSurface(missioncours);
+                        SDL_Flip(ecran);
+                        continuer=0;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void affichageReussie(SDL_Surface * ecran, Jeu & jeu, string miss) {
+    SDL_Surface *mission= NULL;
+    string a = "./data/mission"+miss+"reussie.png";
+    mission = IMG_Load(a.c_str());
+    SDL_Rect positionFond;
+    positionFond.x=400;
+    positionFond.y=150;
+    SDL_BlitSurface(mission,NULL,ecran,&positionFond);
+    SDL_Flip(ecran);
+    SDL_Delay(3000);
+    SDL_FreeSurface(mission);
 }
 
 void affichageJauge(SDL_Surface * ecran, Jeu & jeu) {
@@ -1212,29 +1217,26 @@ void affichageJauge(SDL_Surface * ecran, Jeu & jeu) {
     positionJauge.y+=25;
     SDL_BlitSurface(imFaim,NULL,ecran,&positionJauge);
     positionJauge.x+=20;
-    if (faim.w > 70) jauge = IMG_Load("./data/jauge.png");
+    if (faim.w > 70) jauge = IMG_Load("./data/jauge2.png");
     if (faim.w <= 70) jauge = IMG_Load("./data/jauge1.png");    
-    if (faim.w <= 30) jauge = IMG_Load("./data/jauge2.png");
+    if (faim.w <= 30) jauge = IMG_Load("./data/jauge.png");
     SDL_BlitSurface(jauge, &faim, ecran, &positionJauge);
 //affichage soif
     positionJauge.x-=20;
     positionJauge.y+=25;
     SDL_BlitSurface(imSoif,NULL,ecran,&positionJauge);
     positionJauge.x+=20;   
-    if (soif.w > 70) jauge = IMG_Load("./data/jauge.png"); 
+    if (soif.w > 70) jauge = IMG_Load("./data/jauge2.png"); 
     if (soif.w <= 70) jauge = IMG_Load("./data/jauge1.png");    
-    if (soif.w <= 30) jauge = IMG_Load("./data/jauge2.png");
+    if (soif.w <= 30) jauge = IMG_Load("./data/jauge.png");
     SDL_BlitSurface(jauge, &soif, ecran, &positionJauge);
 //affichage faim
     positionJauge.x-=20;
     positionJauge.y+=25;
     SDL_BlitSurface(imFatigue,NULL,ecran,&positionJauge);
     positionJauge.x+=20;   
-    if (fatigue.w > 70) jauge = IMG_Load("./data/jauge.png");
+    if (fatigue.w > 70) jauge = IMG_Load("./data/jauge2.png");
     if (fatigue.w <= 70) jauge = IMG_Load("./data/jauge1.png");    
-    if (fatigue.w <= 30) jauge = IMG_Load("./data/jauge2.png");
+    if (fatigue.w <= 30) jauge = IMG_Load("./data/jauge.png");
     SDL_BlitSurface(jauge, &fatigue, ecran, &positionJauge);
-
-    
-    
 }

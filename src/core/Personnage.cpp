@@ -6,7 +6,7 @@ const char persoChar[3]  = "P";
 Personnage::Personnage() {
     nom="sansNom";
     avatar=persoChar[0];
-    argent=200;
+    argent=500;
     position.setX(0);
     position.setY(0);
     vie.setPtsDeVie(100);
@@ -27,12 +27,12 @@ Personnage::Personnage(string nomP) {
     position.setX(0);
     position.setY(0);
     vie.setPtsDeVie(100);
-    vie.setFaim(10000);
-    vie.getFaim().setNiveauMax(10000);
-    vie.setSoif(10000);
-    vie.getSoif().setNiveauMax(10000);
-    vie.setFatigue(10000);
-    vie.getFatigue().setNiveauMax(10000);
+    vie.setFaim(0);
+    vie.getFaim().setNiveauMax(100);
+    vie.setSoif(0);
+    vie.getSoif().setNiveauMax(100);
+    vie.setFatigue(0);
+    vie.getFatigue().setNiveauMax(100);
     niveau.setNiveau(0);
     niveau.setNiveauMax(100);
     xp.setNiveau(0);
@@ -129,11 +129,10 @@ void Personnage::affichePersonnage() const {
 void Personnage::varieAuto() { 
     if(xp.jaugeRemplie()) {
         int niv = xp.getNiveau()/100;
-        cout << "AAAAAA" << niv;
         int newXP = xp.getNiveau()%100;
-        cout << "AAAAAA" << newXP;
         xp.setNiveau(newXP);
         niveau.setNiveau(niveau.getNiveau()+niv);
+        cout << xp.getNiveau() << endl;
     }      
 }
 

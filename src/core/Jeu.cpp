@@ -73,15 +73,6 @@ const EnsembleMission& Jeu::getConstMissions() const{ return mission;}
 void Jeu::actionsAutomatiques() {
     getPersonnage().vie.varieAuto();
     getPersonnage().varieAuto();
-
-    // Fonction mission1
-    if(getPersonnage().inventaire.getFruitLeg().jaugeRemplie()
-        &&getMissions().tabMission->at(0).getFini()==false) {
-			getPersonnage().niveau.setNiveau
-            (getPersonnage().niveau.getNiveau()
-            +getMissions().tabMission->at(0).getRecompense());
-			getMissions().tabMission->at(0).setFini(true);
-		}
 }
 
 void Jeu::actionClavier(const char touche){
