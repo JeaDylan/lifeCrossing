@@ -3,7 +3,7 @@
 
 Jauge::Jauge() {
     niveauActuel=0;
-    niveauMax=100;
+    niveauMax=500;
 }
 
 Jauge::Jauge(int niv, int nivMax) {
@@ -13,7 +13,7 @@ Jauge::Jauge(int niv, int nivMax) {
 
 Jauge::~Jauge() {
     niveauActuel=0;
-    niveauMax=100;
+    niveauMax=500;
 }
 
 int Jauge::getNiveau() const {
@@ -54,7 +54,7 @@ string Jauge::afficheJeuTxt() const {
 
 void Jauge::testRegression() {
     cout<<"Tests pour le module Jauge :"<<endl;
-    assert(niveauActuel == 0 && niveauMax==100);
+    assert(niveauActuel == 0 && niveauMax==500);
     cout<<"Constructeur par défaut OK ..."<<endl;
     Jauge j(85, 150);
     assert(j.getNiveau()==85);

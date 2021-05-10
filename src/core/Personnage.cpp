@@ -9,7 +9,7 @@ Personnage::Personnage() {
     argent=500;
     position.setX(0);
     position.setY(0);
-    vie.setPtsDeVie(100);
+    vie.setPtsDeVie(500);
     vie.setFaim(0);
     vie.setSoif(0);
     vie.setFatigue(0);
@@ -26,7 +26,7 @@ Personnage::Personnage(string nomP) {
     argent=0.0;
     position.setX(0);
     position.setY(0);
-    vie.setPtsDeVie(100);
+    vie.setPtsDeVie(500);
     vie.setFaim(0);
     vie.getFaim().setNiveauMax(100);
     vie.setSoif(0);

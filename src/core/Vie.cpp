@@ -32,15 +32,15 @@ void Vie::setFatigue(int fat){
 void Vie::varieAuto() {
     if(getFaim().jaugeRemplie()) {
         setFaim(0);
-        setPtsDeVie(getPtsDeVie().getNiveau()-5);
+        setPtsDeVie(getPtsDeVie().getNiveau()-1);
     }
     if(getFatigue().jaugeRemplie()) {
         setFatigue(0);
-        setPtsDeVie(getPtsDeVie().getNiveau()-5);
+        setPtsDeVie(getPtsDeVie().getNiveau()-1);
     }
     if(getSoif().jaugeRemplie()) {
         setSoif(0);
-        setPtsDeVie(getPtsDeVie().getNiveau()-5);
+        setPtsDeVie(getPtsDeVie().getNiveau()-1);
     }
     setFaim(getFaim().getNiveau()+1);
     setFatigue(getFatigue().getNiveau()+1);

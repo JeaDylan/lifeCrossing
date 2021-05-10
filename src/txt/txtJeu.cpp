@@ -255,7 +255,7 @@ void txtAffMarche(WINDOW * winDialogue, Jeu & jeu) {
 					.tabFruitLeg->at(i).affichejeuTxt(i).c_str());
 		}
 		mvwprintw(winDialogue,2,25,"(e) Eau - 2$");
-		mvwprintw(winDialogue,3,25,"(n) Nourriture - 5$");
+		mvwprintw(winDialogue,3,25,"(n) Nourriture - 20$");
 
 		c = wgetch(winDialogue);
 		switch (c)
@@ -272,8 +272,8 @@ void txtAffMarche(WINDOW * winDialogue, Jeu & jeu) {
 		
 		case 'n':
 			if(perso.inventaire.getManger().jaugeRemplie()==false) {
-				jeu.getPersonnage().perteArgent(5);
-				jeu.getPersonnage().inventaire.setManger(5,true);
+				jeu.getPersonnage().perteArgent(20);
+				jeu.getPersonnage().inventaire.setManger(20,true);
 				werase(winDialogue);
 				box(winDialogue,0,0);
 				mvwprintw(winDialogue,1,1,"Vous avez achetez à manger !");
@@ -549,7 +549,7 @@ void txtBoucle (Jeu & jeu) {
 				boire(winDialogue,jeu);
 				break;
 			case 'f':
-				jeu.getPersonnage().vie.setPtsDeVie(5);
+				jeu.getPersonnage().vie.setPtsDeVie(0);
 				break;
 			case 'q':
 				ok = false;
