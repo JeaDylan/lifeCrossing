@@ -48,21 +48,7 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
         jeu.actionsAutomatiques();
         SDL_WaitEvent(&event);
 
-        cout<<"Vie:"<<endl;
-        cout<<"Points de vie: "<<jeu.getPersonnage().vie.getPtsDeVie().afficheJeuTxt()<<endl;
-        cout<<"Faim: "<<jeu.getPersonnage().vie.getFaim().afficheJeuTxt()<<endl;
-        cout<<"Fatigue: "<<jeu.getPersonnage().vie.getFatigue().afficheJeuTxt()<<endl;
-        cout<<"Soif :"<<jeu.getPersonnage().vie.getSoif().afficheJeuTxt()<<endl;
-        cout<<endl;
-        cout<<"Inventaire:"<<endl;
-        cout<<"Stock fruits/legs: "<<jeu.getPersonnage().inventaire.getFruitLeg().afficheJeuTxt()<<endl;
-        cout<<"Stock eau: "<<jeu.getPersonnage().inventaire.getEau().afficheJeuTxt()<<endl;
-        cout<<"Stock nourriture: "<<jeu.getPersonnage().inventaire.getManger().afficheJeuTxt()<<endl;
-        cout<<"Argent: "<<jeu.getPersonnage().getArgent()<<endl;
-        cout<<endl;
-        cout<<positionJoueur.x<<"/"<<positionJoueur.y<<endl;
-        cout<<"Niveau :"<<jeu.getPersonnage().niveau.getNiveau()<<" // XP : "<<jeu.getPersonnage().xp.getNiveau()<<" / "<<jeu.getPersonnage().xp.getNiveauMax();
-        cout<<endl;
+        
 
         switch(event.type){
             case SDL_QUIT:
@@ -151,6 +137,24 @@ void jouer(SDL_Surface * ecran,Jeu & jeu,Map & map){
                 
                 case SDLK_m:
                 affichageMission(ecran, jeu);
+                break;
+
+                case SDLK_i:
+                cout<<"Vie:"<<endl;
+                cout<<"Points de vie: "<<jeu.getPersonnage().vie.getPtsDeVie().afficheJeuTxt()<<endl;
+                cout<<"Faim: "<<jeu.getPersonnage().vie.getFaim().afficheJeuTxt()<<endl;
+                cout<<"Fatigue: "<<jeu.getPersonnage().vie.getFatigue().afficheJeuTxt()<<endl;
+                cout<<"Soif :"<<jeu.getPersonnage().vie.getSoif().afficheJeuTxt()<<endl;
+                cout<<endl;
+                cout<<"Inventaire:"<<endl;
+                cout<<"Stock fruits/legs: "<<jeu.getPersonnage().inventaire.getFruitLeg().afficheJeuTxt()<<endl;
+                cout<<"Stock eau: "<<jeu.getPersonnage().inventaire.getEau().afficheJeuTxt()<<endl;
+                cout<<"Stock nourriture: "<<jeu.getPersonnage().inventaire.getManger().afficheJeuTxt()<<endl;
+                cout<<"Argent: "<<jeu.getPersonnage().getArgent()<<endl;
+                cout<<endl;
+                cout<<positionJoueur.x<<"/"<<positionJoueur.y<<endl;
+                cout<<"Niveau :"<<jeu.getPersonnage().niveau.getNiveau()<<" // XP : "<<jeu.getPersonnage().xp.getNiveau()<<" / "<<jeu.getPersonnage().xp.getNiveauMax();
+                cout<<endl;
                 break;
             }
             break;
@@ -279,14 +283,12 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
         perso[HAUT] = IMG_Load("./data/kirby2.png");
         perso[DROITE] = IMG_Load("./data/kirbyWater1.png");
         perso[GAUCHE] = IMG_Load("./data/kirbyWater6.png");
-        perso[PLOUF] = IMG_Load("./data/kirbyWater5.png");
     }else{
         if(nb_carte == 11){
             perso[BAS] = IMG_Load("./data/kirbyWater3.png");
             perso[HAUT] = IMG_Load("./data/kirbyWater2.png");
             perso[DROITE] = IMG_Load("./data/kirbyWater4.png");
             perso[GAUCHE] = IMG_Load("./data/kirbyWater7.png");
-            perso[PLOUF] = IMG_Load("./data/kirbyWater5.png");
         }else{
             perso[BAS] = IMG_Load("./data/kirby1.png");
             perso[HAUT] = IMG_Load("./data/kirby2.png");
@@ -355,21 +357,6 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
             continuer = 0;
         }
 
-        cout<<"Vie:"<<endl;
-        cout<<"Points de vie: "<<jeu.getPersonnage().vie.getPtsDeVie().afficheJeuTxt()<<endl;
-        cout<<"Faim: "<<jeu.getPersonnage().vie.getFaim().afficheJeuTxt()<<endl;
-        cout<<"Fatigue: "<<jeu.getPersonnage().vie.getFatigue().afficheJeuTxt()<<endl;
-        cout<<"Soif :"<<jeu.getPersonnage().vie.getSoif().afficheJeuTxt()<<endl;
-        cout<<endl;
-        cout<<"Inventaire:"<<endl;
-        cout<<"Stock fruits/legs: "<<jeu.getPersonnage().inventaire.getFruitLeg().afficheJeuTxt()<<endl;
-        cout<<"Stock eau: "<<jeu.getPersonnage().inventaire.getEau().afficheJeuTxt()<<endl;
-        cout<<"Stock nourriture: "<<jeu.getPersonnage().inventaire.getManger().afficheJeuTxt()<<endl;
-        cout<<"Argent: "<<jeu.getPersonnage().getArgent()<<endl;
-        cout<<endl;
-        cout<<positionJoueur.x<<"/"<<positionJoueur.y<<endl;
-        cout<<"Niveau :"<<jeu.getPersonnage().niveau.getNiveau()<<" // XP : "<<jeu.getPersonnage().xp.getNiveau()<<" / "<<jeu.getPersonnage().xp.getNiveauMax();
-        cout<<endl;
 
         switch(event.type){
             case SDL_QUIT:
@@ -415,14 +402,26 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
             deplacerJoueur(&positionJoueur,GAUCHE, ecran,n,nb_carte,jeu,map);
             break;
 
-            case SDLK_s:
-            if(nb_carte == 10 || nb_carte == 11){
-                persoActuel = perso[PLOUF];
-            }
-            break;
-
             case SDLK_m:
             affichageMission(ecran, jeu);
+            break;
+
+            case SDLK_i:
+            cout<<"Vie:"<<endl;
+            cout<<"Points de vie: "<<jeu.getPersonnage().vie.getPtsDeVie().afficheJeuTxt()<<endl;
+            cout<<"Faim: "<<jeu.getPersonnage().vie.getFaim().afficheJeuTxt()<<endl;
+            cout<<"Fatigue: "<<jeu.getPersonnage().vie.getFatigue().afficheJeuTxt()<<endl;
+            cout<<"Soif :"<<jeu.getPersonnage().vie.getSoif().afficheJeuTxt()<<endl;
+            cout<<endl;
+            cout<<"Inventaire:"<<endl;
+            cout<<"Stock fruits/legs: "<<jeu.getPersonnage().inventaire.getFruitLeg().afficheJeuTxt()<<endl;
+            cout<<"Stock eau: "<<jeu.getPersonnage().inventaire.getEau().afficheJeuTxt()<<endl;
+            cout<<"Stock nourriture: "<<jeu.getPersonnage().inventaire.getManger().afficheJeuTxt()<<endl;
+            cout<<"Argent: "<<jeu.getPersonnage().getArgent()<<endl;
+            cout<<endl;
+            cout<<positionJoueur.x<<"/"<<positionJoueur.y<<endl;
+            cout<<"Niveau :"<<jeu.getPersonnage().niveau.getNiveau()<<" // XP : "<<jeu.getPersonnage().xp.getNiveau()<<" / "<<jeu.getPersonnage().xp.getNiveauMax();
+            cout<<endl;
             break;
 
             case SDLK_RETURN:
