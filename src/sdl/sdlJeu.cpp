@@ -537,6 +537,8 @@ void teleporter(SDL_Surface * ecran,int nb_carte,Jeu & jeu,Map &  map) {
                          if(positionClic.y == 4 && positionClic.x == 11){
                              teleporter(ecran,7,jeu,map);
                          }
+                        positionJoueur.x = 11;
+                        positionJoueur.y = 5;
                     }
                     if(nb_carte == 8){
                         reponse = transformeConstantes(map.interfaceJardin[positionClic.y][positionClic.x]);
