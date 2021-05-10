@@ -1175,7 +1175,7 @@ void affichageJauge(SDL_Surface * ecran, Jeu & jeu) {
     vie.x=0;
     vie.y=0;
     vie.h=20;
-    vie.w=life.getPtsDeVie().getNiveau(); // la barre varie en fonction de la vie du perso
+    vie.w=life.getPtsDeVie().getNiveau()*100/life.getPtsDeVie().getNiveauMax(); // la barre varie en fonction de la vie du perso
     SDL_Rect faim;
     faim.x=0;
     faim.y=0;
