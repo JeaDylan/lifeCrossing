@@ -5,6 +5,7 @@ Mini jeu appelé “Life crossing” qui simule le concept de vie artificielle, 
 ## Explication détaillée
 
 ### Commande de compilation
+S'assurer que la lib SDL est installée (sudo apt-get install libsdl1.2-dev libsdl-image1.2-dev)
 En tapant 'make' dans le terminal.
 
 ### Commandes d'execution
